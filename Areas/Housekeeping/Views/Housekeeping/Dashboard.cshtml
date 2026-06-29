@@ -1,0 +1,158 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Housekeeping Services";
+    ViewData["Role"] = "Housekeeping";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Housekeeping Services</h1>
+    <p style="color: var(--color-text-muted);">Manage cleaning checklists, sign-off completed room cleans, and track guest service requests.</p>
+</div>
+
+<!-- Stats Counter Grid -->
+<div class="grid-container grid-cols-4" style="margin-bottom: 30px;">
+    <div class="cogstay-stat-card housekeeping">
+        <div class="cogstay-stat-details">
+            <p>Assigned Cleans</p>
+            <h3>5 Rooms</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-broom" style="color: var(--accent-housekeeping);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card housekeeping">
+        <div class="cogstay-stat-details">
+            <p>Cleaning In-Progress</p>
+            <h3>1 Room</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-soap" style="color: var(--accent-housekeeping);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card housekeeping">
+        <div class="cogstay-stat-details">
+            <p>Completed Shift Cleans</p>
+            <h3>4 Rooms</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-check-double" style="color: var(--accent-housekeeping);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card housekeeping">
+        <div class="cogstay-stat-details">
+            <p>Active Service Tickets</p>
+            <h3>3 Tickets</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-bell-concierge" style="color: var(--accent-housekeeping);"></i>
+        </div>
+    </div>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Active Task Cards (Checklists) -->
+    <div>
+        <h3 style="font-size: 18px; font-weight: 600; color: var(--color-primary-dark); margin-bottom: 15px;"><i class="fa-solid fa-clipboard-list"></i> Your Cleaning Roster Checklist</h3>
+
+        <!-- Task Card 1: Room 304 Checkout Clean -->
+        <div class="housekeeper-task-card">
+            <div class="task-card-meta">
+                <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--accent-housekeeping); background-color: rgba(46, 125, 91, 0.08); padding: 4px 8px; border-radius: 4px;">Checkout Clean</span>
+                <span class="cogstay-badge danger">Urgent</span>
+            </div>
+            <h4 class="task-card-title" style="font-family: var(--font-serif); font-size: 20px; color: var(--color-primary-dark); margin-bottom: 5px;">Room 304 (Penthouse Suite)</h4>
+            <p style="font-size: 12px; color: var(--color-text-muted);">Guest John Henderson checked out. Prepare room for next arrival.</p>
+            
+            <ul class="task-card-items-list">
+                <li class="task-card-item">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" /> <span>Strip bed linen and pillows</span>
+                    </label>
+                </li>
+                <li class="task-card-item">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" /> <span>Vacuum bedroom and dust lounge desk</span>
+                    </label>
+                </li>
+                <li class="task-card-item">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" /> <span>Sanitize bathroom and mop tile floors</span>
+                    </label>
+                </li>
+                <li class="task-card-item">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" /> <span>Restock toiletries, mini-bar, and fresh towels</span>
+                    </label>
+                </li>
+            </ul>
+
+            <div style="border-top: 1px solid var(--color-border); padding-top: 15px; margin-top: auto; display: flex; justify-content: flex-end;">
+                <button class="btn btn-primary btn-sm task-complete-btn" style="background-color: var(--accent-housekeeping); opacity: 0.5;" disabled><i class="fa-solid fa-circle-check"></i> Mark Room Clean</button>
+            </div>
+        </div>
+
+        <!-- Task Card 2: Room 102 Stay-over Clean -->
+        <div class="housekeeper-task-card">
+            <div class="task-card-meta">
+                <span style="font-size: 11px; text-transform: uppercase; font-weight: 700; color: var(--accent-housekeeping); background-color: rgba(46, 125, 91, 0.08); padding: 4px 8px; border-radius: 4px;">Stay-Over Clean</span>
+                <span class="cogstay-badge info">Medium</span>
+            </div>
+            <h4 class="task-card-title" style="font-family: var(--font-serif); font-size: 20px; color: var(--color-primary-dark); margin-bottom: 5px;">Room 102 (Superior King)</h4>
+            <p style="font-size: 12px; color: var(--color-text-muted);">Standard housekeeping service. Make bed and replace towels.</p>
+            
+            <ul class="task-card-items-list">
+                <li class="task-card-item">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" /> <span>Make bed neatly (replace sheet if requested)</span>
+                    </label>
+                </li>
+                <li class="task-card-item">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" /> <span>Empty trashbins and restock toilet paper</span>
+                    </label>
+                </li>
+                <li class="task-card-item">
+                    <label style="display: flex; align-items: center; gap: 8px;">
+                        <input type="checkbox" /> <span>Wipe surfaces and replace bath towels</span>
+                    </label>
+                </li>
+            </ul>
+
+            <div style="border-top: 1px solid var(--color-border); padding-top: 15px; margin-top: auto; display: flex; justify-content: flex-end;">
+                <button class="btn btn-primary btn-sm task-complete-btn" style="background-color: var(--accent-housekeeping); opacity: 0.5;" disabled><i class="fa-solid fa-circle-check"></i> Mark Room Clean</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Shortcuts -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-bars"></i> Service Sub-Pages</h3>
+            </div>
+            <div class="cogstay-card-body" style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="/Housekeeping/Housekeeping/ServiceRequests" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-bell-concierge" style="color: var(--accent-housekeeping);"></i> Service Requests
+                </a>
+                <a href="/Housekeeping/Housekeeping/CleaningService" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-bucket" style="color: var(--accent-housekeeping);"></i> Room Cleaning Lists
+                </a>
+                <a href="/Housekeeping/Housekeeping/LaundryService" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-shirt" style="color: var(--accent-housekeeping);"></i> Laundry Service
+                </a>
+                <a href="/Housekeeping/Housekeeping/FoodService" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-utensils" style="color: var(--accent-housekeeping);"></i> Room Service Food
+                </a>
+                <a href="/Housekeeping/Housekeeping/MaintenanceService" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-screwdriver-wrench" style="color: var(--accent-housekeeping);"></i> Maintenance Repairs
+                </a>
+                <a href="/Housekeeping/Housekeeping/AssignTask" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-user-plus" style="color: var(--accent-housekeeping);"></i> Assign Tasks
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

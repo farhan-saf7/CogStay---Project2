@@ -1,0 +1,107 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Food Services";
+    ViewData["Role"] = "Housekeeping";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">In-Room Dining Services</h1>
+    <p style="color: var(--color-text-muted);">Coordinate food preparation, monitor service delays, and sign-off delivered room dinners.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Table of Orders -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-burger"></i> Dining Deliveries Log</h3>
+            </div>
+            
+            <div class="cogstay-table-responsive" style="border: none;">
+                <table class="cogstay-table">
+                    <thead>
+                        <tr>
+                            <th>Room No.</th>
+                            <th>Guest Name</th>
+                            <th>Dish Order details</th>
+                            <th>Ordered Time</th>
+                            <th>Service Status</th>
+                            <th>Roster Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Room 304</strong></td>
+                            <td>John Henderson</td>
+                            <td>Breakfast Waffles, 1x Double Espresso</td>
+                            <td>08:15 AM</td>
+                            <td><span class="cogstay-badge success">Delivered</span></td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Archived</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 201</strong></td>
+                            <td>Albert Einstein</td>
+                            <td>Ribeye Steak (Medium), 1x Pinot Noir</td>
+                            <td>07:30 PM</td>
+                            <td><span class="cogstay-badge success">Delivered</span></td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Archived</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 202</strong></td>
+                            <td>Grace Hopper</td>
+                            <td>Caesar Salad, 1x Diet Soda</td>
+                            <td>Today, 2:15 PM</td>
+                            <td><span class="cogstay-badge info">Preparing</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Food marked as out for delivery.', 'success')">Dispatch Food</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 302</strong></td>
+                            <td>Ada Lovelace</td>
+                            <td>Fresh Fruit Platter, 1x Green Tea</td>
+                            <td>Today, 2:40 PM</td>
+                            <td><span class="cogstay-badge warning">Cooking</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Food dispatch registered.', 'success')">Dispatch Food</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Log dining order -->
+    <div>
+        <div class="cogstay-card" style="position: sticky; top: 100px;">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-utensils"></i> Log Room Dining</h3>
+            </div>
+            <div class="cogstay-card-body">
+                <form method="post" action="/Housekeeping/Housekeeping/FoodService" data-success-message="In-room dining order registered!" data-redirect="/Housekeeping/Housekeeping/FoodService">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Room Number</label>
+                        <input type="text" class="cogstay-form-control" placeholder="e.g. Room 304" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Menu Items Selection</label>
+                        <textarea class="cogstay-form-control" rows="3" placeholder="e.g. 1x Cheeseburger, 1x French Fries, 1x Milkshake" required></textarea>
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Delivery Note</label>
+                        <input type="text" class="cogstay-form-control" placeholder="Allergies, door-knock preference..." />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; background-color: var(--accent-housekeeping);"><i class="fa-solid fa-save"></i> Send to Kitchen</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

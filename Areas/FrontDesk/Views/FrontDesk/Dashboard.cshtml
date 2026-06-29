@@ -1,0 +1,160 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Front Desk Dashboard";
+    ViewData["Role"] = "FrontDesk";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Front Desk Operations</h1>
+    <p style="color: var(--color-text-muted);">Manage guest arrivals, assign rooms, write RFID key cards, and settle final payments on departure.</p>
+</div>
+
+<!-- Stats Counter Grid -->
+<div class="grid-container grid-cols-4" style="margin-bottom: 30px;">
+    <div class="cogstay-stat-card frontdesk">
+        <div class="cogstay-stat-details">
+            <p>Active Checked-In</p>
+            <h3>84 Stays</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-user-check" style="color: var(--accent-frontdesk);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card frontdesk">
+        <div class="cogstay-stat-details">
+            <p>Pending Arrivals</p>
+            <h3>14 Guests</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-plane-arrival" style="color: var(--accent-frontdesk);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card frontdesk">
+        <div class="cogstay-stat-details">
+            <p>Pending Departures</p>
+            <h3>8 Rooms</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-plane-departure" style="color: var(--accent-frontdesk);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card frontdesk">
+        <div class="cogstay-stat-details">
+            <p>Available Clean Rooms</p>
+            <h3>22 Rooms</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-sparkles" style="color: var(--accent-frontdesk);"></i>
+        </div>
+    </div>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Arrivals Queue -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-clock"></i> Today's Pending Arrivals Queue</h3>
+            </div>
+            <div class="cogstay-card-body" style="padding-top: 10px; padding-bottom: 10px;">
+                <!-- Arrival 1 -->
+                <div class="guest-arrival-card">
+                    <div>
+                        <strong style="font-size: 15px; color: var(--color-primary-dark);">Emily Watson</strong>
+                        <p style="font-size: 12px; color: var(--color-text-muted); margin-top: 2px;">Booking: #CS-9288 &bull; Room 301 &bull; Guests: 1</p>
+                    </div>
+                    <a href="/FrontDesk/FrontDesk/CheckIn?booking=CS-9288" class="btn btn-primary btn-sm" style="background-color: var(--accent-frontdesk);">Process Check-In</a>
+                </div>
+
+                <!-- Arrival 2 -->
+                <div class="guest-arrival-card">
+                    <div>
+                        <strong style="font-size: 15px; color: var(--color-primary-dark);">Robert Downey</strong>
+                        <p style="font-size: 12px; color: var(--color-text-muted); margin-top: 2px;">Booking: #CS-9402 &bull; Room 201 &bull; Guests: 2</p>
+                    </div>
+                    <a href="/FrontDesk/FrontDesk/CheckIn?booking=CS-9402" class="btn btn-primary btn-sm" style="background-color: var(--accent-frontdesk);">Process Check-In</a>
+                </div>
+
+                <!-- Arrival 3 -->
+                <div class="guest-arrival-card">
+                    <div>
+                        <strong style="font-size: 15px; color: var(--color-primary-dark);">Clark Kent</strong>
+                        <p style="font-size: 12px; color: var(--color-text-muted); margin-top: 2px;">Booking: #CS-9552 &bull; Room 102 &bull; Guests: 2</p>
+                    </div>
+                    <a href="/FrontDesk/FrontDesk/CheckIn?booking=CS-9552" class="btn btn-primary btn-sm" style="background-color: var(--accent-frontdesk);">Process Check-In</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-clipboard-question"></i> Active Guest Request Tickets</h3>
+            </div>
+            <div class="cogstay-table-responsive">
+                <table class="cogstay-table">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Room No.</th>
+                            <th>Guest Request Details</th>
+                            <th>Urgency</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>#TK-101</td>
+                            <td>Room 304</td>
+                            <td>Wake-up call at 06:00 AM</td>
+                            <td><span class="cogstay-badge warning">Medium</span></td>
+                            <td><span class="cogstay-badge warning">Logged</span></td>
+                        </tr>
+                        <tr>
+                            <td>#TK-102</td>
+                            <td>Room 201</td>
+                            <td>Bring 2 extra pillows and coffee pods</td>
+                            <td><span class="cogstay-badge info">Low</span></td>
+                            <td><span class="cogstay-badge success">Dispatched</span></td>
+                        </tr>
+                        <tr>
+                            <td>#TK-103</td>
+                            <td>Room 101</td>
+                            <td>Emergency bathroom sink drain clog</td>
+                            <td><span class="cogstay-badge danger">Urgent</span></td>
+                            <td><span class="cogstay-badge success">Dispatched</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Shortcuts -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-bars"></i> Desk Shortcuts</h3>
+            </div>
+            <div class="cogstay-card-body" style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="/FrontDesk/FrontDesk/CheckIn" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-sign-in-alt" style="color: var(--accent-frontdesk);"></i> Guest Check-In
+                </a>
+                <a href="/FrontDesk/FrontDesk/CheckOut" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-sign-out-alt" style="color: var(--accent-frontdesk);"></i> Guest Check-Out
+                </a>
+                <a href="/FrontDesk/FrontDesk/Reservations" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-calendar-days" style="color: var(--accent-frontdesk);"></i> Booking Database
+                </a>
+                <a href="/FrontDesk/FrontDesk/HousekeepingCoordination" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-sparkles" style="color: var(--accent-frontdesk);"></i> Room Cleanliness
+                </a>
+                <a href="/FrontDesk/FrontDesk/GuestOperations" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-concierge-bell" style="color: var(--accent-frontdesk);"></i> Guest Service Tickets
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

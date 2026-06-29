@@ -1,0 +1,122 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Guest Service Operations";
+    ViewData["Role"] = "FrontDesk";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Guest Operations Console</h1>
+    <p style="color: var(--color-text-muted);">Log special guest requests, wake-up calls, valet tasks, and dispatch them to specific teams.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Active Tickets Table -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-list-check"></i> Guest Service Tickets Feed</h3>
+            </div>
+            
+            <div style="padding: 20px 24px; border-bottom: 1px solid var(--color-border); display: flex; gap: 15px; flex-wrap: wrap;">
+                <div class="search-input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="admin-table-search" class="cogstay-form-control" placeholder="Search Room Number..." />
+                </div>
+                <div style="min-width: 150px;">
+                    <select id="admin-table-filter-status" class="cogstay-form-control">
+                        <option value="all">All Statuses</option>
+                        <option value="logged">Logged</option>
+                        <option value="dispatched">Dispatched</option>
+                        <option value="completed">Completed</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="cogstay-table-responsive">
+                <table class="cogstay-table">
+                    <thead>
+                        <tr>
+                            <th>Ticket ID</th>
+                            <th>Room No.</th>
+                            <th>Service Category</th>
+                            <th>Request Details</th>
+                            <th>Urgency</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#TK-101</strong></td>
+                            <td>Room 304</td>
+                            <td>Wake-Up Call</td>
+                            <td>Wake-up call at 06:00 AM</td>
+                            <td><span class="cogstay-badge warning">Medium</span></td>
+                            <td><span class="cogstay-badge warning">Logged</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#TK-102</strong></td>
+                            <td>Room 201</td>
+                            <td>Amenities</td>
+                            <td>Bring 2 extra pillows and coffee pods</td>
+                            <td><span class="cogstay-badge info">Low</span></td>
+                            <td><span class="cogstay-badge success">Dispatched</span></td>
+                        </tr>
+                        <tr>
+                            <td><strong>#TK-103</strong></td>
+                            <td>Room 101</td>
+                            <td>Maintenance</td>
+                            <td>Emergency bathroom sink drain clog</td>
+                            <td><span class="cogstay-badge danger">Urgent</span></td>
+                            <td><span class="cogstay-badge success">Dispatched</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Create Ticket Form -->
+    <div>
+        <div class="cogstay-card" style="position: sticky; top: 100px;">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-circle-plus"></i> Open Service Ticket</h3>
+            </div>
+            <div class="cogstay-card-body">
+                <form method="post" action="/FrontDesk/FrontDesk/GuestOperations" data-success-message="Service ticket logged and dispatched to team!" data-redirect="/FrontDesk/FrontDesk/GuestOperations">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Room Number</label>
+                        <input type="text" class="cogstay-form-control" placeholder="e.g. Room 304" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Service Category</label>
+                        <select class="cogstay-form-control" required>
+                            <option value="wakeup">Wake-up Call</option>
+                            <option value="toiletries">Extra Toiletries / Linen</option>
+                            <option value="laundry">Laundry Pick-up</option>
+                            <option value="food">In-Room Dining</option>
+                            <option value="maintenance">Maintenance Repair</option>
+                            <option value="bellboy">Luggage / Valet Assistance</option>
+                        </select>
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Urgency Level</label>
+                        <select class="cogstay-form-control" required>
+                            <option value="low">Low Priority</option>
+                            <option value="medium" selected>Medium Priority</option>
+                            <option value="urgent">High / Urgent Priority</option>
+                        </select>
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Remarks & Description</label>
+                        <textarea class="cogstay-form-control" rows="3" placeholder="Specify instructions..." required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; background-color: var(--accent-frontdesk);"><i class="fa-solid fa-save"></i> Dispatch Ticket</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

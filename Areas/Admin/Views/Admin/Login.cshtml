@@ -1,0 +1,27 @@
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewData["Title"] = "Admin Login";
+}
+
+<div class="cogstay-login-card" style="border-top: 4px solid var(--accent-admin);">
+    <div class="cogstay-login-header">
+        <span class="cogstay-badge" style="background-color: rgba(107, 63, 160, 0.08); color: var(--accent-admin); margin-bottom: 12px; text-transform: uppercase; font-weight: 700;">Administrator Access</span>
+        <h2 class="cogstay-login-title">CogStay Administration</h2>
+        <p class="cogstay-login-desc">Sign in with your system credentials to access admin configuration modules.</p>
+    </div>
+
+    <!-- Login form pointing to Admin Dashboard -->
+    <form method="post" action="/Admin/Admin/Dashboard" data-success-message="Admin verified! Loading System Console." data-redirect="/Admin/Admin/Dashboard">
+        <div class="cogstay-form-group">
+            <label class="cogstay-form-label">Admin Username</label>
+            <input type="text" class="cogstay-form-control" placeholder="admin_username" required value="sysadmin" />
+        </div>
+
+        <div class="cogstay-form-group">
+            <label class="cogstay-form-label">Password</label>
+            <input type="password" class="cogstay-form-control" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required value="adminpassword" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; background-color: var(--accent-admin);">Log In to Console</button>
+    </form>
+</div>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CogStay Portal Login</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="~/css/site.css" />
+    
+    <!-- Staff Login Specific Style -->
+    <link rel="stylesheet" href="~/css/staff-login.css" />
+
+    @RenderSection("Styles", required: false)
+</head>
+@{
+    var isSplit = ViewData["IsSplitPage"] is true;
+}
+<body style="background-color: var(--color-bg); margin: 0; padding: 0; min-height: 100vh; @(isSplit ? "" : "display: flex; align-items: center; justify-content: center;")">
+
+    @if (isSplit)
+    {
+        @RenderBody()
+    }
+    else
+    {
+        <div style="width: 100%; max-width: 500px; display: flex; flex-direction: column; gap: 20px; margin: auto; padding: 20px;">
+            <div style="text-align: center;">
+                <a href="/Home/Index" style="font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: var(--color-primary); display: inline-flex; align-items: center; gap: 10px; text-decoration: none;">
+                    <i class="fa-solid fa-hotel" style="color: var(--color-accent);"></i> CogStay
+                </a>
+                <p style="color: var(--color-text-muted); font-size: 14px; margin-top: 5px;">Premium Hotel Reservation & Guest Experience Platform</p>
+            </div>
+
+            @RenderBody()
+            
+            <div style="text-align: center;">
+                <a href="/Home/Index" style="font-size: 13px; color: var(--color-text-muted); display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+                    <i class="fa-solid fa-arrow-left-long"></i> Back to Homepage
+                </a>
+            </div>
+        </div>
+    }
+
+    <!-- Global Scripts -->
+    <script src="~/js/site.js"></script>
+    <script src="~/js/staff-login.js"></script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

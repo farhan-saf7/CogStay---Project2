@@ -1,0 +1,27 @@
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewData["Title"] = "Housekeeping Staff Login";
+}
+
+<div class="cogstay-login-card" style="border-top: 4px solid var(--accent-housekeeping);">
+    <div class="cogstay-login-header">
+        <span class="cogstay-badge" style="background-color: rgba(46, 125, 91, 0.08); color: var(--accent-housekeeping); margin-bottom: 12px; text-transform: uppercase; font-weight: 700;">Housekeeping Operations</span>
+        <h2 class="cogstay-login-title">CogStay Housekeeping</h2>
+        <p class="cogstay-login-desc">Sign in with housekeeper credentials to check cleaning rosters, food service lists, and laundry queues.</p>
+    </div>
+
+    <!-- Login form pointing to Housekeeping Dashboard -->
+    <form method="post" action="/Housekeeping/Housekeeping/Dashboard" data-success-message="Housekeeper authenticated! Loading tasks checklist." data-redirect="/Housekeeping/Housekeeping/Dashboard">
+        <div class="cogstay-form-group">
+            <label class="cogstay-form-label">Housekeeper Username</label>
+            <input type="text" class="cogstay-form-control" placeholder="housekeeper_username" required value="housekeeping_mary" />
+        </div>
+
+        <div class="cogstay-form-group">
+            <label class="cogstay-form-label">Password</label>
+            <input type="password" class="cogstay-form-control" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required value="housekeepingpassword" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; background-color: var(--accent-housekeeping);">Log In to Work Roster</button>
+    </form>
+</div>

@@ -1,0 +1,107 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "System Settings";
+    ViewData["Role"] = "Admin";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Settings Panel</h1>
+    <p style="color: var(--color-text-muted);">Adjust global booking constants, security variables, system parameters, and housekeeping automations.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Settings switches -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-toggle-on"></i> Portal & Operational Toggles</h3>
+            </div>
+            <div class="cogstay-card-body" style="padding-top: 10px; padding-bottom: 10px;">
+                <!-- Toggle 1 -->
+                <div class="settings-toggle-container">
+                    <div>
+                        <h4 style="font-size: 15px; font-weight: 600; color: var(--color-primary-dark);">Guest Self-Bookings</h4>
+                        <p style="font-size: 12px; color: var(--color-text-muted); margin-top: 2px;">Allow customers to search, book, and pay for rooms without front desk approval.</p>
+                    </div>
+                    <label class="cogstay-switch">
+                        <input type="checkbox" checked />
+                        <span class="cogstay-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Toggle 2 -->
+                <div class="settings-toggle-container">
+                    <div>
+                        <h4 style="font-size: 15px; font-weight: 600; color: var(--color-primary-dark);">Automated Invoice Receipts</h4>
+                        <p style="font-size: 12px; color: var(--color-text-muted); margin-top: 2px;">Email transactional PDF receipts to customers instantly on payment approval.</p>
+                    </div>
+                    <label class="cogstay-switch">
+                        <input type="checkbox" checked />
+                        <span class="cogstay-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Toggle 3 -->
+                <div class="settings-toggle-container">
+                    <div>
+                        <h4 style="font-size: 15px; font-weight: 600; color: var(--color-primary-dark);">Staff Two-Factor Authentication (2FA)</h4>
+                        <p style="font-size: 12px; color: var(--color-text-muted); margin-top: 2px;">Require authenticator token codes for Admin, Manager, and Front Desk logins.</p>
+                    </div>
+                    <label class="cogstay-switch">
+                        <input type="checkbox" />
+                        <span class="cogstay-slider"></span>
+                    </label>
+                </div>
+
+                <!-- Toggle 4 -->
+                <div class="settings-toggle-container">
+                    <div>
+                        <h4 style="font-size: 15px; font-weight: 600; color: var(--color-primary-dark);">Housekeeping Auto-Task Assignments</h4>
+                        <p style="font-size: 12px; color: var(--color-text-muted); margin-top: 2px;">Automatically dispatch room clean checklists to housekeeper rosters on guest check-out.</p>
+                    </div>
+                    <label class="cogstay-switch">
+                        <input type="checkbox" checked />
+                        <span class="cogstay-slider"></span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Numeric Values -->
+    <div>
+        <div class="cogstay-card" style="position: sticky; top: 100px;">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-list-numeric"></i> Financial & Operations Parameters</h3>
+            </div>
+            <div class="cogstay-card-body">
+                <form method="post" action="/Admin/Admin/Dashboard" data-success-message="Global variables saved successfully!" data-redirect="/Admin/Admin/Dashboard">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Tax Rate (%)</label>
+                        <input type="number" class="cogstay-form-control" value="12" min="0" max="30" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Currency Notation</label>
+                        <select class="cogstay-form-control">
+                            <option value="inr" selected>INR (₹)</option>
+                            <option value="usd">USD ($)</option>
+                            <option value="eur">EUR (&euro;)</option>
+                        </select>
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Backup Frequency</label>
+                        <select class="cogstay-form-control">
+                            <option value="6">Every 6 Hours</option>
+                            <option value="12">Every 12 Hours</option>
+                            <option value="24" selected>Every 24 Hours</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; background-color: var(--accent-admin);"><i class="fa-solid fa-save"></i> Save Global Configurations</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,94 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Customer Feedbacks";
+    ViewData["Role"] = "Manager";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Guest Review Board</h1>
+    <p style="color: var(--color-text-muted);">Audit guest feedback submissions, rate averages, and publish reviews to public homepage spotlights.</p>
+</div>
+
+<!-- Average Summary -->
+<div class="cogstay-card" style="margin-bottom: 30px;">
+    <div class="cogstay-card-body" style="display: flex; align-items: center; justify-content: space-around; flex-wrap: wrap; gap: 20px;">
+        <div style="text-align: center;">
+            <p style="font-size: 13px; text-transform: uppercase; color: var(--color-text-muted); font-weight: 600;">Overall Average</p>
+            <h2 style="font-size: 42px; font-weight: 700; color: var(--color-accent);">4.8 <span style="font-size: 18px; color: var(--color-text-muted);">/ 5.0</span></h2>
+            <div class="feedback-stars-display"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star-half-stroke"></i></div>
+        </div>
+
+        <div style="border-left: 1px solid var(--color-border); height: 80px; display: inline-block;" class="mobile-hide"></div>
+
+        <div style="display: flex; flex-direction: column; gap: 8px;">
+            <div style="font-size: 13px; display: flex; gap: 10px; align-items: center;">
+                <span>Rooms Comfort:</span>
+                <strong style="color: var(--color-primary-dark);">4.9 / 5.0</strong>
+            </div>
+            <div style="font-size: 13px; display: flex; gap: 10px; align-items: center;">
+                <span>Staff Service:</span>
+                <strong style="color: var(--color-primary-dark);">4.8 / 5.0</strong>
+            </div>
+            <div style="font-size: 13px; display: flex; gap: 10px; align-items: center;">
+                <span>In-Room Dining:</span>
+                <strong style="color: var(--color-primary-dark);">4.6 / 5.0</strong>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Reviews Queue (5 items) -->
+<div class="cogstay-card">
+    <div class="cogstay-card-header">
+        <h3 class="cogstay-card-title"><i class="fa-solid fa-star"></i> Guest Feedback Submissions</h3>
+    </div>
+    <div class="cogstay-card-body">
+        <!-- Review 1 -->
+        <div class="feedback-review-card">
+            <div class="feedback-review-header">
+                <div>
+                    <h4 style="font-size: 15px; font-weight: 700; color: var(--color-primary-dark);">John Henderson</h4>
+                    <span style="font-size: 11px; color: var(--color-text-muted);">Reviewed: Today, 3:30 PM &bull; Category: Room Comfort & Service</span>
+                </div>
+                <div class="feedback-stars-display"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+            <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.5; margin-bottom: 15px;">"The room service dry cleaning was returned in under 4 hours, and the Penthouse view was exceptional. CogStay system operates very smoothly."</p>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn btn-primary btn-sm" onclick="showToast('Success', 'Feedback approved for homepage spotlight.', 'success')">Approve to Homepage</button>
+                <button class="btn btn-secondary btn-sm" onclick="showToast('Success', 'Feedback flagged.', 'warning')">Flag Review</button>
+            </div>
+        </div>
+
+        <!-- Review 2 -->
+        <div class="feedback-review-card">
+            <div class="feedback-review-header">
+                <div>
+                    <h4 style="font-size: 15px; font-weight: 700; color: var(--color-primary-dark);">Emily Watson</h4>
+                    <span style="font-size: 11px; color: var(--color-text-muted);">Reviewed: Yesterday, 11:20 AM &bull; Category: General Stay Value</span>
+                </div>
+                <div class="feedback-stars-display"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+            </div>
+            <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.5; margin-bottom: 15px;">"Very comfortable Deluxe room, excellent writing desk configuration. The AC unit was slightly loud but resolved quickly by maintenance."</p>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn btn-primary btn-sm" onclick="showToast('Success', 'Feedback approved for homepage spotlight.', 'success')">Approve to Homepage</button>
+                <button class="btn btn-secondary btn-sm" onclick="showToast('Success', 'Feedback flagged.', 'warning')">Flag Review</button>
+            </div>
+        </div>
+
+        <!-- Review 3 -->
+        <div class="feedback-review-card">
+            <div class="feedback-review-header">
+                <div>
+                    <h4 style="font-size: 15px; font-weight: 700; color: var(--color-primary-dark);">Albert Einstein</h4>
+                    <span style="font-size: 11px; color: var(--color-text-muted);">Reviewed: June 12, 10:45 AM &bull; Category: Amenities & Facilities</span>
+                </div>
+                <div class="feedback-stars-display"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+            </div>
+            <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.5; margin-bottom: 15px;">"Spa aromatherapy bath salts are highly recommended. Front desk agent processed our late checkout with extreme courtesy."</p>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn btn-primary btn-sm" onclick="showToast('Success', 'Feedback approved for homepage spotlight.', 'success')">Approve to Homepage</button>
+                <button class="btn btn-secondary btn-sm" onclick="showToast('Success', 'Feedback flagged.', 'warning')">Flag Review</button>
+            </div>
+        </div>
+    </div>
+</div>

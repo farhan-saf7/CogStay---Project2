@@ -1,0 +1,100 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Book Room";
+    ViewData["Role"] = "Customer";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Room Booking</h1>
+    <p style="color: var(--color-text-muted);">Fill in the check-in particulars to lock in your reservation.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Checkout Form -->
+    <div class="cogstay-card">
+        <div class="cogstay-card-header">
+            <h3 class="cogstay-card-title"><i class="fa-solid fa-hotel"></i> Reservation Form</h3>
+        </div>
+        <div class="cogstay-card-body">
+            <form method="post" action="/Customer/Customer/Payment" data-success-message="Reservation temporary lock completed! Proceeding to Payment." data-redirect="/Customer/Customer/Payment">
+                <div class="cogstay-form-row">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Check-In Date</label>
+                        <input type="date" id="checkin-date" name="CheckInDate" class="cogstay-form-control" required />
+                    </div>
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Check-Out Date</label>
+                        <input type="date" id="checkout-date" name="CheckOutDate" class="cogstay-form-control" required />
+                    </div>
+                </div>
+
+                <div class="cogstay-form-row">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Room Category</label>
+                        <select id="checkout-room-type" name="RoomCategory" class="cogstay-form-control" required>
+                            <option value="standard">Superior King (₹11,200/night)</option>
+                            <option value="deluxe" selected>Deluxe Executive (₹14,400/night)</option>
+                            <option value="suite">Penthouse Suite (₹28,000/night)</option>
+                        </select>
+                    </div>
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Number of Guests</label>
+                        <select name="NumberOfGuests" class="cogstay-form-control">
+                            <option value="1">1 Guest</option>
+                            <option value="2" selected>2 Guests</option>
+                            <option value="3">3 Guests</option>
+                            <option value="4">4 Guests</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="cogstay-form-group">
+                    <label class="cogstay-form-label">Guest Special Requests</label>
+                    <textarea class="cogstay-form-control" name="SpecialRequests" rows="4" placeholder="Allergies, high-floor preference, early check-in details..."></textarea>
+                </div>
+
+                <div style="border-top: 1px solid var(--color-border); padding-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
+                    <a href="/Customer/Customer/AvailableRooms" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary">Proceed to Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Right Column: Live Price Summary -->
+    <div class="cogstay-card booking-summary-card">
+        <div class="cogstay-card-header">
+            <h3 class="cogstay-card-title"><i class="fa-solid fa-receipt"></i> Booking Summary</h3>
+        </div>
+        <div class="cogstay-card-body">
+            <div class="booking-price-row">
+                <span>Room Class:</span>
+                <strong id="summary-room-type">Deluxe Executive</strong>
+            </div>
+            <div class="booking-price-row">
+                <span>Daily Rate:</span>
+                <strong id="summary-room-rate">₹14,400</strong>
+            </div>
+            <div class="booking-price-row">
+                <span>Duration:</span>
+                <strong id="summary-nights">0 nights</strong>
+            </div>
+            <hr style="border: 0; border-top: 1px solid var(--color-border); margin: 15px 0;" />
+            <div class="booking-price-row">
+                <span>Subtotal:</span>
+                <strong id="summary-subtotal">₹0</strong>
+            </div>
+            <div class="booking-price-row">
+                <span>Taxes & Fees (12%):</span>
+                <strong id="summary-tax">₹0</strong>
+            </div>
+            <div class="booking-price-total" style="margin-top: 15px;">
+                <span>Total Quote:</span>
+                <strong id="summary-total">₹0</strong>
+            </div>
+        </div>
+        <div class="cogstay-card-footer" style="justify-content: center; background-color: rgba(200, 160, 77, 0.05);">
+            <span style="font-size: 11px; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 600; color: var(--color-accent);"><i class="fa-solid fa-shield"></i> Secure Checkout Reservation</span>
+        </div>
+    </div>
+</div>

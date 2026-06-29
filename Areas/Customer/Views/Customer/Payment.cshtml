@@ -1,0 +1,91 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Payment Checkout";
+    ViewData["Role"] = "Customer";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Payment Portal</h1>
+    <p style="color: var(--color-text-muted);">Process outstanding room charges or advance reservation deposits.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Card Details form -->
+    <div class="cogstay-card">
+        <div class="cogstay-card-header">
+            <h3 class="cogstay-card-title"><i class="fa-solid fa-credit-card"></i> Credit Card Payment Details</h3>
+        </div>
+        <div class="cogstay-card-body">
+            <!-- Form intercept points back to Dashboard -->
+            <form method="post" action="/Customer/Customer/Dashboard" data-success-message="Payment processed successfully! Your receipt has been emailed." data-redirect="/Customer/Customer/Dashboard">
+                <div class="cogstay-form-group">
+                    <label class="cogstay-form-label">Cardholder Full Name</label>
+                    <input type="text" class="cogstay-form-control" placeholder="John Henderson" required value="John Henderson" />
+                </div>
+
+                <div class="cogstay-form-group">
+                    <label class="cogstay-form-label">Card Number</label>
+                    <div style="position: relative;">
+                        <input type="text" class="cogstay-form-control" placeholder="4111 2222 3333 4444" required pattern="\d{16}" title="16-digit card number" value="4111222233334444" />
+                        <i class="fa-brands fa-cc-visa" style="position: absolute; right: 15px; top: 15px; font-size: 20px; color: var(--color-text-muted);"></i>
+                    </div>
+                </div>
+
+                <div class="cogstay-form-row">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Expiry Date</label>
+                        <input type="text" class="cogstay-form-control" placeholder="MM/YY" required pattern="(0[1-9]|1[0-2])\/\d{2}" title="Expiry in MM/YY format" value="12/28" />
+                    </div>
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">CVV Code</label>
+                        <input type="password" class="cogstay-form-control" placeholder="&bull;&bull;&bull;" required pattern="\d{3}" title="3-digit security code" value="123" />
+                    </div>
+                </div>
+
+                <div style="background-color: #FAF9F6; border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: 15px; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    <i class="fa-solid fa-lock" style="color: var(--color-success); font-size: 18px;"></i>
+                    <p style="font-size: 12px; color: var(--color-text-muted);">Your transaction is secured with 256-bit SSL encryption. Card data is tokenized and processed compliant with PCI-DSS.</p>
+                </div>
+
+                <div style="border-top: 1px solid var(--color-border); padding-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
+                    <a href="/Customer/Customer/Dashboard" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary"><i class="fa-solid fa-receipt"></i> Process Payment</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Right Column: Charge breakdown -->
+    <div class="cogstay-card">
+        <div class="cogstay-card-header">
+            <h3 class="cogstay-card-title"><i class="fa-solid fa-file-invoice"></i> Billing Summary</h3>
+        </div>
+        <div class="cogstay-card-body">
+            <div class="booking-price-row">
+                <span>Room Number:</span>
+                <strong>Room 304</strong>
+            </div>
+            <div class="booking-price-row">
+                <span>Description:</span>
+                <span style="font-size: 13px; text-align: right; color: var(--color-text-muted);">Outstanding mini-bar + service charges</span>
+            </div>
+            <hr style="border: 0; border-top: 1px solid var(--color-border); margin: 15px 0;" />
+            <div class="booking-price-row">
+                <span>Room Charges:</span>
+                <strong>₹8,000.00</strong>
+            </div>
+            <div class="booking-price-row">
+                <span>Mini-Bar Order:</span>
+                <strong>₹4,000.00</strong>
+            </div>
+            <div class="booking-price-total" style="margin-top: 15px;">
+                <span>Balance Due:</span>
+                <strong style="color: var(--color-danger);">₹12,000.00</strong>
+            </div>
+            <hr style="border: 0; border-top: 1px solid var(--color-border); margin: 20px 0 15px 0;" />
+            <button class="btn btn-secondary w-100" style="width: 100%; justify-content: center; display: inline-flex; gap: 8px;" onclick="downloadReceipt('CS-9024')">
+                <i class="fa-solid fa-file-pdf"></i> Download Invoice / Receipt
+            </button>
+        </div>
+    </div>
+</div>

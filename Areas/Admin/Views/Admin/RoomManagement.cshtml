@@ -1,0 +1,175 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Room Management";
+    ViewData["Role"] = "Admin";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Room Management</h1>
+    <p style="color: var(--color-text-muted);">Manage room allocations, category parameters, daily rates, and status.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Table of Rooms -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-list-check"></i> Room Inventory Catalog</h3>
+            </div>
+            
+            <!-- Filter Bar -->
+            <div style="padding: 20px 24px; border-bottom: 1px solid var(--color-border); display: flex; gap: 15px; flex-wrap: wrap;">
+                <div class="search-input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="admin-table-search" class="cogstay-form-control" placeholder="Search by Room Number..." />
+                </div>
+                <div style="min-width: 150px;">
+                    <select id="admin-table-filter-status" class="cogstay-form-control">
+                        <option value="all">All Room States</option>
+                        <option value="available">Available</option>
+                        <option value="occupied">Occupied</option>
+                        <option value="dirty">Dirty</option>
+                        <option value="maintenance">Maintenance</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="cogstay-table-responsive">
+                <table class="cogstay-table">
+                    <thead>
+                        <tr>
+                            <th>Room No.</th>
+                            <th>Category</th>
+                            <th>Base Rate</th>
+                            <th>Cleanliness</th>
+                            <th>Status State</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Room 101</strong></td>
+                            <td>Superior King</td>
+                            <td>₹11,200.00</td>
+                            <td><span class="cogstay-badge success">Clean</span></td>
+                            <td><span class="cogstay-badge success">Available</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Room 101 settings.', 'info')"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeRoomRow(this, 'Room 101')"><i class="fa-solid fa-trash"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 102</strong></td>
+                            <td>Superior King</td>
+                            <td>₹11,200.00</td>
+                            <td><span class="cogstay-badge warning">Dirty</span></td>
+                            <td><span class="cogstay-badge danger">Occupied</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Room 102 settings.', 'info')"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeRoomRow(this, 'Room 102')"><i class="fa-solid fa-trash"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 201</strong></td>
+                            <td>Deluxe Executive</td>
+                            <td>₹14,400.00</td>
+                            <td><span class="cogstay-badge success">Clean</span></td>
+                            <td><span class="cogstay-badge success">Available</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Room 201 settings.', 'info')"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeRoomRow(this, 'Room 201')"><i class="fa-solid fa-trash"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 202</strong></td>
+                            <td>Deluxe Executive</td>
+                            <td>₹14,800.00</td>
+                            <td><span class="cogstay-badge success">Clean</span></td>
+                            <td><span class="cogstay-badge danger">Occupied</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Room 202 settings.', 'info')"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeRoomRow(this, 'Room 202')"><i class="fa-solid fa-trash"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 304</strong></td>
+                            <td>Penthouse Suite</td>
+                            <td>₹28,000.00</td>
+                            <td><span class="cogstay-badge warning">Dirty</span></td>
+                            <td><span class="cogstay-badge danger">Occupied</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Room 304 settings.', 'info')"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeRoomRow(this, 'Room 304')"><i class="fa-solid fa-trash"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 305</strong></td>
+                            <td>Penthouse Suite</td>
+                            <td>₹28,000.00</td>
+                            <td><span class="cogstay-badge danger">Dirty</span></td>
+                            <td><span class="cogstay-badge warning">Maintenance</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Room 305 settings.', 'info')"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeRoomRow(this, 'Room 305')"><i class="fa-solid fa-trash"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 401</strong></td>
+                            <td>Presidential Suite</td>
+                            <td>₹28,800.00</td>
+                            <td><span class="cogstay-badge success">Clean</span></td>
+                            <td><span class="cogstay-badge success">Available</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Room 401 settings.', 'info')"><i class="fa-solid fa-pen"></i> Edit</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeRoomRow(this, 'Room 401')"><i class="fa-solid fa-trash"></i> Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Add Room Form -->
+    <div>
+        <div class="cogstay-card" style="position: sticky; top: 100px;">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-circle-plus"></i> Configure New Room</h3>
+            </div>
+            <div class="cogstay-card-body">
+                <form method="post" action="/Admin/Admin/RoomManagement" data-success-message="New Room added successfully to CogStay system!" data-redirect="/Admin/Admin/RoomManagement">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Room Number</label>
+                        <input type="text" class="cogstay-form-control" placeholder="e.g. Room 204" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Room Category</label>
+                        <select class="cogstay-form-control" required>
+                            <option value="standard">Superior King (₹11,200/night)</option>
+                            <option value="deluxe">Deluxe Executive (₹14,400/night)</option>
+                            <option value="suite">Penthouse Suite (₹28,000/night)</option>
+                            <option value="presidential">Presidential Suite (₹28,800/night)</option>
+                        </select>
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Base Price Rate (₹)</label>
+                        <input type="number" class="cogstay-form-control" placeholder="e.g. 14400" min="4000" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Initial Status</label>
+                        <select class="cogstay-form-control" required>
+                            <option value="available">Available (Clean)</option>
+                            <option value="dirty">Dirty (Requires cleaning)</option>
+                            <option value="maintenance">Under Maintenance</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; background-color: var(--accent-admin);"><i class="fa-solid fa-save"></i> Save Room Configuration</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

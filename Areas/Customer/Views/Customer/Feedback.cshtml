@@ -1,0 +1,55 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Submit Feedback";
+    ViewData["Role"] = "Customer";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Guest Feedback</h1>
+    <p style="color: var(--color-text-muted);">Share your experience with us. We use customer reviews to continuously refine our hospitality standards.</p>
+</div>
+
+<div class="cogstay-card" style="max-width: 800px; margin: 0 auto;">
+    <div class="cogstay-card-header">
+        <h3 class="cogstay-card-title"><i class="fa-solid fa-star-half-stroke"></i> Share Your Stay Experience</h3>
+    </div>
+    <div class="cogstay-card-body">
+        <form method="post" action="/Customer/Customer/Dashboard" data-success-message="Thank you for your valuable feedback! It has been submitted to management." data-redirect="/Customer/Customer/Dashboard">
+            <!-- Hidden input for rating -->
+            <input type="hidden" id="guest-rating-val" name="RatingValue" value="5" required />
+            
+            <div class="cogstay-form-group">
+                <label class="cogstay-form-label">Overall Stay Rating</label>
+                <div class="rating-stars">
+                    <i class="fa-solid fa-star active" data-value="1"></i>
+                    <i class="fa-solid fa-star active" data-value="2"></i>
+                    <i class="fa-solid fa-star active" data-value="3"></i>
+                    <i class="fa-solid fa-star active" data-value="4"></i>
+                    <i class="fa-solid fa-star active" data-value="5"></i>
+                </div>
+                <span style="font-size: 12px; color: var(--color-text-muted);">Click on a star to set your score.</span>
+            </div>
+
+            <div class="cogstay-form-group">
+                <label class="cogstay-form-label">Category of Review</label>
+                <select name="FeedbackCategory" class="cogstay-form-control" required>
+                    <option value="comfort" selected>Room Cleanliness & Comfort</option>
+                    <option value="staff">Staff Professionalism & Courtesy</option>
+                    <option value="food">In-Room Dining & Catering Quality</option>
+                    <option value="facilities">Hotel Amenities & Spa Facilities</option>
+                    <option value="overall">General Value & Overall Stay</option>
+                </select>
+            </div>
+
+            <div class="cogstay-form-group">
+                <label class="cogstay-form-label">Detailed Comments</label>
+                <textarea class="cogstay-form-control" name="FeedbackComments" rows="5" placeholder="Tell us what you loved, or areas where we could improve our hospitality services..." required></textarea>
+            </div>
+
+            <div style="border-top: 1px solid var(--color-border); padding-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
+                <a href="/Customer/Customer/Dashboard" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Submit Feedback</button>
+            </div>
+        </form>
+    </div>
+</div>

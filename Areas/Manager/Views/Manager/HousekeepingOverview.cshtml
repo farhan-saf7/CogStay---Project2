@@ -1,0 +1,108 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Housekeeping Overview";
+    ViewData["Role"] = "Manager";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Housekeeping Audit Console</h1>
+    <p style="color: var(--color-text-muted);">Monitor cleaning logs, supervisor sign-offs, and service task rosters.</p>
+</div>
+
+<!-- Housekeeping status counts -->
+<div class="grid-container grid-cols-4" style="margin-bottom: 30px;">
+    <div class="cogstay-stat-card manager">
+        <div class="cogstay-stat-details">
+            <p>Clean Rooms</p>
+            <h3>114 rooms</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-broom" style="color: var(--color-primary);"></i>
+        </div>
+    </div>
+    
+    <div class="cogstay-stat-card manager">
+        <div class="cogstay-stat-details">
+            <p>Dirty / Pending Clean</p>
+            <h3>28 rooms</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-soap" style="color: var(--color-primary);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card manager">
+        <div class="cogstay-stat-details">
+            <p>Cleaning In-Progress</p>
+            <h3>4 rooms</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-spray-can-sparkles" style="color: var(--color-primary);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card manager">
+        <div class="cogstay-stat-details">
+            <p>Out of Order (Maintenance)</p>
+            <h3>2 rooms</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-screwdriver-wrench" style="color: var(--color-primary);"></i>
+        </div>
+    </div>
+</div>
+
+<!-- Audit list table -->
+<div class="cogstay-card">
+    <div class="cogstay-card-header">
+        <h3 class="cogstay-card-title"><i class="fa-solid fa-list-check"></i> Pending Cleaning Roster Audit</h3>
+    </div>
+    <div class="cogstay-table-responsive">
+        <table class="cogstay-table">
+            <thead>
+                <tr>
+                    <th>Room No.</th>
+                    <th>Room Type</th>
+                    <th>Cleanliness Status</th>
+                    <th>Housekeeper Assigned</th>
+                    <th>Priority Level</th>
+                    <th>Roster Time</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Room 102</strong></td>
+                    <td>Superior King</td>
+                    <td><span class="cogstay-badge warning">Dirty</span></td>
+                    <td>Mary Poppins</td>
+                    <td><span class="cogstay-badge danger">Urgent (Checkout)</span></td>
+                    <td>Today, 2:30 PM</td>
+                </tr>
+                <tr>
+                    <td><strong>Room 304</strong></td>
+                    <td>Penthouse Suite</td>
+                    <td><span class="cogstay-badge info">Cleaning</span></td>
+                    <td>Bruce Wayne</td>
+                    <td><span class="cogstay-badge danger">Urgent (Checkout)</span></td>
+                    <td>Today, 2:45 PM</td>
+                </tr>
+                <tr>
+                    <td><strong>Room 202</strong></td>
+                    <td>Deluxe Executive</td>
+                    <td><span class="cogstay-badge warning">Dirty</span></td>
+                    <td>Peter Parker</td>
+                    <td><span class="cogstay-badge warning">Medium</span></td>
+                    <td>Today, 3:15 PM</td>
+                </tr>
+                <tr>
+                    <td><strong>Room 305</strong></td>
+                    <td>Penthouse Suite</td>
+                    <td><span class="cogstay-badge danger">Dirty</span></td>
+                    <td>Mary Poppins</td>
+                    <td><span class="cogstay-badge warning">Medium (Maint.)</span></td>
+                    <td>Today, 3:30 PM</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

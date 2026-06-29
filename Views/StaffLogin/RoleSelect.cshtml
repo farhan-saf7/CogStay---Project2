@@ -1,0 +1,80 @@
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewData["Title"] = "Staff Portal Selection";
+    ViewData["IsSplitPage"] = true;
+}
+
+<div class="split-login-container">
+    <!-- Left Section: Main Hero Image of CogStay -->
+    <div class="split-login-hero">
+        <div class="split-login-hero-overlay"></div>
+        <div class="split-login-hero-content">
+            <a href="/Home/Index" class="split-login-brand">
+                <i class="fa-solid fa-hotel"></i> CogStay
+            </a>
+            <h1>Experience Hospitality Excellence</h1>
+            <p>Welcome to the CogStay Operations & Staff Management Suite. Please select your department to log in and manage reservations, cleaning tasks, and executive dashboards in real-time.</p>
+        </div>
+    </div>
+    
+    <!-- Right Section: Login Selection Cards -->
+    <div class="split-login-panel">
+        <div class="split-login-panel-content">
+            <div class="cogstay-login-header" style="text-align: center;">
+                <a href="/Home/Index" style="font-family: var(--font-serif); font-size: 32px; font-weight: 700; color: var(--color-primary); display: inline-flex; align-items: center; gap: 10px; text-decoration: none; margin-bottom: 10px;">
+                    <i class="fa-solid fa-hotel" style="color: var(--color-accent);"></i> CogStay
+                </a>
+                <h2 class="cogstay-login-title">Staff Operations Portal</h2>
+                <p class="cogstay-login-desc">Select your designated department role below to authenticate.</p>
+            </div>
+
+            <div class="role-select-grid">
+                <!-- Admin -->
+                <div class="role-select-card admin">
+                    <div class="role-select-icon">
+                        <i class="fa-solid fa-user-shield"></i>
+                    </div>
+                    <h3 class="role-select-title">Administrator</h3>
+                    <p class="role-select-desc">Manage system parameters, room configurations, and staff assignments.</p>
+                    <a href="/Admin/Admin/Login" class="btn btn-primary btn-sm btn-accent" style="margin-top: auto; color: var(--color-primary-dark)">Log In</a>
+                </div>
+
+                <!-- Manager -->
+                <div class="role-select-card manager">
+                    <div class="role-select-icon">
+                        <i class="fa-solid fa-user-tie"></i>
+                    </div>
+                    <h3 class="role-select-title">Hotel Manager</h3>
+                    <p class="role-select-desc">Access executive summaries, revenue reports, and customer feedback data.</p>
+                    <a href="/Manager/Manager/Login" class="btn btn-primary btn-sm btn-accent" style="margin-top: auto; color: var(--color-primary-dark)">Log In</a>
+                </div>
+
+                <!-- Front Desk -->
+                <div class="role-select-card frontdesk">
+                    <div class="role-select-icon">
+                        <i class="fa-solid fa-bell-concierge"></i>
+                    </div>
+                    <h3 class="role-select-title">Front Desk Agent</h3>
+                    <p class="role-select-desc">Manage active check-ins, check-outs, key cards, and guest service requests.</p>
+                    <a href="/FrontDesk/FrontDesk/Login" class="btn btn-primary btn-sm btn-accent" style="margin-top: auto; color: var(--color-primary-dark)">Log In</a>
+                </div>
+
+                <!-- Housekeeping -->
+                <div class="role-select-card housekeeping">
+                    <div class="role-select-icon">
+                        <i class="fa-solid fa-broom-ball"></i>
+                    </div>
+                    <h3 class="role-select-title">Housekeeping Staff</h3>
+                    <p class="role-select-desc">Access room cleaning sheets, laundry logs, food services, and assignments.</p>
+                    <a href="/Housekeeping/Housekeeping/Login" class="btn btn-primary btn-sm btn-accent" style="margin-top: auto; color: var(--color-primary-dark)">Log In</a>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin-top: 10px;">
+                <a href="/Home/Index" style="font-size: 13px; color: var(--color-text-muted); display: inline-flex; align-items: center; gap: 6px; text-decoration: none;">
+                    <i class="fa-solid fa-arrow-left-long"></i> Back to Homepage
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

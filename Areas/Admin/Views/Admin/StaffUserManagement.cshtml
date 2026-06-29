@@ -1,0 +1,174 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Staff Management";
+    ViewData["Role"] = "Admin";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Staff User Management</h1>
+    <p style="color: var(--color-text-muted);">Manage employee credentials, security groups, roles, and shift parameters.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Staff Table -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-users"></i> Hotel Staff Accounts</h3>
+            </div>
+            
+            <div style="padding: 20px 24px; border-bottom: 1px solid var(--color-border); display: flex; gap: 15px; flex-wrap: wrap;">
+                <div class="search-input-wrapper">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                    <input type="text" id="admin-table-search" class="cogstay-form-control" placeholder="Search by Employee Name..." />
+                </div>
+                <div style="min-width: 150px;">
+                    <select id="admin-table-filter-status" class="cogstay-form-control">
+                        <option value="all">All Roles</option>
+                        <option value="admin">Admin</option>
+                        <option value="manager">Manager</option>
+                        <option value="front desk">Front Desk</option>
+                        <option value="housekeeper">Housekeeper</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="cogstay-table-responsive">
+                <table class="cogstay-table">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Username</th>
+                            <th>Operational Role</th>
+                            <th>Shift Schedule</th>
+                            <th>User Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>John Doe</strong></td>
+                            <td>sysadmin</td>
+                            <td><span class="cogstay-badge info" style="background-color: rgba(107, 63, 160, 0.1); color: var(--accent-admin);">Admin</span></td>
+                            <td>24/7 Support</td>
+                            <td><span class="cogstay-badge success">Active</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Lock Alert', 'Cannot modify system administrator accounts.', 'warning')">Configure</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none; opacity: 0.5;" onclick="removeStaffRow(this, 'John Doe')"><i class="fa-solid fa-user-minus"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Robert Downey</strong></td>
+                            <td>manager_robert</td>
+                            <td><span class="cogstay-badge info" style="background-color: rgba(31, 58, 95, 0.1); color: var(--accent-manager);">Manager</span></td>
+                            <td>Day Shift</td>
+                            <td><span class="cogstay-badge success">Active</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Robert Downey shift.', 'info')">Configure</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeStaffRow(this, 'Robert Downey')"><i class="fa-solid fa-user-minus"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>John Smith</strong></td>
+                            <td>frontdesk_john</td>
+                            <td><span class="cogstay-badge info" style="background-color: rgba(46, 111, 149, 0.1); color: var(--accent-frontdesk);">Front Desk</span></td>
+                            <td>Night Shift</td>
+                            <td><span class="cogstay-badge success">Active</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing John Smith shift.', 'info')">Configure</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeStaffRow(this, 'John Smith')"><i class="fa-solid fa-user-minus"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Sarah Connor</strong></td>
+                            <td>frontdesk_sarah</td>
+                            <td><span class="cogstay-badge info" style="background-color: rgba(46, 111, 149, 0.1); color: var(--accent-frontdesk);">Front Desk</span></td>
+                            <td>Day Shift</td>
+                            <td><span class="cogstay-badge success">Active</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Sarah Connor shift.', 'info')">Configure</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeStaffRow(this, 'Sarah Connor')"><i class="fa-solid fa-user-minus"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mary Poppins</strong></td>
+                            <td>housekeeping_mary</td>
+                            <td><span class="cogstay-badge info" style="background-color: rgba(46, 125, 91, 0.1); color: var(--accent-housekeeping);">Housekeeper</span></td>
+                            <td>Day Shift</td>
+                            <td><span class="cogstay-badge success">Active</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Mary Poppins shift.', 'info')">Configure</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeStaffRow(this, 'Mary Poppins')"><i class="fa-solid fa-user-minus"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Bruce Wayne</strong></td>
+                            <td>housekeeping_bruce</td>
+                            <td><span class="cogstay-badge info" style="background-color: rgba(46, 125, 91, 0.1); color: var(--accent-housekeeping);">Housekeeper</span></td>
+                            <td>Night Shift</td>
+                            <td><span class="cogstay-badge success">Active</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Bruce Wayne shift.', 'info')">Configure</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeStaffRow(this, 'Bruce Wayne')"><i class="fa-solid fa-user-minus"></i> Remove</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Peter Parker</strong></td>
+                            <td>housekeeping_peter</td>
+                            <td><span class="cogstay-badge info" style="background-color: rgba(46, 125, 91, 0.1); color: var(--accent-housekeeping);">Housekeeper</span></td>
+                            <td>On Call</td>
+                            <td><span class="cogstay-badge warning">On Leave</span></td>
+                            <td style="display: flex; gap: 6px;">
+                                <button class="btn btn-secondary btn-sm" onclick="showToast('Action Logged', 'Editing Peter Parker shift.', 'info')">Configure</button>
+                                <button class="btn btn-danger btn-sm" style="background-color: var(--color-danger); color: white; border: none;" onclick="removeStaffRow(this, 'Peter Parker')"><i class="fa-solid fa-user-minus"></i> Remove</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Add user Form -->
+    <div>
+        <div class="cogstay-card" style="position: sticky; top: 100px;">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-user-plus"></i> Register Employee</h3>
+            </div>
+            <div class="cogstay-card-body">
+                <form method="post" action="/Admin/Admin/StaffUserManagement" data-success-message="New Employee registered successfully to CogStay Portal!" data-redirect="/Admin/Admin/StaffUserManagement">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Full Name</label>
+                        <input type="text" class="cogstay-form-control" placeholder="e.g. Clark Kent" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Username</label>
+                        <input type="text" class="cogstay-form-control" placeholder="e.g. housekeeping_clark" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Security Role</label>
+                        <select class="cogstay-form-control" required>
+                            <option value="admin">System Admin</option>
+                            <option value="manager">Hotel Manager</option>
+                            <option value="frontdesk">Front Desk Agent</option>
+                            <option value="housekeeping" selected>Housekeeping Member</option>
+                        </select>
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Shift Hours</label>
+                        <select class="cogstay-form-control">
+                            <option value="day">Day Shift (08:00 AM - 04:00 PM)</option>
+                            <option value="night">Night Shift (04:00 PM - 12:00 AM)</option>
+                            <option value="oncall">On Call / Standby</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; background-color: var(--accent-admin);"><i class="fa-solid fa-save"></i> Register Credentials</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

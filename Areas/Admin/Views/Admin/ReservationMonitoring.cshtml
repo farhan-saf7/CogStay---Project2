@@ -1,0 +1,132 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Reservation Monitoring";
+    ViewData["Role"] = "Admin";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Reservation Monitoring</h1>
+    <p style="color: var(--color-text-muted);">Real-time tracking of active check-ins, guest billing statuses, and pending reservations.</p>
+</div>
+
+<!-- Monitoring Table -->
+<div class="cogstay-card">
+    <div class="cogstay-card-header">
+        <h3 class="cogstay-card-title"><i class="fa-solid fa-desktop"></i> Global Reservation Feed</h3>
+    </div>
+    
+    <!-- Table search actions -->
+    <div style="padding: 20px 24px; border-bottom: 1px solid var(--color-border); display: flex; gap: 15px; flex-wrap: wrap;">
+        <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="admin-table-search" class="cogstay-form-control" placeholder="Search Guest Name or ID..." />
+        </div>
+        <div style="min-width: 150px;">
+            <select id="admin-table-filter-status" class="cogstay-form-control">
+                <option value="all">All Reservation States</option>
+                <option value="checked in">Checked In</option>
+                <option value="confirmed">Confirmed</option>
+                <option value="completed">Completed</option>
+                <option value="cancelled">Cancelled</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="cogstay-table-responsive">
+        <table class="cogstay-table">
+            <thead>
+                <tr>
+                    <th>Booking ID</th>
+                    <th>Guest Name</th>
+                    <th>Room</th>
+                    <th>Stay Dates</th>
+                    <th>Guests</th>
+                    <th>Total billing</th>
+                    <th>Payment</th>
+                    <th>Status</th>
+                    <th>Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>#CS-9024</strong></td>
+                    <td>John Henderson</td>
+                    <td>Room 304</td>
+                    <td>Jun 24 - Jun 28, 2026</td>
+                    <td>2</td>
+                    <td>₹1,25,440.00</td>
+                    <td><span class="cogstay-badge warning">Partial</span></td>
+                    <td><span class="cogstay-badge success">Checked In</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" onclick="showToast('Alert', 'Guest is currently checked-in. Process Check-out from Front Desk.', 'warning')">Force Check-out</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#CS-9288</strong></td>
+                    <td>Emily Watson</td>
+                    <td>Room 301</td>
+                    <td>Jul 15 - Jul 18, 2026</td>
+                    <td>1</td>
+                    <td>₹48,384.00</td>
+                    <td><span class="cogstay-badge info">Paid</span></td>
+                    <td><span class="cogstay-badge info">Confirmed</span></td>
+                    <td>
+                        <button class="btn btn-danger btn-sm" onclick="showToast('Success', 'Reservation #CS-9288 has been cancelled and refunded.', 'success')">Cancel</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#CS-9402</strong></td>
+                    <td>Robert Downey</td>
+                    <td>Room 201</td>
+                    <td>Jul 20 - Jul 25, 2026</td>
+                    <td>2</td>
+                    <td>₹80,640.00</td>
+                    <td><span class="cogstay-badge danger">Unpaid</span></td>
+                    <td><span class="cogstay-badge warning">Pending</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" onclick="showToast('Success', 'Booking status updated to Confirmed.', 'success')">Confirm</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#CS-8711</strong></td>
+                    <td>Albert Einstein</td>
+                    <td>Room 201</td>
+                    <td>May 10 - May 12, 2026</td>
+                    <td>2</td>
+                    <td>₹25,088.00</td>
+                    <td><span class="cogstay-badge success">Paid</span></td>
+                    <td><span class="cogstay-badge success">Completed</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;">Archived</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#CS-8430</strong></td>
+                    <td>Grace Hopper</td>
+                    <td>Room 202</td>
+                    <td>Mar 04 - Mar 08, 2026</td>
+                    <td>2</td>
+                    <td>₹48,384.00</td>
+                    <td><span class="cogstay-badge success">Paid</span></td>
+                    <td><span class="cogstay-badge success">Completed</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;">Archived</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#CS-8012</strong></td>
+                    <td>Charles Babbage</td>
+                    <td>Room 302</td>
+                    <td>Jan 12 - Jan 15, 2026</td>
+                    <td>2</td>
+                    <td>₹49,728.00</td>
+                    <td><span class="cogstay-badge danger">Refunded</span></td>
+                    <td><span class="cogstay-badge danger">Cancelled</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;">Archived</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

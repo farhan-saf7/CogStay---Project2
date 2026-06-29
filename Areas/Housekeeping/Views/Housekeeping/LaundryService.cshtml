@@ -1,0 +1,121 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Laundry Services";
+    ViewData["Role"] = "Housekeeping";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Guest Laundry & Valet Services</h1>
+    <p style="color: var(--color-text-muted);">Manage guest dry-cleaning collections, wash counts, and valet deliveries.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Laundry Table -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-shirt"></i> Guest Laundry Log</h3>
+            </div>
+            
+            <div class="cogstay-table-responsive" style="border: none;">
+                <table class="cogstay-table">
+                    <thead>
+                        <tr>
+                            <th>Room No.</th>
+                            <th>Guest Name</th>
+                            <th>Service Class</th>
+                            <th>Linen Count</th>
+                            <th>Laundry Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Room 304</strong></td>
+                            <td>John Henderson</td>
+                            <td>Dry Cleaning (Suit)</td>
+                            <td>1 Item</td>
+                            <td><span class="cogstay-badge success">Delivered</span></td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Archived</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 201</strong></td>
+                            <td>Albert Einstein</td>
+                            <td>Standard Wash & Fold</td>
+                            <td>8 Items</td>
+                            <td><span class="cogstay-badge info">In Wash</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Laundry marked as Ironed.', 'success')">Progress State</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 202</strong></td>
+                            <td>Grace Hopper</td>
+                            <td>Express Ironing</td>
+                            <td>2 Items</td>
+                            <td><span class="cogstay-badge warning">Ironing</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Laundry marked as Delivered.', 'success')">Mark Delivered</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 101</strong></td>
+                            <td>Frank Sinatra</td>
+                            <td>Dry Cleaning (Coat)</td>
+                            <td>1 Item</td>
+                            <td><span class="cogstay-badge success">Delivered</span></td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Archived</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 302</strong></td>
+                            <td>Ada Lovelace</td>
+                            <td>Standard Wash & Fold</td>
+                            <td>12 Items</td>
+                            <td><span class="cogstay-badge info">Sorting</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Laundry marked as In Wash.', 'success')">Progress State</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Log New Laundry Ticket -->
+    <div>
+        <div class="cogstay-card" style="position: sticky; top: 100px;">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-square-plus"></i> Log Laundry Job</h3>
+            </div>
+            <div class="cogstay-card-body">
+                <form method="post" action="/Housekeeping/Housekeeping/LaundryService" data-success-message="Laundry ticket logged and added to tracking!" data-redirect="/Housekeeping/Housekeeping/LaundryService">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Room Number</label>
+                        <input type="text" class="cogstay-form-control" placeholder="e.g. Room 202" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Valet Service Type</label>
+                        <select class="cogstay-form-control" required>
+                            <option value="standard">Standard Wash & Fold</option>
+                            <option value="dry">Express Dry Cleaning</option>
+                            <option value="iron">Iron & Press Only</option>
+                        </select>
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Linen / Item Count</label>
+                        <input type="number" class="cogstay-form-control" value="1" min="1" required />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; background-color: var(--accent-housekeeping);"><i class="fa-solid fa-save"></i> Register Laundry Job</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

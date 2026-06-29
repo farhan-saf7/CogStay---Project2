@@ -1,0 +1,137 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Wellness Spa Requests";
+    ViewData["Role"] = "Housekeeping";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Wellness Spa Services</h1>
+    <p style="color: var(--color-text-muted);">Coordinate guest therapy treatments, assign therapists, and manage massage/aromatherapy appointments.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Table of Spa Requests -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-spa"></i> Guest Spa Appointments Log</h3>
+            </div>
+            
+            <div class="cogstay-table-responsive" style="border: none;">
+                <table class="cogstay-table">
+                    <thead>
+                        <tr>
+                            <th>Room No.</th>
+                            <th>Guest Name</th>
+                            <th>Service Treatment</th>
+                            <th>Preferred Slot</th>
+                            <th>Assigned Therapist</th>
+                            <th>Service Status</th>
+                            <th>Roster Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Room 304</strong></td>
+                            <td>John Henderson</td>
+                            <td>Aromatherapy Massage (90 mins)</td>
+                            <td>04:00 PM</td>
+                            <td>Emma Watson (Therapist)</td>
+                            <td><span class="cogstay-badge success">Scheduled</span></td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Assigned</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 201</strong></td>
+                            <td>Albert Einstein</td>
+                            <td>Swedish Massage (60 mins)</td>
+                            <td>06:00 PM</td>
+                            <td>Bruce Willis (Therapist)</td>
+                            <td><span class="cogstay-badge success">Completed</span></td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Archived</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 302</strong></td>
+                            <td>Ada Lovelace</td>
+                            <td>Facial & Skincare Treatment</td>
+                            <td>Today, 2:30 PM</td>
+                            <td>Sarah Parker (Therapist)</td>
+                            <td><span class="cogstay-badge info">In-Progress</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Therapy completed. Session archived.', 'success')">Complete Therapy</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 202</strong></td>
+                            <td>Grace Hopper</td>
+                            <td>Hot Stone Therapy (60 mins)</td>
+                            <td>Today, 5:15 PM</td>
+                            <td>Pending Assignment</td>
+                            <td><span class="cogstay-badge warning">Pending</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Therapist assigned. Roster updated.', 'success')">Assign Staff</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Log Spa Request -->
+    <div>
+        <div class="cogstay-card" style="position: sticky; top: 100px;">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-circle-plus"></i> Book Spa Treatment</h3>
+            </div>
+            <div class="cogstay-card-body">
+                <form method="post" action="/Housekeeping/Housekeeping/WellnessSpaRequest" data-success-message="Wellness Spa appointment registered successfully!" data-redirect="/Housekeeping/Housekeeping/WellnessSpaRequest">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Room Number</label>
+                        <input type="text" class="cogstay-form-control" placeholder="e.g. Room 304" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Guest Full Name</label>
+                        <input type="text" class="cogstay-form-control" placeholder="e.g. John Henderson" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Treatment Selection</label>
+                        <select class="cogstay-form-control" required>
+                            <option value="aromatherapy">Aromatherapy Massage (90 mins)</option>
+                            <option value="swedish">Swedish Massage (60 mins)</option>
+                            <option value="hotstone">Hot Stone Therapy (60 mins)</option>
+                            <option value="facial">Facial & Skincare Treatment</option>
+                        </select>
+                    </div>
+
+                    <div class="cogstay-form-row">
+                        <div class="cogstay-form-group">
+                            <label class="cogstay-form-label">Time Slot</label>
+                            <input type="text" class="cogstay-form-control" placeholder="e.g. 04:00 PM" required />
+                        </div>
+                        <div class="cogstay-form-group">
+                            <label class="cogstay-form-label">Therapist</label>
+                            <select class="cogstay-form-control">
+                                <option value="emma">Emma Watson</option>
+                                <option value="bruce">Bruce Willis</option>
+                                <option value="sarah">Sarah Parker</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Aromatherapy Oils / Remarks</label>
+                        <input type="text" class="cogstay-form-control" placeholder="Lavender oil, high pressure..." />
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; background-color: var(--accent-housekeeping);"><i class="fa-solid fa-save"></i> Register Spa Booking</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

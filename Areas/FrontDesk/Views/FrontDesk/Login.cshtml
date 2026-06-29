@@ -1,0 +1,27 @@
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewData["Title"] = "Front Desk Agent Login";
+}
+
+<div class="cogstay-login-card" style="border-top: 4px solid var(--accent-frontdesk);">
+    <div class="cogstay-login-header">
+        <span class="cogstay-badge" style="background-color: rgba(46, 111, 149, 0.08); color: var(--accent-frontdesk); margin-bottom: 12px; text-transform: uppercase; font-weight: 700;">Front Desk Operations</span>
+        <h2 class="cogstay-login-title">CogStay Front Desk</h2>
+        <p class="cogstay-login-desc">Sign in with agent credentials to handle guest arrivals, key allocations, and checkout billings.</p>
+    </div>
+
+    <!-- Login form pointing to Front Desk Dashboard -->
+    <form method="post" action="/FrontDesk/FrontDesk/Dashboard" data-success-message="Front Desk session authenticated! Loading Operations Board." data-redirect="/FrontDesk/FrontDesk/Dashboard">
+        <div class="cogstay-form-group">
+            <label class="cogstay-form-label">Agent Username</label>
+            <input type="text" class="cogstay-form-control" placeholder="agent_username" required value="frontdesk_john" />
+        </div>
+
+        <div class="cogstay-form-group">
+            <label class="cogstay-form-label">Password</label>
+            <input type="password" class="cogstay-form-control" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required value="frontdeskpassword" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px; background-color: var(--accent-frontdesk);">Log In to Operations</button>
+    </form>
+</div>

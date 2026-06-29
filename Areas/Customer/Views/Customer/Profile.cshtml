@@ -1,0 +1,66 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Guest Profile";
+    ViewData["Role"] = "Customer";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Guest Profile Settings</h1>
+    <p style="color: var(--color-text-muted);">Manage your personal details, credentials, and notification settings.</p>
+</div>
+
+<div class="profile-header-card">
+    <div class="profile-avatar-large">JH</div>
+    <div>
+        <h2 style="font-family: var(--font-serif); font-size: 24px; color: var(--color-accent-light);">John Henderson</h2>
+        <p style="font-size: 14px; opacity: 0.8; margin-top: 4px;">Member Since: February 2024 &bull; Loyalty ID: #CG-890214</p>
+        <span class="cogstay-badge" style="background-color: var(--color-accent); color: var(--color-primary-dark); margin-top: 10px;">Gold Tier status</span>
+    </div>
+</div>
+
+<div class="cogstay-card">
+    <div class="cogstay-card-header">
+        <h3 class="cogstay-card-title"><i class="fa-solid fa-user-pen"></i> Edit Personal Details</h3>
+    </div>
+    <div class="cogstay-card-body">
+        <form method="post" action="/Customer/Customer/Dashboard" data-success-message="Profile updated successfully!" data-redirect="/Customer/Customer/Dashboard">
+            <div class="cogstay-form-row">
+                <div class="cogstay-form-group">
+                    <label class="cogstay-form-label">First Name</label>
+                    <input type="text" class="cogstay-form-control" value="John" required />
+                </div>
+                <div class="cogstay-form-group">
+                    <label class="cogstay-form-label">Last Name</label>
+                    <input type="text" class="cogstay-form-control" value="Henderson" required />
+                </div>
+            </div>
+
+            <div class="cogstay-form-row">
+                <div class="cogstay-form-group">
+                    <label class="cogstay-form-label">Email Address</label>
+                    <input type="email" class="cogstay-form-control" value="guest@example.com" required />
+                </div>
+                <div class="cogstay-form-group">
+                    <label class="cogstay-form-label">Phone Number</label>
+                    <input type="tel" class="cogstay-form-control" value="+1555019283" required />
+                </div>
+            </div>
+
+            <div class="cogstay-form-row">
+                <div class="cogstay-form-group">
+                    <label class="cogstay-form-label">New Password (Leave blank to keep current)</label>
+                    <input type="password" class="cogstay-form-control" placeholder="New Password" />
+                </div>
+                <div class="cogstay-form-group">
+                    <label class="cogstay-form-label">Confirm Password</label>
+                    <input type="password" class="cogstay-form-control" placeholder="Confirm Password" />
+                </div>
+            </div>
+
+            <div style="border-top: 1px solid var(--color-border); padding-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
+                <a href="/Customer/Customer/Dashboard" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary"><i class="fa-solid fa-save"></i> Save Changes</button>
+            </div>
+        </form>
+    </div>
+</div>

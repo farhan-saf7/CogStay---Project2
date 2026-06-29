@@ -1,0 +1,475 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Available Rooms";
+    ViewData["Role"] = "Customer";
+}
+
+@section Styles {
+    <style>
+        /* Page Header Title */
+        .cogstay-page-header {
+            margin-bottom: 35px;
+            border-bottom: 1px solid rgba(31, 58, 95, 0.08);
+            padding-bottom: 24px;
+        }
+        
+        .cogstay-page-title {
+            font-family: var(--font-serif);
+            font-size: 36px;
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+        
+        .cogstay-page-subtitle {
+            color: var(--color-text-muted);
+            font-size: 15px;
+            line-height: 1.6;
+            max-width: 800px;
+        }
+
+        /* Premium Filters Bar */
+        .cogstay-filter-bar {
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 40px;
+            display: flex;
+            gap: 24px;
+            align-items: flex-end;
+            box-shadow: 0 4px 20px rgba(31, 58, 95, 0.02);
+            flex-wrap: wrap;
+        }
+
+        .cogstay-filter-group {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .cogstay-filter-label {
+            font-size: 11px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--color-text-muted);
+        }
+
+        .cogstay-filter-select {
+            border: 1px solid var(--color-border);
+            border-radius: 8px;
+            padding: 10px 14px;
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--color-primary-dark);
+            background-color: #ffffff;
+            outline: none;
+            transition: all 0.2s ease;
+            width: 100%;
+            cursor: pointer;
+            appearance: none;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%231f3a5f' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: right 14px center;
+            background-size: 14px;
+            padding-right: 40px;
+        }
+
+        .cogstay-filter-select:focus {
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(197, 160, 89, 0.15);
+        }
+
+        .cogstay-filter-results {
+            margin-left: auto;
+            align-self: center;
+            font-size: 13.5px;
+            color: var(--color-text-muted);
+            font-weight: 500;
+        }
+
+        /* Responsive Premium Grid */
+        .customer-rooms-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 50px;
+        }
+
+        @@media (max-width: 992px) {
+            .customer-rooms-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 24px;
+            }
+            .cogstay-filter-results {
+                width: 100%;
+                margin-top: 10px;
+                text-align: left;
+            }
+        }
+
+        @@media (max-width: 768px) {
+            .customer-rooms-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Premium Room Card */
+        .cogstay-room-card {
+            display: flex;
+            flex-direction: column;
+            background-color: var(--color-surface);
+            border: 1px solid var(--color-border);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(31, 58, 95, 0.04);
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+            height: 100%;
+        }
+
+        .cogstay-room-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 16px 35px rgba(31, 58, 95, 0.1);
+            border-color: var(--color-accent);
+        }
+
+        /* Image Container & Overlay Badge */
+        .cogstay-room-image-container {
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            background-color: #f3f3f3;
+        }
+
+        .cogstay-room-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .cogstay-room-card:hover .cogstay-room-card-img {
+            transform: scale(1.08);
+        }
+
+        .cogstay-room-badge {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background-color: var(--color-success);
+            color: #ffffff;
+            padding: 6px 14px;
+            font-size: 11px;
+            font-weight: 700;
+            border-radius: 30px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(255, 255, 255, 0.25);
+            z-index: 2;
+        }
+
+        /* Card Content Styling */
+        .cogstay-room-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .cogstay-room-title {
+            font-family: var(--font-serif);
+            font-size: 21px;
+            font-weight: 600;
+            color: var(--color-primary-dark);
+            margin-bottom: 8px;
+            line-height: 1.3;
+        }
+
+        .cogstay-room-desc {
+            color: var(--color-text-muted);
+            font-size: 13.5px;
+            line-height: 1.5;
+            margin-bottom: 16px;
+            height: 40px;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* Occupancy styling */
+        .cogstay-occupancy-row {
+            font-size: 13px;
+            color: var(--color-text-muted);
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 500;
+        }
+
+        .cogstay-occupancy-row i {
+            color: var(--color-primary);
+            font-size: 14px;
+        }
+
+        /* Chips styling for amenities */
+        .cogstay-room-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 24px;
+        }
+
+        .cogstay-amenity-chip {
+            background-color: rgba(31, 58, 95, 0.04);
+            color: var(--color-primary-dark);
+            font-size: 11px;
+            font-weight: 600;
+            padding: 5px 10px;
+            border-radius: 6px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid rgba(31, 58, 95, 0.06);
+            transition: all 0.2s ease;
+        }
+
+        .cogstay-amenity-chip i {
+            color: var(--color-accent);
+            font-size: 12px;
+        }
+
+        /* Footer & Price & Button */
+        .cogstay-room-footer {
+            margin-top: auto;
+            border-top: 1px solid var(--color-border);
+            padding-top: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .cogstay-room-price {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--color-primary-dark);
+            display: flex;
+            flex-direction: column;
+            line-height: 1.1;
+        }
+
+        .cogstay-room-price span {
+            font-size: 11px;
+            color: var(--color-text-muted);
+            font-weight: 400;
+            margin-top: 2px;
+        }
+
+        .cogstay-room-footer .btn-reserve {
+            padding: 10px 24px;
+            font-size: 13.5px;
+            font-weight: 600;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+            min-width: 105px;
+            text-align: center;
+            background-color: var(--color-primary);
+            color: #ffffff;
+            border: none;
+            box-shadow: 0 4px 10px rgba(31, 58, 95, 0.15);
+        }
+
+        .cogstay-room-footer .btn-reserve:hover {
+            background-color: var(--color-primary-dark);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 15px rgba(31, 58, 95, 0.2);
+        }
+    </style>
+}
+
+<div class="cogstay-page-header">
+    <h1 class="cogstay-page-title">Available Rooms</h1>
+    <p class="cogstay-page-subtitle">Browse premium room options at CogStay and choose the stay that fits your comfort and budget.</p>
+</div>
+
+<!-- Filters Bar -->
+<div class="cogstay-filter-bar">
+    <div class="cogstay-filter-group">
+        <label class="cogstay-filter-label">Room Type</label>
+        <select id="filter-room-type" class="cogstay-filter-select">
+            <option value="all">All Rooms</option>
+            <option value="standard">Standard King</option>
+            <option value="deluxe">Deluxe Room</option>
+            <option value="suite">Penthouse Suite</option>
+        </select>
+    </div>
+
+    <div class="cogstay-filter-group">
+        <label class="cogstay-filter-label">Price Sort</label>
+        <select id="filter-price" class="cogstay-filter-select">
+            <option value="default">No Sort</option>
+            <option value="low">Price: Low to High</option>
+            <option value="high">Price: High to Low</option>
+        </select>
+    </div>
+
+    <div class="cogstay-filter-results">
+        <span>Showing 6 premium options</span>
+    </div>
+</div>
+
+<!-- Customer Rooms Grid (6 items) -->
+<div class="customer-rooms-grid">
+    <!-- Room 1 -->
+    <div class="cogstay-room-card" data-room-type="deluxe" data-room-price="14400">
+        <div class="cogstay-room-image-container">
+            <img src="/images/rooms/room_deluxe.png" class="cogstay-room-card-img" alt="Deluxe Executive Room 301" />
+            <span class="cogstay-room-badge"><i class="fa-solid fa-circle-check"></i> Available Now</span>
+        </div>
+        <div class="cogstay-room-body">
+            <h3 class="cogstay-room-title">Deluxe Executive Room 301</h3>
+            <p class="cogstay-room-desc">Comfortable city views, dedicated workspace desk, high-speed fibre internet.</p>
+            <div class="cogstay-occupancy-row">
+                <i class="fa-solid fa-users"></i> Occupancy: Max 2 Guests
+            </div>
+            <div class="cogstay-room-chips">
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-wifi"></i> Wifi</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-bed"></i> King Bed</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-mug-hot"></i> Coffee</span>
+            </div>
+            <div class="cogstay-room-footer">
+                <div class="cogstay-room-price">₹14,400 <span>/ night</span></div>
+                <a href="/Customer/Customer/BookRoom?type=deluxe" class="btn-reserve">Reserve</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room 2 -->
+    <div class="cogstay-room-card" data-room-type="suite" data-room-price="28000">
+        <div class="cogstay-room-image-container">
+            <img src="/images/rooms/room_suite.png" class="cogstay-room-card-img" alt="Penthouse Suite 304" />
+            <span class="cogstay-room-badge"><i class="fa-solid fa-circle-check"></i> Available Now</span>
+        </div>
+        <div class="cogstay-room-body">
+            <h3 class="cogstay-room-title">Penthouse Suite 304</h3>
+            <p class="cogstay-room-desc">Top-floor expansive views, lounge room, dining table, private hot tub.</p>
+            <div class="cogstay-occupancy-row">
+                <i class="fa-solid fa-users"></i> Occupancy: Max 4 Guests
+            </div>
+            <div class="cogstay-room-chips">
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-hot-tub-person"></i> Hot Tub</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-wine-glass"></i> Minibar</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-couch"></i> Lounge</span>
+            </div>
+            <div class="cogstay-room-footer">
+                <div class="cogstay-room-price">₹28,000 <span>/ night</span></div>
+                <a href="/Customer/Customer/BookRoom?type=suite" class="btn-reserve">Reserve</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room 3 -->
+    <div class="cogstay-room-card" data-room-type="standard" data-room-price="11200">
+        <div class="cogstay-room-image-container">
+            <img src="/images/rooms/room_standard.png" class="cogstay-room-card-img" alt="Superior King 201" />
+            <span class="cogstay-room-badge"><i class="fa-solid fa-circle-check"></i> Available Now</span>
+        </div>
+        <div class="cogstay-room-body">
+            <h3 class="cogstay-room-title">Superior King 201</h3>
+            <p class="cogstay-room-desc">Plush bedding, modern layout shower, garden views, standard amenities.</p>
+            <div class="cogstay-occupancy-row">
+                <i class="fa-solid fa-users"></i> Occupancy: Max 2 Guests
+            </div>
+            <div class="cogstay-room-chips">
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-wifi"></i> Wifi</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-snowflake"></i> AC</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-tv"></i> TV</span>
+            </div>
+            <div class="cogstay-room-footer">
+                <div class="cogstay-room-price">₹11,200 <span>/ night</span></div>
+                <a href="/Customer/Customer/BookRoom?type=standard" class="btn-reserve">Reserve</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room 4 -->
+    <div class="cogstay-room-card" data-room-type="deluxe" data-room-price="14800">
+        <div class="cogstay-room-image-container">
+            <img src="/images/rooms/room_deluxe.png" class="cogstay-room-card-img" alt="Deluxe Executive Room 302" />
+            <span class="cogstay-room-badge"><i class="fa-solid fa-circle-check"></i> Available Now</span>
+        </div>
+        <div class="cogstay-room-body">
+            <h3 class="cogstay-room-title">Deluxe Executive Room 302</h3>
+            <p class="cogstay-room-desc">Double queen bedding configuration, balcony, coffee machine, desk.</p>
+            <div class="cogstay-occupancy-row">
+                <i class="fa-solid fa-users"></i> Occupancy: Max 4 Guests
+            </div>
+            <div class="cogstay-room-chips">
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-wifi"></i> Wifi</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-users"></i> Sleeps 4</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-mug-hot"></i> Nespresso</span>
+            </div>
+            <div class="cogstay-room-footer">
+                <div class="cogstay-room-price">₹14,800 <span>/ night</span></div>
+                <a href="/Customer/Customer/BookRoom?type=deluxe" class="btn-reserve">Reserve</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room 5 -->
+    <div class="cogstay-room-card" data-room-type="suite" data-room-price="28800">
+        <div class="cogstay-room-image-container">
+            <img src="/images/rooms/room_suite.png" class="cogstay-room-card-img" alt="Presidential Suite 401" />
+            <span class="cogstay-room-badge"><i class="fa-solid fa-circle-check"></i> Available Now</span>
+        </div>
+        <div class="cogstay-room-body">
+            <h3 class="cogstay-room-title">Presidential Suite 401</h3>
+            <p class="cogstay-room-desc">Extra large king master suite, bar area, bath amenities, private terrace.</p>
+            <div class="cogstay-occupancy-row">
+                <i class="fa-solid fa-users"></i> Occupancy: Max 6 Guests
+            </div>
+            <div class="cogstay-room-chips">
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-martini-glass-citrus"></i> Bar</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-bath"></i> Marble Tub</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-sun"></i> Terrace</span>
+            </div>
+            <div class="cogstay-room-footer">
+                <div class="cogstay-room-price">₹28,800 <span>/ night</span></div>
+                <a href="/Customer/Customer/BookRoom?type=suite" class="btn-reserve">Reserve</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Room 6 -->
+    <div class="cogstay-room-card" data-room-type="standard" data-room-price="10800">
+        <div class="cogstay-room-image-container">
+            <img src="/images/rooms/room_standard.png" class="cogstay-room-card-img" alt="Superior King 202" />
+            <span class="cogstay-room-badge"><i class="fa-solid fa-circle-check"></i> Available Now</span>
+        </div>
+        <div class="cogstay-room-body">
+            <h3 class="cogstay-room-title">Superior King 202</h3>
+            <p class="cogstay-room-desc">Standard bedding, walk-in shower room, smart thermostat control.</p>
+            <div class="cogstay-occupancy-row">
+                <i class="fa-solid fa-users"></i> Occupancy: Max 2 Guests
+            </div>
+            <div class="cogstay-room-chips">
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-wifi"></i> Wifi</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-snowflake"></i> AC</span>
+                <span class="cogstay-amenity-chip"><i class="fa-solid fa-tv"></i> TV</span>
+            </div>
+            <div class="cogstay-room-footer">
+                <div class="cogstay-room-price">₹10,800 <span>/ night</span></div>
+                <a href="/Customer/Customer/BookRoom?type=standard" class="btn-reserve">Reserve</a>
+            </div>
+        </div>
+    </div>
+</div>

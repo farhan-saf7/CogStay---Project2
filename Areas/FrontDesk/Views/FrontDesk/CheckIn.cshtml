@@ -1,0 +1,111 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Guest Check-In";
+    ViewData["Role"] = "FrontDesk";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Front Desk Check-In</h1>
+    <p style="color: var(--color-text-muted);">Retrieve reservations, assign clean room keys, and verify credit credentials on arrival.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Check-in form -->
+    <div class="cogstay-card">
+        <div class="cogstay-card-header">
+            <h3 class="cogstay-card-title"><i class="fa-solid fa-sign-in-alt"></i> Process Guest Arrival</h3>
+        </div>
+        <div class="cogstay-card-body">
+            <form method="post" action="/FrontDesk/FrontDesk/Dashboard" data-success-message="Guest checked-in successfully! Room key card activated." data-redirect="/FrontDesk/FrontDesk/Dashboard">
+                <div class="cogstay-form-group">
+                    <label class="cogstay-form-label">Search Booking ID or Guest Name</label>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" class="cogstay-form-control" placeholder="e.g. CS-9288 or Emily Watson" value="CS-9288" />
+                        <button type="button" class="btn btn-secondary" onclick="showToast('Search Completed', 'Guest Emily Watson reservation found.', 'success')">Search</button>
+                    </div>
+                </div>
+
+                <div class="cogstay-form-row">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Guest Full Name</label>
+                        <input type="text" class="cogstay-form-control" value="Emily Watson" required />
+                    </div>
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">ID Verification Status</label>
+                        <select class="cogstay-form-control" required>
+                            <option value="verified" selected>Passport Verified</option>
+                            <option value="dl">Driver's License Verified</option>
+                            <option value="pending">Verification Pending</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="cogstay-form-row">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Room Allocation</label>
+                        <select class="cogstay-form-control" required>
+                            <option value="301" selected>Room 301 - Deluxe Executive (Clean)</option>
+                            <option value="302">Room 302 - Deluxe Executive (Clean)</option>
+                            <option value="201">Room 201 - Superior King (Clean)</option>
+                        </select>
+                    </div>
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Swipe card on Arrival</label>
+                        <input type="text" class="cogstay-form-control" placeholder="Swipe Credit card..." value="4111 2222 **** ****" required />
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid var(--color-border); padding-top: 20px; display: flex; justify-content: flex-end; gap: 12px;">
+                    <a href="/FrontDesk/FrontDesk/Dashboard" class="btn btn-secondary">Cancel</a>
+                    <button type="submit" class="btn btn-primary" style="background-color: var(--accent-frontdesk);"><i class="fa-solid fa-key"></i> Confirm Check-In</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Right Column: Assign Keys to Customer -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-key"></i> Assign Keys to Customer</h3>
+            </div>
+            <div class="cogstay-card-body" style="display: flex; flex-direction: column; gap: 16px;">
+                <p style="font-size: 13px; color: var(--color-text-muted); line-height: 1.4;">Specify room details and assign physical key card credentials for hand-over.</p>
+                
+                <div class="cogstay-form-group" style="margin-bottom: 12px;">
+                    <label class="cogstay-form-label">Room Number / Booking Ref</label>
+                    <input type="text" class="cogstay-form-control" value="Room 301 / CS-9288" readonly />
+                </div>
+                
+                <div class="cogstay-form-group" style="margin-bottom: 12px;">
+                    <label class="cogstay-form-label">Guest Name</label>
+                    <input type="text" class="cogstay-form-control" value="Emily Watson" readonly />
+                </div>
+
+                <div class="cogstay-form-group" style="margin-bottom: 12px;">
+                    <label class="cogstay-form-label">Assigned Key/Card Number</label>
+                    <input type="text" class="cogstay-form-control" id="assignedKeyCard" placeholder="e.g. KC-301-A" value="KC-301-A" required />
+                </div>
+
+                <div class="cogstay-form-row" style="margin-bottom: 12px;">
+                    <div class="cogstay-form-group" style="margin-bottom: 0;">
+                        <label class="cogstay-form-label">Issue Date/Time</label>
+                        <input type="text" class="cogstay-form-control" value="2026-06-26 12:00 PM" readonly />
+                    </div>
+                    <div class="cogstay-form-group" style="margin-bottom: 0;">
+                        <label class="cogstay-form-label">Status</label>
+                        <div style="margin-top: 8px;">
+                            <span class="cogstay-badge success" style="background-color: rgba(46, 125, 91, 0.1); color: var(--accent-housekeeping); padding: 4px 8px; border-radius: 4px; font-size: 12px; font-weight: 600;">Key Ready</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 10px;">
+                    <button type="button" class="btn btn-primary" style="background-color: var(--accent-frontdesk); width: 100%; justify-content: center; display: inline-flex; gap: 8px;" onclick="showToast('Key Assigned', 'Key Card KC-301-A has been assigned to Emily Watson.', 'success')">
+                        <i class="fa-solid fa-check"></i> Confirm Key Handover
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

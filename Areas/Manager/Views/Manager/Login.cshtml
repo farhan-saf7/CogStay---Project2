@@ -1,0 +1,27 @@
+@{
+    Layout = "~/Views/Shared/_LoginLayout.cshtml";
+    ViewData["Title"] = "Manager Login";
+}
+
+<div class="cogstay-login-card" style="border-top: 4px solid var(--color-primary);">
+    <div class="cogstay-login-header">
+        <span class="cogstay-badge" style="background-color: rgba(31, 58, 95, 0.08); color: var(--color-primary); margin-bottom: 12px; text-transform: uppercase; font-weight: 700;">Executive Access</span>
+        <h2 class="cogstay-login-title">CogStay Management Console</h2>
+        <p class="cogstay-login-desc">Sign in with your manager credentials to access yield analytics and reviews databases.</p>
+    </div>
+
+    <!-- Login form pointing to Manager Dashboard -->
+    <form method="post" action="/Manager/Manager/Dashboard" data-success-message="Manager credentials verified! Welcome to Dashboard." data-redirect="/Manager/Manager/Dashboard">
+        <div class="cogstay-form-group">
+            <label class="cogstay-form-label">Manager Username</label>
+            <input type="text" class="cogstay-form-control" placeholder="manager_username" required value="manager_robert" />
+        </div>
+
+        <div class="cogstay-form-group">
+            <label class="cogstay-form-label">Password</label>
+            <input type="password" class="cogstay-form-control" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;" required value="managerpassword" />
+        </div>
+
+        <button type="submit" class="btn btn-primary" style="width: 100%; padding: 12px;">Log In to Console</button>
+    </form>
+</div>

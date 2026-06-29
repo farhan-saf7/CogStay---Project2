@@ -1,0 +1,109 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Revenue Dashboard";
+    ViewData["Role"] = "Manager";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Revenue Performance</h1>
+    <p style="color: var(--color-text-muted);">Monitor yield statistics, extra billing segments, food services returns, and RevPAR parameters.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Weekly Yield Earnings Chart -->
+    <div class="cogstay-card">
+        <div class="cogstay-card-header">
+            <h3 class="cogstay-card-title"><i class="fa-solid fa-chart-line"></i> Weekly Revenue Returns</h3>
+            <div style="display: flex; gap: 8px;">
+                <button class="btn btn-secondary btn-sm chart-filter-tab active-tab" data-period="weekly" style="padding: 4px 10px; font-size: 11px;">Weekly</button>
+                <button class="btn btn-secondary btn-sm chart-filter-tab" data-period="monthly" style="padding: 4px 10px; font-size: 11px;">Monthly</button>
+            </div>
+        </div>
+        <div class="cogstay-card-body">
+            <div class="chart-bar-container">
+                <div class="chart-bar-wrapper">
+                    <div class="chart-bar" style="height: 72%;">
+                        <span class="chart-bar-val">₹960k</span>
+                    </div>
+                    <span class="chart-bar-label">Mon</span>
+                </div>
+                <div class="chart-bar-wrapper">
+                    <div class="chart-bar" style="height: 84%;">
+                        <span class="chart-bar-val">₹1,120k</span>
+                    </div>
+                    <span class="chart-bar-label">Tue</span>
+                </div>
+                <div class="chart-bar-wrapper">
+                    <div class="chart-bar" style="height: 78%;">
+                        <span class="chart-bar-val">₹1,040k</span>
+                    </div>
+                    <span class="chart-bar-label">Wed</span>
+                </div>
+                <div class="chart-bar-wrapper">
+                    <div class="chart-bar" style="height: 90%;">
+                        <span class="chart-bar-val">₹1,200k</span>
+                    </div>
+                    <span class="chart-bar-label">Thu</span>
+                </div>
+                <div class="chart-bar-wrapper">
+                    <div class="chart-bar" style="height: 88%;">
+                        <span class="chart-bar-val">₹1,160k</span>
+                    </div>
+                    <span class="chart-bar-label">Fri</span>
+                </div>
+                <div class="chart-bar-wrapper">
+                    <div class="chart-bar" style="height: 96%;">
+                        <span class="chart-bar-val">₹1,280k</span>
+                    </div>
+                    <span class="chart-bar-label">Sat</span>
+                </div>
+                <div class="chart-bar-wrapper">
+                    <div class="chart-bar" style="height: 70%;">
+                        <span class="chart-bar-val">₹944k</span>
+                    </div>
+                    <span class="chart-bar-label">Sun</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Revenue Segments -->
+    <div class="cogstay-card">
+        <div class="cogstay-card-header">
+            <h3 class="cogstay-card-title"><i class="fa-solid fa-calculator"></i> Revenue Streams Segment</h3>
+        </div>
+        <div class="cogstay-card-body" style="padding-top: 10px; padding-bottom: 10px;">
+            <div class="manager-kpi-row">
+                <div>
+                    <h4 style="font-size: 14px; font-weight: 600; color: var(--color-primary-dark);">Room Bookings Revenue</h4>
+                    <p style="font-size: 11px; color: var(--color-text-muted);">Direct overnight stays revenue.</p>
+                </div>
+                <strong style="color: var(--color-success); font-size: 16px;">₹1,58,72,000.00</strong>
+            </div>
+
+            <div class="manager-kpi-row">
+                <div>
+                    <h4 style="font-size: 14px; font-weight: 600; color: var(--color-primary-dark);">Food & Beverage Deliveries</h4>
+                    <p style="font-size: 11px; color: var(--color-text-muted);">In-room dining & catering orders.</p>
+                </div>
+                <strong style="color: var(--color-success); font-size: 16px;">₹22,59,200.00</strong>
+            </div>
+
+            <div class="manager-kpi-row">
+                <div>
+                    <h4 style="font-size: 14px; font-weight: 600; color: var(--color-primary-dark);">Laundry & Valet Services</h4>
+                    <p style="font-size: 11px; color: var(--color-text-muted);">Dry-cleaning and ironing tickets.</p>
+                </div>
+                <strong style="color: var(--color-success); font-size: 16px;">₹7,32,800.00</strong>
+            </div>
+
+            <div class="manager-kpi-row">
+                <div>
+                    <h4 style="font-size: 14px; font-weight: 600; color: var(--color-primary-dark);">Wellness & Spa Bookings</h4>
+                    <p style="font-size: 11px; color: var(--color-text-muted);">Direct therapy treatments bookings.</p>
+                </div>
+                <strong style="color: var(--color-success); font-size: 16px;">₹8,00,000.00</strong>
+            </div>
+        </div>
+    </div>
+</div>

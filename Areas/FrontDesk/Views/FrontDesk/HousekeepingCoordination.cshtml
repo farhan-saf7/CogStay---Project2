@@ -1,0 +1,110 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Housekeeping Coordination";
+    ViewData["Role"] = "FrontDesk";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Housekeeping Coordination</h1>
+    <p style="color: var(--color-text-muted);">Monitor room cleanliness, inspect vacant clean states, and request express cleanings.</p>
+</div>
+
+<!-- Cleanliness Table -->
+<div class="cogstay-card">
+    <div class="cogstay-card-header">
+        <h3 class="cogstay-card-title"><i class="fa-solid fa-sparkles"></i> Rooms Cleanliness Status</h3>
+    </div>
+    
+    <!-- Table filters -->
+    <div style="padding: 20px 24px; border-bottom: 1px solid var(--color-border); display: flex; gap: 15px; flex-wrap: wrap;">
+        <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="admin-table-search" class="cogstay-form-control" placeholder="Search Room Number..." />
+        </div>
+        <div style="min-width: 150px;">
+            <select id="admin-table-filter-status" class="cogstay-form-control">
+                <option value="all">All States</option>
+                <option value="clean">Clean</option>
+                <option value="dirty">Dirty</option>
+                <option value="in progress">In Progress</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="cogstay-table-responsive">
+        <table class="cogstay-table">
+            <thead>
+                <tr>
+                    <th>Room No.</th>
+                    <th>Category</th>
+                    <th>Cleanliness Status</th>
+                    <th>Roster Assignee</th>
+                    <th>Stay Status</th>
+                    <th>Express Operations</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>Room 101</strong></td>
+                    <td>Superior King</td>
+                    <td><span class="cogstay-badge success">Clean</span></td>
+                    <td>Mary Poppins</td>
+                    <td><span class="cogstay-badge success">Available</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;">Room Clean</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Room 102</strong></td>
+                    <td>Superior King</td>
+                    <td><span class="cogstay-badge warning">Dirty</span></td>
+                    <td>Mary Poppins</td>
+                    <td><span class="cogstay-badge danger">Occupied</span></td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" style="background-color: var(--accent-frontdesk);" onclick="showToast('Dispatch Success', 'Express checkout cleaning dispatched for Room 102.', 'success')"><i class="fa-solid fa-soap"></i> Request Clean</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Room 201</strong></td>
+                    <td>Deluxe Executive</td>
+                    <td><span class="cogstay-badge success">Clean</span></td>
+                    <td>Peter Parker</td>
+                    <td><span class="cogstay-badge success">Available</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;">Room Clean</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Room 202</strong></td>
+                    <td>Deluxe Executive</td>
+                    <td><span class="cogstay-badge success">Clean</span></td>
+                    <td>Peter Parker</td>
+                    <td><span class="cogstay-badge danger">Occupied</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;">Room Clean</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Room 304</strong></td>
+                    <td>Penthouse Suite</td>
+                    <td><span class="cogstay-badge info">In Progress</span></td>
+                    <td>Bruce Wayne</td>
+                    <td><span class="cogstay-badge danger">Occupied</span></td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5; cursor: not-allowed;">Cleaning</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>Room 305</strong></td>
+                    <td>Penthouse Suite</td>
+                    <td><span class="cogstay-badge warning">Dirty</span></td>
+                    <td>Bruce Wayne</td>
+                    <td><span class="cogstay-badge warning">Maintenance</span></td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" style="background-color: var(--accent-frontdesk);" onclick="showToast('Dispatch Success', 'Express maintenance cleaning dispatched for Room 305.', 'success')"><i class="fa-solid fa-soap"></i> Request Clean</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

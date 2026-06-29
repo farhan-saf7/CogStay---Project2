@@ -1,0 +1,166 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Executive Dashboard";
+    ViewData["Role"] = "Manager";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">CogStay Management Console</h1>
+    <p style="color: var(--color-text-muted);">Access occupancy charts, monthly revenue models, and guest feedback ratings.</p>
+</div>
+
+<!-- Stats Counter Grid -->
+<div class="grid-container grid-cols-4" style="margin-bottom: 30px;">
+    <div class="cogstay-stat-card manager">
+        <div class="cogstay-stat-details">
+            <p>Occupancy Rate</p>
+            <h3>84.6%</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-hotel" style="color: var(--color-primary);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card manager">
+        <div class="cogstay-stat-details">
+            <p>Monthly Revenue</p>
+            <h3>₹1,96,64,000</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-hand-holding-dollar" style="color: var(--color-primary);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card manager">
+        <div class="cogstay-stat-details">
+            <p>Average Daily Rate</p>
+            <h3>₹14,736.00</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-receipt" style="color: var(--color-primary);"></i>
+        </div>
+    </div>
+
+    <div class="cogstay-stat-card manager">
+        <div class="cogstay-stat-details">
+            <p>Guest Satisfaction</p>
+            <h3>4.8 / 5.0</h3>
+        </div>
+        <div class="cogstay-stat-icon">
+            <i class="fa-solid fa-star" style="color: var(--color-primary);"></i>
+        </div>
+    </div>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Occupancy Chart Preview -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-chart-simple"></i> Weekly Occupancy Rate Trend</h3>
+                <div style="display: flex; gap: 8px;">
+                    <button class="btn btn-secondary btn-sm chart-filter-tab active-tab" data-period="weekly" style="padding: 4px 10px; font-size: 11px;">Weekly</button>
+                    <button class="btn btn-secondary btn-sm chart-filter-tab" data-period="monthly" style="padding: 4px 10px; font-size: 11px;">Monthly</button>
+                </div>
+            </div>
+            <div class="cogstay-card-body">
+                <!-- Bar Chart Placeholder -->
+                <div class="chart-bar-container">
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" style="height: 75%;">
+                            <span class="chart-bar-val">75%</span>
+                        </div>
+                        <span class="chart-bar-label">Mon</span>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" style="height: 80%;">
+                            <span class="chart-bar-val">80%</span>
+                        </div>
+                        <span class="chart-bar-label">Tue</span>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" style="height: 85%;">
+                            <span class="chart-bar-val">85%</span>
+                        </div>
+                        <span class="chart-bar-label">Wed</span>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" style="height: 92%;">
+                            <span class="chart-bar-val">92%</span>
+                        </div>
+                        <span class="chart-bar-label">Thu</span>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" style="height: 88%;">
+                            <span class="chart-bar-val">88%</span>
+                        </div>
+                        <span class="chart-bar-label">Fri</span>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" style="height: 95%;">
+                            <span class="chart-bar-val">95%</span>
+                        </div>
+                        <span class="chart-bar-label">Sat</span>
+                    </div>
+                    <div class="chart-bar-wrapper">
+                        <div class="chart-bar" style="height: 78%;">
+                            <span class="chart-bar-val">78%</span>
+                        </div>
+                        <span class="chart-bar-label">Sun</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Recent Reviews Feed (5 rows) -->
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-comments"></i> Guest Reviews Highlights</h3>
+                <a href="/Manager/Manager/Feedbacks" style="font-size: 13px; color: var(--color-accent); font-weight: 600;">View All Reviews</a>
+            </div>
+            <div class="cogstay-card-body" style="padding-top: 10px; padding-bottom: 10px;">
+                <div class="feedback-review-card" style="margin-bottom: 15px; padding: 15px;">
+                    <div class="feedback-review-header">
+                        <strong>John Henderson (Room 304)</strong>
+                        <div class="feedback-stars-display"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i></div>
+                    </div>
+                    <p style="font-size: 13px; color: var(--color-text-muted);">"The room service dry cleaning was returned in under 4 hours, and the Penthouse view was exceptional. CogStay system operates very smoothly."</p>
+                </div>
+
+                <div class="feedback-review-card" style="margin-bottom: 0; padding: 15px;">
+                    <div class="feedback-review-header">
+                        <strong>Emily Watson (Room 301)</strong>
+                        <div class="feedback-stars-display"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-regular fa-star"></i></div>
+                    </div>
+                    <p style="font-size: 13px; color: var(--color-text-muted);">"Very comfortable Deluxe room, excellent writing desk configuration. The AC unit was slightly loud but resolved quickly by maintenance."</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Manager Shortcuts -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-location-arrow"></i> Management Focus</h3>
+            </div>
+            <div class="cogstay-card-body" style="display: flex; flex-direction: column; gap: 12px;">
+                <a href="/Manager/Manager/Reservations" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-calendar-check" style="color: var(--color-primary);"></i> Reservations Yield
+                </a>
+                <a href="/Manager/Manager/Occupancy" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-bed" style="color: var(--color-primary);"></i> Occupancy Statistics
+                </a>
+                <a href="/Manager/Manager/Revenue" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-indian-rupee-sign" style="color: var(--color-primary);"></i> Revenue Performance
+                </a>
+                <a href="/Manager/Manager/HousekeepingOverview" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-broom-ball" style="color: var(--color-primary);"></i> Housekeeping Audits
+                </a>
+                <a href="/Manager/Manager/Feedbacks" class="btn btn-secondary" style="width: 100%; text-align: left; justify-content: flex-start;">
+                    <i class="fa-solid fa-star-half-stroke" style="color: var(--color-primary);"></i> Feedback Reviews
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

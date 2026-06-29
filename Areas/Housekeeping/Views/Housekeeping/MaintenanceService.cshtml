@@ -1,0 +1,111 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Maintenance Service";
+    ViewData["Role"] = "Housekeeping";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Maintenance & Structural Repairs</h1>
+    <p style="color: var(--color-text-muted);">Monitor hotel facility conditions, coordinate technician dispatches, and log appliance malfunctions.</p>
+</div>
+
+<div class="booking-checkout-container">
+    <!-- Left Column: Table of repairs -->
+    <div>
+        <div class="cogstay-card">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-screwdriver-wrench"></i> Active Repair Tickets</h3>
+            </div>
+            
+            <div class="cogstay-table-responsive" style="border: none;">
+                <table class="cogstay-table">
+                    <thead>
+                        <tr>
+                            <th>Room No.</th>
+                            <th>Issue Description</th>
+                            <th>Logged Timestamp</th>
+                            <th>Severity</th>
+                            <th>Ticket Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Room 304</strong></td>
+                            <td>AC Thermostat Screen frozen</td>
+                            <td>June 24, 7:15 PM</td>
+                            <td><span class="cogstay-badge danger">Urgent</span></td>
+                            <td><span class="cogstay-badge success">Resolved</span></td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Resolved</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 305</strong></td>
+                            <td>Shower head drain leak</td>
+                            <td>Today, 10:30 AM</td>
+                            <td><span class="cogstay-badge warning">Medium</span></td>
+                            <td><span class="cogstay-badge info">Assigned</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Repair ticket marked as Resolved.', 'success')">Resolve Ticket</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 101</strong></td>
+                            <td>Bedside lamp bulb blown</td>
+                            <td>Today, 1:15 PM</td>
+                            <td><span class="cogstay-badge info">Low</span></td>
+                            <td><span class="cogstay-badge warning">Pending</span></td>
+                            <td>
+                                <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Repair ticket marked as In Progress.', 'success')">Begin Repair</button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>Room 202</strong></td>
+                            <td>Balcony door locking click stuck</td>
+                            <td>June 24, 2:10 PM</td>
+                            <td><span class="cogstay-badge warning">Medium</span></td>
+                            <td><span class="cogstay-badge success">Resolved</span></td>
+                            <td>
+                                <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Resolved</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Right Column: Log New Repair Ticket -->
+    <div>
+        <div class="cogstay-card" style="position: sticky; top: 100px;">
+            <div class="cogstay-card-header">
+                <h3 class="cogstay-card-title"><i class="fa-solid fa-square-plus"></i> Log Maintenance</h3>
+            </div>
+            <div class="cogstay-card-body">
+                <form method="post" action="/Housekeeping/Housekeeping/MaintenanceService" data-success-message="Maintenance ticket registered and assigned to technician!" data-redirect="/Housekeeping/Housekeeping/MaintenanceService">
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Room / Location</label>
+                        <input type="text" class="cogstay-form-control" placeholder="e.g. Room 201 or Lobby" required />
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Malfunction Description</label>
+                        <textarea class="cogstay-form-control" rows="3" placeholder="Specify details of leaky taps, structural cracks, electronics malfunctions..." required></textarea>
+                    </div>
+
+                    <div class="cogstay-form-group">
+                        <label class="cogstay-form-label">Severity Level</label>
+                        <select class="cogstay-form-control" required>
+                            <option value="low">Low (Bulb replacement, cosmetic fixes)</option>
+                            <option value="medium" selected>Medium (Sink leaks, door lock stiff)</option>
+                            <option value="urgent">Urgent (Water flood, total AC blackouts)</option>
+                        </select>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary" style="width: 100%; background-color: var(--accent-housekeeping);"><i class="fa-solid fa-save"></i> Register Ticket</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CogStay Hotel Reservation & Guest Management</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+    
+    <!-- Icons (FontAwesome) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Global CSS -->
+    <link rel="stylesheet" href="~/css/site.css" />
+
+    <!-- Page / Role specific CSS -->
+    @if (ViewData["PageType"]?.ToString() == "Home")
+    {
+        <link rel="stylesheet" href="~/css/home.css" />
+    }
+    else if (ViewData["PageType"]?.ToString() == "StaffLogin")
+    {
+        <link rel="stylesheet" href="~/css/staff-login.css" />
+    }
+
+    @if (ViewData["Role"] != null)
+    {
+        var roleLower = ViewData["Role"].ToString().ToLower();
+        <link rel="stylesheet" href="~/css/@(roleLower)/@(roleLower).css" />
+    }
+
+    @RenderSection("Styles", required: false)
+</head>
+<body>
+
+    @if (ViewData["Role"] != null)
+    {
+        var role = ViewData["Role"].ToString();
+        var portalName = "";
+        var avatarInitial = role.Substring(0, 1).ToUpper();
+        
+        @if (role == "Customer") { portalName = "CogStay Guest Portal"; }
+        else if (role == "Admin") { portalName = "CogStay Administration"; }
+        else if (role == "Manager") { portalName = "CogStay Management Console"; }
+        else if (role == "FrontDesk") { portalName = "CogStay Front Desk Operations"; }
+        else if (role == "Housekeeping") { portalName = "CogStay Housekeeping Services"; }
+
+        <div class="cogstay-app-wrapper">
+            <!-- Sidebar -->
+            <aside class="cogstay-sidebar">
+                <div class="cogstay-sidebar-brand">
+                    <a href="/Home/Index" class="cogstay-brand-logo">
+                        <i class="fa-solid fa-hotel"></i> CogStay
+                    </a>
+                </div>
+                
+                <div class="cogstay-sidebar-user">
+                    <div class="cogstay-user-avatar">
+                        @avatarInitial
+                    </div>
+                    <div class="cogstay-user-info">
+                        <span class="cogstay-user-name">Demo @role</span>
+                        <span class="cogstay-user-role">@role</span>
+                    </div>
+                </div>
+
+                <ul class="cogstay-sidebar-menu">
+                    @if (role == "Customer")
+                    {
+                        <li class="cogstay-menu-item">
+                            <a href="/Customer/Customer/Dashboard" class="cogstay-menu-link">
+                                <i class="fa-solid fa-chart-line"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Customer/Customer/AvailableRooms" class="cogstay-menu-link">
+                                <i class="fa-solid fa-bed"></i> Available Rooms
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Customer/Customer/BookRoom" class="cogstay-menu-link">
+                                <i class="fa-solid fa-calendar-check"></i> Book Room
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Customer/Customer/Payment" class="cogstay-menu-link">
+                                <i class="fa-solid fa-credit-card"></i> Payment
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Customer/Customer/BookingHistory" class="cogstay-menu-link">
+                                <i class="fa-solid fa-history"></i> Booking History
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Customer/Customer/Profile" class="cogstay-menu-link">
+                                <i class="fa-solid fa-user-gear"></i> Profile Settings
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Customer/Customer/Feedback" class="cogstay-menu-link">
+                                <i class="fa-solid fa-comment-dots"></i> Feedback
+                            </a>
+                        </li>
+                    }
+                    else if (role == "Admin")
+                    {
+                        <li class="cogstay-menu-item">
+                            <a href="/Admin/Admin/Dashboard" class="cogstay-menu-link">
+                                <i class="fa-solid fa-chart-pie"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Admin/Admin/RoomManagement" class="cogstay-menu-link">
+                                <i class="fa-solid fa-door-open"></i> Room Management
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Admin/Admin/ReservationMonitoring" class="cogstay-menu-link">
+                                <i class="fa-solid fa-list-check"></i> Monitoring
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Admin/Admin/Reports" class="cogstay-menu-link">
+                                <i class="fa-solid fa-file-invoice-dollar"></i> Reports
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Admin/Admin/StaffUserManagement" class="cogstay-menu-link">
+                                <i class="fa-solid fa-users-gear"></i> Staff Management
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Admin/Admin/Settings" class="cogstay-menu-link">
+                                <i class="fa-solid fa-gears"></i> Settings
+                            </a>
+                        </li>
+                    }
+                    else if (role == "Manager")
+                    {
+                        <li class="cogstay-menu-item">
+                            <a href="/Manager/Manager/Dashboard" class="cogstay-menu-link">
+                                <i class="fa-solid fa-gauge-high"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Manager/Manager/Reservations" class="cogstay-menu-link">
+                                <i class="fa-solid fa-book-bookmark"></i> Reservations
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Manager/Manager/Occupancy" class="cogstay-menu-link">
+                                <i class="fa-solid fa-hotel"></i> Occupancy Stats
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Manager/Manager/Revenue" class="cogstay-menu-link">
+                                <i class="fa-solid fa-hand-holding-dollar"></i> Revenue
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Manager/Manager/HousekeepingOverview" class="cogstay-menu-link">
+                                <i class="fa-solid fa-broom"></i> Housekeeping
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Manager/Manager/Feedbacks" class="cogstay-menu-link">
+                                <i class="fa-solid fa-star"></i> Feedback Reviews
+                            </a>
+                        </li>
+                    }
+                    else if (role == "FrontDesk")
+                    {
+                        <li class="cogstay-menu-item">
+                            <a href="/FrontDesk/FrontDesk/Dashboard" class="cogstay-menu-link">
+                                <i class="fa-solid fa-clipboard-list"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/FrontDesk/FrontDesk/CheckIn" class="cogstay-menu-link">
+                                <i class="fa-solid fa-sign-in-alt"></i> Guest Check-In
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/FrontDesk/FrontDesk/CheckOut" class="cogstay-menu-link">
+                                <i class="fa-solid fa-sign-out-alt"></i> Guest Check-Out
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/FrontDesk/FrontDesk/Reservations" class="cogstay-menu-link">
+                                <i class="fa-solid fa-calendar-days"></i> Booking List
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/FrontDesk/FrontDesk/HousekeepingCoordination" class="cogstay-menu-link">
+                                <i class="fa-solid fa-spray-can-sparkles"></i> Cleanliness
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/FrontDesk/FrontDesk/GuestOperations" class="cogstay-menu-link">
+                                <i class="fa-solid fa-concierge-bell"></i> Guest Service
+                            </a>
+                        </li>
+                    }
+                    else if (role == "Housekeeping")
+                    {
+                        <li class="cogstay-menu-item">
+                            <a href="/Housekeeping/Housekeeping/Dashboard" class="cogstay-menu-link">
+                                <i class="fa-solid fa-house-chimney-window"></i> Dashboard
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Housekeeping/Housekeeping/ServiceRequests" class="cogstay-menu-link">
+                                <i class="fa-solid fa-bell-concierge"></i> Service Requests
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Housekeeping/Housekeeping/AssignTask" class="cogstay-menu-link">
+                                <i class="fa-solid fa-user-plus"></i> Assign Tasks
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Housekeeping/Housekeeping/LaundryService" class="cogstay-menu-link">
+                                <i class="fa-solid fa-shirt"></i> Laundry Service
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Housekeeping/Housekeeping/FoodService" class="cogstay-menu-link">
+                                <i class="fa-solid fa-utensils"></i> Room Service Food
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Housekeeping/Housekeeping/WellnessSpaRequest" class="cogstay-menu-link">
+                                <i class="fa-solid fa-spa"></i> Wellness Spa Request
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Housekeeping/Housekeeping/MaintenanceService" class="cogstay-menu-link">
+                                <i class="fa-solid fa-screwdriver-wrench"></i> Maintenance
+                            </a>
+                        </li>
+                        <li class="cogstay-menu-item">
+                            <a href="/Housekeeping/Housekeeping/CleaningService" class="cogstay-menu-link">
+                                <i class="fa-solid fa-bucket"></i> Room Cleaning
+                            </a>
+                        </li>
+                    }
+                </ul>
+
+                <div class="cogstay-sidebar-footer">
+                    <a href="/Home/Index" class="cogstay-logout-btn">
+                        <i class="fa-solid fa-right-from-bracket"></i> Logout
+                    </a>
+                </div>
+            </aside>
+
+            <!-- Main Shell Container -->
+            <div class="cogstay-main-container">
+                <!-- Top Navbar -->
+                <header class="cogstay-navbar">
+                    <div class="cogstay-nav-left">
+                        <button class="cogstay-sidebar-toggle" aria-label="Toggle Sidebar">
+                            <i class="fa-solid fa-bars"></i>
+                        </button>
+                        <h2 class="cogstay-page-title">@ViewData["Title"]</h2>
+                    </div>
+                    <div class="cogstay-nav-right">
+                        <span class="cogstay-portal-badge">@portalName</span>
+                        <div class="cogstay-notification-bell">
+                            <i class="fa-regular fa-bell"></i>
+                            <span class="cogstay-notification-badge"></span>
+                        </div>
+                    </div>
+                </header>
+
+                <!-- Page Content Area -->
+                <main class="cogstay-content">
+                    @RenderBody()
+                </main>
+
+                <!-- Footer -->
+                <footer class="cogstay-footer">
+                    &copy; 2026 CogStay hospitality operations. All rights reserved.
+                </footer>
+            </div>
+        </div>
+    }
+    else
+    {
+        <!-- Public Website Layout (No Sidebar) -->
+        <div class="cogstay-public-wrapper">
+            @RenderBody()
+        </div>
+    }
+
+    <!-- Global Scripts -->
+    <script src="~/js/site.js"></script>
+
+    <!-- Page / Role specific JS -->
+    @if (ViewData["PageType"]?.ToString() == "Home")
+    {
+        <script src="~/js/home.js"></script>
+    }
+    else if (ViewData["PageType"]?.ToString() == "StaffLogin")
+    {
+        <script src="~/js/staff-login.js"></script>
+    }
+
+    @if (ViewData["Role"] != null)
+    {
+        var roleLower = ViewData["Role"].ToString().ToLower();
+        <script src="~/js/@(roleLower)/@(roleLower).js"></script>
+    }
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

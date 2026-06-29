@@ -1,0 +1,106 @@
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Service Requests";
+    ViewData["Role"] = "Housekeeping";
+}
+
+<div style="margin-bottom: 30px;">
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Guest Service Requests</h1>
+    <p style="color: var(--color-text-muted);">Manage requests for extra room amenities, towels, laundry collections, and food service logs.</p>
+</div>
+
+<!-- Requests Table -->
+<div class="cogstay-card">
+    <div class="cogstay-card-header">
+        <h3 class="cogstay-card-title"><i class="fa-solid fa-list-check"></i> Guest Service Dispatch Queue</h3>
+    </div>
+    
+    <!-- Table filters -->
+    <div style="padding: 20px 24px; border-bottom: 1px solid var(--color-border); display: flex; gap: 15px; flex-wrap: wrap;">
+        <div class="search-input-wrapper">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input type="text" id="admin-table-search" class="cogstay-form-control" placeholder="Search Room Number..." />
+        </div>
+        <div style="min-width: 150px;">
+            <select id="admin-table-filter-status" class="cogstay-form-control">
+                <option value="all">All States</option>
+                <option value="pending">Pending</option>
+                <option value="dispatched">Dispatched</option>
+                <option value="completed">Completed</option>
+            </select>
+        </div>
+    </div>
+
+    <div class="cogstay-table-responsive">
+        <table class="cogstay-table">
+            <thead>
+                <tr>
+                    <th>Request ID</th>
+                    <th>Room No.</th>
+                    <th>Request Type</th>
+                    <th>Details</th>
+                    <th>Priority</th>
+                    <th>Roster Time</th>
+                    <th>Roster Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><strong>#SR-3012</strong></td>
+                    <td>Room 304</td>
+                    <td>Cleaning</td>
+                    <td>Bring 2 extra pillows and coffee pods</td>
+                    <td><span class="cogstay-badge info">Low</span></td>
+                    <td>Today, 2:10 PM</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Request marked as Completed.', 'success')"><i class="fa-solid fa-check"></i> Complete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#FD-9024</strong></td>
+                    <td>Room 304</td>
+                    <td>Room Service Food</td>
+                    <td>Breakfast Waffles and Espresso delivery</td>
+                    <td><span class="cogstay-badge warning">Medium</span></td>
+                    <td>Today, 8:15 AM</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" style="background-color: var(--accent-housekeeping);" onclick="showToast('Success', 'Request marked as Completed.', 'success')"><i class="fa-solid fa-check"></i> Complete</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#LR-1102</strong></td>
+                    <td>Room 304</td>
+                    <td>Laundry Service</td>
+                    <td>Pick up suit for dry cleaning</td>
+                    <td><span class="cogstay-badge warning">Medium</span></td>
+                    <td>Yesterday, 4:30 PM</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Completed</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#MT-5502</strong></td>
+                    <td>Room 304</td>
+                    <td>Maintenance</td>
+                    <td>AC thermostat screen frozen</td>
+                    <td><span class="cogstay-badge danger">Urgent</span></td>
+                    <td>June 24, 7:15 PM</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Resolved</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><strong>#SR-2980</strong></td>
+                    <td>Room 101</td>
+                    <td>Amenities</td>
+                    <td>Deliver spa toiletries pack</td>
+                    <td><span class="cogstay-badge info">Low</span></td>
+                    <td>June 24, 4:00 PM</td>
+                    <td>
+                        <button class="btn btn-secondary btn-sm" disabled style="opacity: 0.5;">Completed</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
