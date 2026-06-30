@@ -10,53 +10,7 @@ The system is designed to streamline hotel operations, from the initial room boo
 
 ## 📋 System Architecture
 
-LANDING PAGE 1 (Customer Hotel Homepage)
-│
-├── Customer Login
-│   └── Customer Login Page
-│       └── Customer Dashboard
-│           ├── Available Rooms
-│           ├── Book Rooms
-│           ├── Booking History
-│           ├── Payment
-│           ├── Profile Management
-│           └── Feedback
-│
-└── Staff Login
-    └── LANDING PAGE 2 (Staff Role Login Page)
-        ├── Admin Login
-        │   └── Admin Dashboard
-        │       ├── Room Management
-        │       ├── Reservation Monitoring
-        │       ├── Reports
-        │       ├── Staff & User Management
-        │       └── Settings
-        │
-        ├── Manager Login
-        │   └── Manager Dashboard
-        │       ├── Reservations
-        │       ├── Occupancy
-        │       ├── Revenue
-        │       ├── Housekeeping
-        │       └── Feedbacks
-        │
-        ├── Front Desk Login
-        │   └── Front Desk Dashboard
-        │       ├── Check In
-        │       ├── Check Out
-        │       ├── Reservations
-        │       ├── Housekeeping
-        │       └── Guest Operations
-        │
-        └── Housekeeping Login
-            └── Housekeeping Dashboard
-                ├── Housekeeping Service Requests
-                ├── Laundry Service
-                ├── Food Service
-                ├── Maintenance Service
-                ├── Cleaning Service
-                ├── WellnessSpaRequest
-                └── Assign Task to Employee
+![Architecture Flow](hotel_system_flow.png)
 
 ## 🚀 Core Modules
 
