@@ -296,25 +296,5 @@
         </div>
     }
 
-    <!-- Global Scripts -->
-    <script src="~/js/site.js"></script>
-
-    <!-- Page / Role specific JS -->
-    @if (ViewData["PageType"]?.ToString() == "Home")
-    {
-        <script src="~/js/home.js"></script>
-    }
-    else if (ViewData["PageType"]?.ToString() == "StaffLogin")
-    {
-        <script src="~/js/staff-login.js"></script>
-    }
-
-    @if (ViewData["Role"] != null)
-    {
-        var roleLower = ViewData["Role"].ToString().ToLower();
-        <script src="~/js/@(roleLower)/@(roleLower).js"></script>
-    }
-
-    @RenderSection("Scripts", required: false)
 </body>
 </html>

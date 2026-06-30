@@ -45,3 +45,41 @@ C:\Users\Ritesh SK\Desktop\CogStay - Hotel Management\obj\Debug\net10.0\compress
 C:\Users\Ritesh SK\Desktop\CogStay - Hotel Management\obj\Debug\net10.0\compressed\n4b0ii103y-{0}-mdspaun3ty-mdspaun3ty.gz
 C:\Users\Ritesh SK\Desktop\CogStay - Hotel Management\obj\Debug\net10.0\compressed\3y1t44iuqu-{0}-v40mz47qbp-v40mz47qbp.gz
 C:\Users\Ritesh SK\Desktop\CogStay - Hotel Management\obj\Debug\net10.0\compressed\0kxj0bf7xf-{0}-ld964bey5t-ld964bey5t.gz
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\bin\Debug\net10.0\appsettings.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\bin\Debug\net10.0\CogStayMVC.staticwebassets.runtime.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\bin\Debug\net10.0\CogStayMVC.staticwebassets.endpoints.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\bin\Debug\net10.0\CogStayMVC.exe
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\bin\Debug\net10.0\CogStayMVC.deps.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\bin\Debug\net10.0\CogStayMVC.runtimeconfig.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\bin\Debug\net10.0\CogStayMVC.dll
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\bin\Debug\net10.0\CogStayMVC.pdb
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\rpswa.dswa.cache.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\CogStayMVC.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\CogStayMVC.AssemblyInfoInputs.cache
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\CogStayMVC.AssemblyInfo.cs
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\CogStayMVC.csproj.CoreCompileInputs.cache
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\CogStayMVC.MvcApplicationPartsAssemblyInfo.cache
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\CogStayMVC.RazorAssemblyInfo.cache
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\CogStayMVC.RazorAssemblyInfo.cs
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\rjimswa.dswa.cache.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\rjsmrazor.dswa.cache.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\rjsmcshtml.dswa.cache.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\scopedcss\bundle\CogStayMVC.styles.css
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\compressed\xqvspcho43-{0}-75jf9ssh0q-75jf9ssh0q.gz
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\compressed\0kxj0bf7xf-{0}-ld964bey5t-ld964bey5t.gz
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\compressed\nnrr1vtdqn-{0}-atp65ku0jb-atp65ku0jb.gz
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\compressed\aoz7g2fh5g-{0}-suxarxhlqv-suxarxhlqv.gz
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\compressed\8hvk0ppmxv-{0}-5m2b8v8dan-5m2b8v8dan.gz
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\compressed\3zx4hg7dgg-{0}-gpb2ytpfi1-gpb2ytpfi1.gz
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\compressed\dpyhmrkrmq-{0}-a6fvitxr2w-a6fvitxr2w.gz
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\compressed\nphof1crrh-{0}-oeu4miegvg-oeu4miegvg.gz
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\staticwebassets.build.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\staticwebassets.build.json.cache
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\staticwebassets.development.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\staticwebassets.build.endpoints.json
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\swae.build.ex.cache
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\CogStayMVC.dll
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\refint\CogStayMVC.dll
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\CogStayMVC.pdb
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\CogStayMVC.genruntimeconfig.cache
+C:\Users\farha\OneDrive\Desktop\Cognizant Projects\CogStay---Project\obj\Debug\net10.0\ref\CogStayMVC.dll

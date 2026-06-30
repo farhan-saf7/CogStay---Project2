@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Ritesh SK\\Desktop\\CogStay - Hotel Management\\CogStayMVC.csproj": {}
+    "C:\\Users\\farha\\OneDrive\\Desktop\\Cognizant Projects\\CogStay---Project\\CogStayMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Ritesh SK\\Desktop\\CogStay - Hotel Management\\CogStayMVC.csproj": {
+    "C:\\Users\\farha\\OneDrive\\Desktop\\Cognizant Projects\\CogStay---Project\\CogStayMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Ritesh SK\\Desktop\\CogStay - Hotel Management\\CogStayMVC.csproj",
+        "projectUniqueName": "C:\\Users\\farha\\OneDrive\\Desktop\\Cognizant Projects\\CogStay---Project\\CogStayMVC.csproj",
         "projectName": "CogStayMVC",
-        "projectPath": "C:\\Users\\Ritesh SK\\Desktop\\CogStay - Hotel Management\\CogStayMVC.csproj",
-        "packagesPath": "C:\\Users\\Ritesh SK\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Ritesh SK\\Desktop\\CogStay - Hotel Management\\obj\\",
+        "projectPath": "C:\\Users\\farha\\OneDrive\\Desktop\\Cognizant Projects\\CogStay---Project\\CogStayMVC.csproj",
+        "packagesPath": "C:\\Users\\farha\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\farha\\OneDrive\\Desktop\\Cognizant Projects\\CogStay---Project\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Ritesh SK\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\farha\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net10.0"
