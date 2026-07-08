@@ -1,4 +1,6 @@
 using CogStayMVC.Models;
+using System;
+using System.Collections.Generic;
 
 namespace CogStayMVC.Data;
 
@@ -6,13 +8,13 @@ public static class SampleData
 {
     public static List<Room> Rooms = new()
     {
-        new Room { Id = 1, RoomNumber = "Room 101", RoomType = "Superior King", PricePerNight = 140.00m, Capacity = 2, IsAvailable = true, Status = "Available", Cleanliness = "Clean" },
-        new Room { Id = 2, RoomNumber = "Room 102", RoomType = "Superior King", PricePerNight = 140.00m, Capacity = 2, IsAvailable = false, Status = "Occupied", Cleanliness = "Dirty" },
-        new Room { Id = 3, RoomNumber = "Room 201", RoomType = "Deluxe Executive", PricePerNight = 180.00m, Capacity = 2, IsAvailable = true, Status = "Available", Cleanliness = "Clean" },
-        new Room { Id = 4, RoomNumber = "Room 202", RoomType = "Deluxe Executive", PricePerNight = 185.00m, Capacity = 4, IsAvailable = false, Status = "Occupied", Cleanliness = "Clean" },
-        new Room { Id = 5, RoomNumber = "Room 304", RoomType = "Penthouse Suite", PricePerNight = 350.00m, Capacity = 2, IsAvailable = false, Status = "Occupied", Cleanliness = "Dirty" },
-        new Room { Id = 6, RoomNumber = "Room 305", RoomType = "Penthouse Suite", PricePerNight = 350.00m, Capacity = 2, IsAvailable = false, Status = "Maintenance", Cleanliness = "Dirty" },
-        new Room { Id = 7, RoomNumber = "Room 401", RoomType = "Presidential Suite", PricePerNight = 360.00m, Capacity = 4, IsAvailable = true, Status = "Available", Cleanliness = "Clean" }
+        new Room { RoomId = 1, RoomNumber = "Room 101", RoomType = "Superior King", PricePerNight = 140.00m, Capacity = 2, IsAvailable = true, Status = RoomStatus.AVAILABLE, Cleanliness = "Clean" },
+        new Room { RoomId = 2, RoomNumber = "Room 102", RoomType = "Superior King", PricePerNight = 140.00m, Capacity = 2, IsAvailable = false, Status = RoomStatus.OCCUPIED, Cleanliness = "Dirty" },
+        new Room { RoomId = 3, RoomNumber = "Room 201", RoomType = "Deluxe Executive", PricePerNight = 180.00m, Capacity = 2, IsAvailable = true, Status = RoomStatus.AVAILABLE, Cleanliness = "Clean" },
+        new Room { RoomId = 4, RoomNumber = "Room 202", RoomType = "Deluxe Executive", PricePerNight = 185.00m, Capacity = 4, IsAvailable = false, Status = RoomStatus.OCCUPIED, Cleanliness = "Clean" },
+        new Room { RoomId = 5, RoomNumber = "Room 304", RoomType = "Penthouse Suite", PricePerNight = 350.00m, Capacity = 2, IsAvailable = false, Status = RoomStatus.OCCUPIED, Cleanliness = "Dirty" },
+        new Room { RoomId = 6, RoomNumber = "Room 305", RoomType = "Penthouse Suite", PricePerNight = 350.00m, Capacity = 2, IsAvailable = false, Status = RoomStatus.UNDER_MAINTENANCE, Cleanliness = "Dirty" },
+        new Room { RoomId = 7, RoomNumber = "Room 401", RoomType = "Presidential Suite", PricePerNight = 360.00m, Capacity = 4, IsAvailable = true, Status = RoomStatus.AVAILABLE, Cleanliness = "Clean" }
     };
 
     public static List<Booking> Bookings = new()
@@ -27,26 +29,26 @@ public static class SampleData
 
     public static List<StaffUser> StaffUsers = new()
     {
-        new StaffUser { Id = 1, Name = "John Doe", Username = "sysadmin", Role = "Admin", ShiftSchedule = "24/7 Support", Status = "Active" },
-        new StaffUser { Id = 2, Name = "Robert Downey", Username = "manager_robert", Role = "Manager", ShiftSchedule = "Day Shift", Status = "Active" },
-        new StaffUser { Id = 3, Name = "John Smith", Username = "frontdesk_john", Role = "Front Desk", ShiftSchedule = "Night Shift", Status = "Active" },
-        new StaffUser { Id = 4, Name = "Sarah Connor", Username = "frontdesk_sarah", Role = "Front Desk", ShiftSchedule = "Day Shift", Status = "Active" },
-        new StaffUser { Id = 5, Name = "Mary Poppins", Username = "housekeeping_mary", Role = "Housekeeper", ShiftSchedule = "Day Shift", Status = "Active" },
-        new StaffUser { Id = 6, Name = "Bruce Wayne", Username = "housekeeping_bruce", Role = "Housekeeper", ShiftSchedule = "Night Shift", Status = "Active" },
-        new StaffUser { Id = 7, Name = "Peter Parker", Username = "housekeeping_peter", Role = "Housekeeper", ShiftSchedule = "On Call", Status = "On Leave" }
+        new StaffUser { StaffUserId = 1, UserId = 1, Name = "John Doe", ShiftSchedule = "24/7 Support", Status = "Active" },
+        new StaffUser { StaffUserId = 2, UserId = 2, Name = "Robert Downey", ShiftSchedule = "Day Shift", Status = "Active" },
+        new StaffUser { StaffUserId = 3, UserId = 3, Name = "John Smith", ShiftSchedule = "Night Shift", Status = "Active" },
+        new StaffUser { StaffUserId = 4, UserId = 4, Name = "Sarah Connor", ShiftSchedule = "Day Shift", Status = "Active" },
+        new StaffUser { StaffUserId = 5, UserId = 5, Name = "Mary Poppins", ShiftSchedule = "Day Shift", Status = "Active" },
+        new StaffUser { StaffUserId = 6, UserId = 6, Name = "Bruce Wayne", ShiftSchedule = "Night Shift", Status = "Active" },
+        new StaffUser { StaffUserId = 7, UserId = 7, Name = "Peter Parker", ShiftSchedule = "On Call", Status = "On Leave" }
     };
 
     public static List<HousekeepingTask> HousekeepingTasks = new()
     {
-        new HousekeepingTask { Id = 101, RoomNumber = "Room 304", TaskType = "Checkout Clean", AssignedTo = "Bruce Wayne", Priority = "Urgent", Status = "In Progress", CreatedAt = DateTime.UtcNow, ChecklistItems = new() { "Strip bed linen and pillows", "Vacuum bedroom and dust lounge desk", "Sanitize bathroom and mop tile floors", "Restock toiletries, mini-bar, and fresh towels" } },
-        new HousekeepingTask { Id = 102, RoomNumber = "Room 102", TaskType = "Stay-Over Clean", AssignedTo = "Mary Poppins", Priority = "Medium", Status = "Pending", CreatedAt = DateTime.UtcNow, ChecklistItems = new() { "Make bed neatly (replace sheet if requested)", "Empty trashbins and restock toilet paper", "Wipe surfaces and replace bath towels" } },
-        new HousekeepingTask { Id = 103, RoomNumber = "Room 202", TaskType = "Checkout Clean", AssignedTo = "Peter Parker", Priority = "Medium", Status = "Pending", CreatedAt = DateTime.UtcNow, ChecklistItems = new() { "Strip bed linen", "Vacuum carpets", "Wipe all switches", "Sanitize toilets" } }
+        new HousekeepingTask { TaskId = 101, RoomId = 5, TaskType = "Checkout Clean", Priority = "Urgent", TaskStatus = HousekeepingTaskStatus.IN_PROGRESS, AssignedToStaffId = 6, CreatedAt = DateTime.UtcNow, ChecklistItems = new() { "Strip bed linen and pillows", "Vacuum bedroom and dust lounge desk", "Sanitize bathroom and mop tile floors", "Restock toiletries, mini-bar, and fresh towels" } },
+        new HousekeepingTask { TaskId = 102, RoomId = 2, TaskType = "Stay-Over Clean", Priority = "Medium", TaskStatus = HousekeepingTaskStatus.PENDING, AssignedToStaffId = 5, CreatedAt = DateTime.UtcNow, ChecklistItems = new() { "Make bed neatly (replace sheet if requested)", "Empty trashbins and restock toilet paper", "Wipe surfaces and replace bath towels" } },
+        new HousekeepingTask { TaskId = 103, RoomId = 4, TaskType = "Checkout Clean", Priority = "Medium", TaskStatus = HousekeepingTaskStatus.PENDING, AssignedToStaffId = 7, CreatedAt = DateTime.UtcNow, ChecklistItems = new() { "Strip bed linen", "Vacuum carpets", "Wipe all switches", "Sanitize toilets" } }
     };
 
     public static List<Feedback> Feedbacks = new()
     {
-        new Feedback { Id = 1, GuestName = "John Henderson", RoomNumber = "Room 304", Rating = 5, Category = "Room Comfort & Service", Comments = "The room service dry cleaning was returned in under 4 hours, and the Penthouse view was exceptional. CogStay system operates very smoothly.", IsApproved = true },
-        new Feedback { Id = 2, GuestName = "Emily Watson", RoomNumber = "Room 301", Rating = 4, Category = "General Stay Value", Comments = "Very comfortable Deluxe room, excellent writing desk configuration. The AC unit was slightly loud but resolved quickly by maintenance.", IsApproved = true },
-        new Feedback { Id = 3, GuestName = "Albert Einstein", RoomNumber = "Room 201", Rating = 5, Category = "Amenities & Facilities", Comments = "Spa aromatherapy bath salts are highly recommended. Front desk agent processed our late checkout with extreme courtesy.", IsApproved = true }
+        new Feedback { FeedbackId = 1, GuestName = "John Henderson", RoomNumber = "Room 304", Rating = 5, Category = "Room Comfort & Service", Comments = "The room service dry cleaning was returned in under 4 hours, and the Penthouse view was exceptional. CogStay system operates very smoothly.", IsApproved = true },
+        new Feedback { FeedbackId = 2, GuestName = "Emily Watson", RoomNumber = "Room 301", Rating = 4, Category = "General Stay Value", Comments = "Very comfortable Deluxe room, excellent writing desk configuration. The AC unit was slightly loud but resolved quickly by maintenance.", IsApproved = true },
+        new Feedback { FeedbackId = 3, GuestName = "Albert Einstein", RoomNumber = "Room 201", Rating = 5, Category = "Amenities & Facilities", Comments = "Spa aromatherapy bath salts are highly recommended. Front desk agent processed our late checkout with extreme courtesy.", IsApproved = true }
     };
 }
