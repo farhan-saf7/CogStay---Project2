@@ -1,6 +1,6 @@
 using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using CogStayMVC.Models;
+using CogStayMVC.Models.Common;
 
 namespace CogStayMVC.Controllers;
 

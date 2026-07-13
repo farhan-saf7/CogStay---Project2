@@ -1,5 +1,11 @@
 using Microsoft.EntityFrameworkCore;
-using CogStayMVC.Models;
+using CogStayMVC.Models.Admin;
+using CogStayMVC.Models.Customer;
+using CogStayMVC.Models.FrontDesk;
+using CogStayMVC.Models.Housekeeping;
+using CogStayMVC.Models.Billing;
+using CogStayMVC.Models.Room;
+using CogStayMVC.Models.Common;
 using System.Text.Json;
 using System.Collections.Generic;
 
