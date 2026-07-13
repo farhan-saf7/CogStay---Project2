@@ -23,10 +23,13 @@ public class Customer
     [NotMapped]
     public string FullName => $"{FirstName} {LastName}";
 
+
     [Required]
     [EmailAddress]
     [MaxLength(100)]
+    [Column(TypeName = "nvarchar(100)")]
     public string Email { get; set; } = string.Empty;
+
 
     [Required]
     [MaxLength(20)]

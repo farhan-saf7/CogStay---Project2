@@ -1,0 +1,183 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Cogstay_2\\CogStay---Project2\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|c:\\cogstay_2\\cogstay---project2\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|solutionrelative:program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|c:\\cogstay_2\\cogstay---project2\\models\\housekeepingtask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|solutionrelative:models\\housekeepingtask.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|c:\\cogstay_2\\cogstay---project2\\data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|solutionrelative:data\\applicationdbcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|c:\\cogstay_2\\cogstay---project2\\models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|solutionrelative:models\\role.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|c:\\cogstay_2\\cogstay---project2\\models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|solutionrelative:models\\room.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|c:\\cogstay_2\\cogstay---project2\\models\\roomamenity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|solutionrelative:models\\roomamenity.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|c:\\cogstay_2\\cogstay---project2\\models\\wellnesssparequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|solutionrelative:models\\wellnesssparequest.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|c:\\cogstay_2\\cogstay---project2\\models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|solutionrelative:models\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|c:\\cogstay_2\\cogstay---project2\\models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|solutionrelative:models\\customer.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|c:\\cogstay_2\\cogstay---project2\\appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
+      "RelativeMoniker": "D:0:0:{C5299599-D980-45D1-62C8-D757499C5D8D}|CogStayMVC.csproj|solutionrelative:appsettings.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 4,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Room.cs",
+              "DocumentMoniker": "C:\\Cogstay_2\\CogStay---Project2\\Models\\Room.cs",
+              "RelativeDocumentMoniker": "Models\\Room.cs",
+              "ToolTip": "C:\\Cogstay_2\\CogStay---Project2\\Models\\Room.cs",
+              "RelativeToolTip": "Models\\Room.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T04:11:43.137Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "RoomAmenity.cs",
+              "DocumentMoniker": "C:\\Cogstay_2\\CogStay---Project2\\Models\\RoomAmenity.cs",
+              "RelativeDocumentMoniker": "Models\\RoomAmenity.cs",
+              "ToolTip": "C:\\Cogstay_2\\CogStay---Project2\\Models\\RoomAmenity.cs",
+              "RelativeToolTip": "Models\\RoomAmenity.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T04:11:37.463Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "HousekeepingTask.cs",
+              "DocumentMoniker": "C:\\Cogstay_2\\CogStay---Project2\\Models\\HousekeepingTask.cs",
+              "RelativeDocumentMoniker": "Models\\HousekeepingTask.cs",
+              "ToolTip": "C:\\Cogstay_2\\CogStay---Project2\\Models\\HousekeepingTask.cs",
+              "RelativeToolTip": "Models\\HousekeepingTask.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAAwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T04:09:25.556Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "WellnessSpaRequest.cs",
+              "DocumentMoniker": "C:\\Cogstay_2\\CogStay---Project2\\Models\\WellnessSpaRequest.cs",
+              "RelativeDocumentMoniker": "Models\\WellnessSpaRequest.cs",
+              "ToolTip": "C:\\Cogstay_2\\CogStay---Project2\\Models\\WellnessSpaRequest.cs",
+              "RelativeToolTip": "Models\\WellnessSpaRequest.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T04:09:17.638Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Cogstay_2\\CogStay---Project2\\Program.cs",
+              "RelativeDocumentMoniker": "Program.cs",
+              "ToolTip": "C:\\Cogstay_2\\CogStay---Project2\\Program.cs",
+              "RelativeToolTip": "Program.cs",
+              "ViewState": "AgIAAAMAAAAAAAAAAAAAABAAAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T19:43:29.825Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ApplicationDbContext.cs",
+              "DocumentMoniker": "C:\\Cogstay_2\\CogStay---Project2\\Data\\ApplicationDbContext.cs",
+              "RelativeDocumentMoniker": "Data\\ApplicationDbContext.cs",
+              "ToolTip": "C:\\Cogstay_2\\CogStay---Project2\\Data\\ApplicationDbContext.cs",
+              "RelativeToolTip": "Data\\ApplicationDbContext.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T04:13:56.914Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Role.cs",
+              "DocumentMoniker": "C:\\Cogstay_2\\CogStay---Project2\\Models\\Role.cs",
+              "RelativeDocumentMoniker": "Models\\Role.cs",
+              "ToolTip": "C:\\Cogstay_2\\CogStay---Project2\\Models\\Role.cs",
+              "RelativeToolTip": "Models\\Role.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T04:08:58.811Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "User.cs",
+              "DocumentMoniker": "C:\\Cogstay_2\\CogStay---Project2\\Models\\User.cs",
+              "RelativeDocumentMoniker": "Models\\User.cs",
+              "ToolTip": "C:\\Cogstay_2\\CogStay---Project2\\Models\\User.cs",
+              "RelativeToolTip": "Models\\User.cs",
+              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-09T04:08:48.584Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "Customer.cs",
+              "DocumentMoniker": "C:\\Cogstay_2\\CogStay---Project2\\Models\\Customer.cs",
+              "RelativeDocumentMoniker": "Models\\Customer.cs",
+              "ToolTip": "C:\\Cogstay_2\\CogStay---Project2\\Models\\Customer.cs",
+              "RelativeToolTip": "Models\\Customer.cs",
+              "ViewState": "AgIAACwAAAAAAAAAAAAYwD0AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-07-08T19:48:47.574Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "appsettings.json",
+              "DocumentMoniker": "C:\\Cogstay_2\\CogStay---Project2\\appsettings.json",
+              "RelativeDocumentMoniker": "appsettings.json",
+              "ToolTip": "C:\\Cogstay_2\\CogStay---Project2\\appsettings.json",
+              "RelativeToolTip": "appsettings.json",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAYAAAAfAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
+              "WhenOpened": "2026-07-08T19:32:59.021Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CogStayMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class InitialCreate : Migration
+    public partial class Init_01 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -15,17 +15,17 @@ namespace CogStayMVC.Migrations
                 name: "Bookings",
                 columns: table => new
                 {
-                    Id = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CustomerName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    RoomNumber = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
-                    CheckInDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CheckOutDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    GuestsCount = table.Column<int>(type: "INTEGER", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
-                    BookingStatus = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    PaymentStatus = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    SpecialRequests = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    RoomNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CheckOutDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GuestsCount = table.Column<int>(type: "int", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    BookingStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    SpecialRequests = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -36,13 +36,13 @@ namespace CogStayMVC.Migrations
                 name: "ContactMessages",
                 columns: table => new
                 {
-                    ContactMessageId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Subject = table.Column<string>(type: "TEXT", maxLength: 150, nullable: false),
-                    Message = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false),
-                    SubmittedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    ContactMessageId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Subject = table.Column<string>(type: "nvarchar(150)", maxLength: 150, nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    SubmittedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -53,12 +53,12 @@ namespace CogStayMVC.Migrations
                 name: "Otps",
                 columns: table => new
                 {
-                    OtpId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    EmailOrPhone = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    OtpCode = table.Column<string>(type: "TEXT", maxLength: 6, nullable: false),
-                    ExpiryTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    IsUsed = table.Column<bool>(type: "INTEGER", nullable: false)
+                    OtpId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    EmailOrPhone = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    OtpCode = table.Column<string>(type: "nvarchar(6)", maxLength: 6, nullable: false),
+                    ExpiryTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsUsed = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -69,9 +69,9 @@ namespace CogStayMVC.Migrations
                 name: "Roles",
                 columns: table => new
                 {
-                    RoleId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoleName = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
+                    RoleId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoleName = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -82,17 +82,17 @@ namespace CogStayMVC.Migrations
                 name: "Rooms",
                 columns: table => new
                 {
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoomNumber = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
-                    RoomType = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    PricePerNight = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
-                    Capacity = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsAvailable = table.Column<bool>(type: "INTEGER", nullable: false),
-                    Status = table.Column<string>(type: "TEXT", nullable: false),
-                    Cleanliness = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    ImageUrl = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    Description = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false)
+                    RoomId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    RoomType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    PricePerNight = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Capacity = table.Column<int>(type: "int", nullable: false),
+                    IsAvailable = table.Column<bool>(type: "bit", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Cleanliness = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Description = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -103,14 +103,14 @@ namespace CogStayMVC.Migrations
                 name: "Users",
                 columns: table => new
                 {
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    Username = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    PasswordHash = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    RoleId = table.Column<int>(type: "INTEGER", nullable: false),
-                    IsActive = table.Column<bool>(type: "INTEGER", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    UserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    Username = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    RoleId = table.Column<int>(type: "int", nullable: false),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -127,14 +127,14 @@ namespace CogStayMVC.Migrations
                 name: "FoodOrders",
                 columns: table => new
                 {
-                    FoodOrderId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false),
-                    GuestName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    DishOrderDetails = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
-                    DeliveryNote = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    OrderedTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Status = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
+                    FoodOrderId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    GuestName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    DishOrderDetails = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    DeliveryNote = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    OrderedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -151,13 +151,13 @@ namespace CogStayMVC.Migrations
                 name: "LaundryRequests",
                 columns: table => new
                 {
-                    LaundryRequestId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false),
-                    GuestName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    ServiceClass = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    LinenCount = table.Column<int>(type: "INTEGER", nullable: false),
-                    Status = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
+                    LaundryRequestId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    GuestName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ServiceClass = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LinenCount = table.Column<int>(type: "int", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -174,14 +174,14 @@ namespace CogStayMVC.Migrations
                 name: "MaintenanceRequests",
                 columns: table => new
                 {
-                    MaintenanceRequestId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Location = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    IssueDescription = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    LoggedTimestamp = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Severity = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Status = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
+                    MaintenanceRequestId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomId = table.Column<int>(type: "int", nullable: true),
+                    Location = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    IssueDescription = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    LoggedTimestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Severity = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -198,10 +198,10 @@ namespace CogStayMVC.Migrations
                 name: "RoomAmenities",
                 columns: table => new
                 {
-                    RoomAmenityId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false),
-                    AmenityName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
+                    RoomAmenityId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    AmenityName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -218,10 +218,10 @@ namespace CogStayMVC.Migrations
                 name: "RoomImages",
                 columns: table => new
                 {
-                    RoomImageId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ImageUrl = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
+                    RoomImageId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    ImageUrl = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -238,14 +238,14 @@ namespace CogStayMVC.Migrations
                 name: "ServiceRequests",
                 columns: table => new
                 {
-                    ServiceRequestId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RequestType = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Details = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
-                    Priority = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    RosterTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Status = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
+                    ServiceRequestId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    RequestType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Details = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    Priority = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    RosterTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -262,15 +262,15 @@ namespace CogStayMVC.Migrations
                 name: "WellnessSpaRequests",
                 columns: table => new
                 {
-                    WellnessSpaRequestId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false),
-                    GuestName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    ServiceTreatment = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    PreferredSlot = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    AssignedTherapist = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Status = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    Remarks = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false)
+                    WellnessSpaRequestId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    GuestName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ServiceTreatment = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PreferredSlot = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    AssignedTherapist = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    Remarks = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -287,13 +287,13 @@ namespace CogStayMVC.Migrations
                 name: "AuditLogs",
                 columns: table => new
                 {
-                    AuditLogId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Action = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    EntityName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Timestamp = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    Details = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false)
+                    AuditLogId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    Action = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    EntityName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Timestamp = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Details = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -310,20 +310,20 @@ namespace CogStayMVC.Migrations
                 name: "Customers",
                 columns: table => new
                 {
-                    CustomerId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: true),
-                    FirstName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    LastName = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Email = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    Phone = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    LoyaltyTier = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    LoyaltyId = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    MemberSince = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    StreetAddress = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    City = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    State = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    ZipCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
+                    CustomerId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: true),
+                    FirstName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Phone = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    LoyaltyTier = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    LoyaltyId = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    MemberSince = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ZipCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -340,11 +340,11 @@ namespace CogStayMVC.Migrations
                 name: "LoginHistories",
                 columns: table => new
                 {
-                    LoginHistoryId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    LoginTime = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    IpAddress = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false)
+                    LoginHistoryId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    LoginTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IpAddress = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -361,12 +361,12 @@ namespace CogStayMVC.Migrations
                 name: "Notifications",
                 columns: table => new
                 {
-                    NotificationId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Message = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    IsRead = table.Column<bool>(type: "INTEGER", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    NotificationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Message = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    IsRead = table.Column<bool>(type: "bit", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -383,13 +383,13 @@ namespace CogStayMVC.Migrations
                 name: "RefreshTokens",
                 columns: table => new
                 {
-                    RefreshTokenId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Token = table.Column<string>(type: "TEXT", maxLength: 255, nullable: false),
-                    Expires = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    RevokedAt = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    RefreshTokenId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Token = table.Column<string>(type: "nvarchar(255)", maxLength: 255, nullable: false),
+                    Expires = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    RevokedAt = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -406,16 +406,16 @@ namespace CogStayMVC.Migrations
                 name: "StaffUsers",
                 columns: table => new
                 {
-                    StaffUserId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    UserId = table.Column<int>(type: "INTEGER", nullable: false),
-                    Name = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    ShiftSchedule = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Status = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    StreetAddress = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    City = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    State = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    ZipCode = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false)
+                    StaffUserId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    ShiftSchedule = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    StreetAddress = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    City = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    State = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    ZipCode = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -432,16 +432,16 @@ namespace CogStayMVC.Migrations
                 name: "Feedbacks",
                 columns: table => new
                 {
-                    FeedbackId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    CustomerId = table.Column<int>(type: "INTEGER", nullable: true),
-                    GuestName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    RoomNumber = table.Column<string>(type: "TEXT", maxLength: 10, nullable: false),
-                    Rating = table.Column<int>(type: "INTEGER", nullable: false),
-                    Category = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    Comments = table.Column<string>(type: "TEXT", maxLength: 2000, nullable: false),
-                    SubmittedDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    IsApproved = table.Column<bool>(type: "INTEGER", nullable: false)
+                    FeedbackId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    CustomerId = table.Column<int>(type: "int", nullable: true),
+                    GuestName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    RoomNumber = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    Rating = table.Column<int>(type: "int", nullable: false),
+                    Category = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    Comments = table.Column<string>(type: "nvarchar(2000)", maxLength: 2000, nullable: false),
+                    SubmittedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    IsApproved = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -458,19 +458,19 @@ namespace CogStayMVC.Migrations
                 name: "Reservations",
                 columns: table => new
                 {
-                    ReservationId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    GuestId = table.Column<int>(type: "INTEGER", nullable: false),
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false),
-                    CheckInDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    CheckOutDate = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    GuestsCount = table.Column<int>(type: "INTEGER", nullable: false),
-                    TotalBilling = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
-                    PaymentStatus = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    ReservationStatus = table.Column<string>(type: "TEXT", nullable: false),
-                    SpecialRequests = table.Column<string>(type: "TEXT", maxLength: 1000, nullable: false),
-                    CancelledDate = table.Column<DateTime>(type: "TEXT", nullable: true),
-                    CancellationReason = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
+                    ReservationId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GuestId = table.Column<int>(type: "int", nullable: false),
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CheckOutDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GuestsCount = table.Column<int>(type: "int", nullable: false),
+                    TotalBilling = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    ReservationStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SpecialRequests = table.Column<string>(type: "nvarchar(1000)", maxLength: 1000, nullable: false),
+                    CancelledDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CancellationReason = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -493,16 +493,16 @@ namespace CogStayMVC.Migrations
                 name: "HousekeepingTasks",
                 columns: table => new
                 {
-                    TaskId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    RoomId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TaskDescription = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false),
-                    TaskType = table.Column<string>(type: "TEXT", maxLength: 50, nullable: false),
-                    AssignedToStaffId = table.Column<int>(type: "INTEGER", nullable: true),
-                    Priority = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    TaskStatus = table.Column<string>(type: "TEXT", nullable: false),
-                    CreatedAt = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ChecklistItems = table.Column<string>(type: "TEXT", nullable: false)
+                    TaskId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    RoomId = table.Column<int>(type: "int", nullable: false),
+                    TaskDescription = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false),
+                    TaskType = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
+                    AssignedToStaffId = table.Column<int>(type: "int", nullable: true),
+                    Priority = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TaskStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ChecklistItems = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -525,12 +525,12 @@ namespace CogStayMVC.Migrations
                 name: "StayRecords",
                 columns: table => new
                 {
-                    StayId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    GuestId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ReservationId = table.Column<int>(type: "INTEGER", nullable: false),
-                    ActualCheckIn = table.Column<DateTime>(type: "TEXT", nullable: false),
-                    ActualCheckOut = table.Column<DateTime>(type: "TEXT", nullable: true)
+                    StayId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GuestId = table.Column<int>(type: "int", nullable: false),
+                    ReservationId = table.Column<int>(type: "int", nullable: false),
+                    ActualCheckIn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ActualCheckOut = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -553,12 +553,12 @@ namespace CogStayMVC.Migrations
                 name: "Billings",
                 columns: table => new
                 {
-                    BillId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    StayId = table.Column<int>(type: "INTEGER", nullable: false),
-                    TotalAmount = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
-                    PaymentStatus = table.Column<string>(type: "TEXT", nullable: false),
-                    Remarks = table.Column<string>(type: "TEXT", maxLength: 500, nullable: false)
+                    BillId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    StayId = table.Column<int>(type: "int", nullable: false),
+                    TotalAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    PaymentStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Remarks = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -575,17 +575,17 @@ namespace CogStayMVC.Migrations
                 name: "Payments",
                 columns: table => new
                 {
-                    PaymentId = table.Column<int>(type: "INTEGER", nullable: false)
-                        .Annotation("Sqlite:Autoincrement", true),
-                    BillingId = table.Column<int>(type: "INTEGER", nullable: true),
-                    ReservationId = table.Column<int>(type: "INTEGER", nullable: true),
-                    CardholderName = table.Column<string>(type: "TEXT", maxLength: 100, nullable: false),
-                    CardNumber = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    ExpiryDate = table.Column<string>(type: "TEXT", maxLength: 5, nullable: false),
-                    CVV = table.Column<string>(type: "TEXT", maxLength: 4, nullable: false),
-                    Amount = table.Column<decimal>(type: "TEXT", precision: 18, scale: 2, nullable: false),
-                    Status = table.Column<string>(type: "TEXT", maxLength: 20, nullable: false),
-                    TransactionDate = table.Column<DateTime>(type: "TEXT", nullable: false)
+                    PaymentId = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BillingId = table.Column<int>(type: "int", nullable: true),
+                    ReservationId = table.Column<int>(type: "int", nullable: true),
+                    CardholderName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    CardNumber = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    ExpiryDate = table.Column<string>(type: "nvarchar(5)", maxLength: 5, nullable: false),
+                    CVV = table.Column<string>(type: "nvarchar(4)", maxLength: 4, nullable: false),
+                    Amount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: false),
+                    TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -625,7 +625,8 @@ namespace CogStayMVC.Migrations
                 name: "IX_Customers_UserId",
                 table: "Customers",
                 column: "UserId",
-                unique: true);
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Feedbacks_CustomerId",
