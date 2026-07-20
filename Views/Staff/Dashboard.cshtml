@@ -16,7 +16,7 @@
         <div class="cogstay-stat-card frontdesk">
             <div class="cogstay-stat-details">
                 <p>Today's Reservations</p>
-                <h3>8 Bookings</h3>
+                <h3>@ViewData["FrontDesk_TodayReservationsCount"] Bookings</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-calendar-check"></i>
@@ -26,7 +26,7 @@
         <div class="cogstay-stat-card frontdesk">
             <div class="cogstay-stat-details">
                 <p>Active Stays</p>
-                <h3>14 Guests</h3>
+                <h3>@ViewData["FrontDesk_ActiveStaysCount"] Guests</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-users"></i>
@@ -36,7 +36,7 @@
         <div class="cogstay-stat-card frontdesk">
             <div class="cogstay-stat-details">
                 <p>Available Rooms</p>
-                <h3>4 Rooms</h3>
+                <h3>@ViewData["FrontDesk_AvailableRoomsCount"] Rooms</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-door-open"></i>
@@ -49,7 +49,6 @@
         <div class="cogstay-card">
             <div class="cogstay-card-header">
                 <h3 class="cogstay-card-title"><i class="fa-solid fa-clock"></i> Today's Expected Arrivals</h3>
-                <span class="cogstay-badge info">3 Pending</span>
             </div>
             <div class="cogstay-table-responsive">
                 <table class="cogstay-table">
@@ -63,20 +62,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td><strong>Sarah Jenkins</strong></td>
-                            <td>Room 205 (Deluxe)</td>
-                            <td>Today, 2:30 PM</td>
-                            <td><span class="cogstay-badge warning">Booked</span></td>
-                            <td><a href="/CheckIn/CheckIn" class="btn btn-primary btn-sm">Check-In</a></td>
-                        </tr>
-                        <tr>
-                            <td><strong>Michael Chang</strong></td>
-                            <td>Room 101 (Standard)</td>
-                            <td>Today, 4:00 PM</td>
-                            <td><span class="cogstay-badge warning">Booked</span></td>
-                            <td><a href="/CheckIn/CheckIn" class="btn btn-primary btn-sm">Check-In</a></td>
-                        </tr>
+                        @foreach (var r in (IEnumerable<CogStayMVC.Models.Reservation>)ViewData["FrontDesk_ExpectedArrivals"]!)
+                        {
+                            <tr>
+                                <td><strong>@r.Guest.FullName</strong></td>
+                                <td>Room @r.Room.RoomNumber (@r.Room.RoomType)</td>
+                                <td>Today</td>
+                                <td><span class="cogstay-badge warning">@r.ReservationStatus.ToString()</span></td>
+                                <td><a href="/CheckIn/CheckIn?reservationId=@r.ReservationId" class="btn btn-primary btn-sm">Check-In</a></td>
+                            </tr>
+                        }
+                        @if (!((IEnumerable<CogStayMVC.Models.Reservation>)ViewData["FrontDesk_ExpectedArrivals"]!).Any())
+                        {
+                            <tr>
+                                <td colspan="5" style="text-align: center; color: var(--color-text-muted);">No expected arrivals today.</td>
+                            </tr>
+                        }
                     </tbody>
                 </table>
             </div>
@@ -110,7 +111,7 @@ else if (role == "Housekeeping")
         <div class="cogstay-stat-card housekeeping">
             <div class="cogstay-stat-details">
                 <p>Pending Tasks</p>
-                <h3>5 Tasks</h3>
+                <h3>@ViewData["Housekeeping_PendingTasksCount"] Tasks</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-clock"></i>
@@ -120,7 +121,7 @@ else if (role == "Housekeeping")
         <div class="cogstay-stat-card housekeeping">
             <div class="cogstay-stat-details">
                 <p>In Progress Tasks</p>
-                <h3>2 Tasks</h3>
+                <h3>@ViewData["Housekeeping_InProgressTasksCount"] Tasks</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-spinner"></i>
@@ -130,7 +131,7 @@ else if (role == "Housekeeping")
         <div class="cogstay-stat-card housekeeping">
             <div class="cogstay-stat-details">
                 <p>Completed Today</p>
-                <h3>12 Tasks</h3>
+                <h3>@ViewData["Housekeeping_CompletedTasksCount"] Tasks</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-circle-check"></i>
@@ -150,25 +151,25 @@ else if (role == "Housekeeping")
                         <th>Room</th>
                         <th>Task Details</th>
                         <th>Status</th>
-                        <th>Priority</th>
                         <th style="text-align: right;">Action</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td><strong>Room 101</strong></td>
-                        <td>Full checkout cleaning & amenity refill</td>
-                        <td><span class="cogstay-badge danger">Pending</span></td>
-                        <td><span class="cogstay-badge danger">High</span></td>
-                        <td style="text-align: right;"><a href="/Housekeeping/Edit?id=1" class="btn btn-primary btn-sm">Update</a></td>
-                    </tr>
-                    <tr>
-                        <td><strong>Room 304</strong></td>
-                        <td>Extra towels request</td>
-                        <td><span class="cogstay-badge warning">In Progress</span></td>
-                        <td><span class="cogstay-badge info">Medium</span></td>
-                        <td style="text-align: right;"><a href="/Housekeeping/Edit?id=2" class="btn btn-primary btn-sm">Update</a></td>
-                    </tr>
+                    @foreach (var t in (IEnumerable<CogStayMVC.Models.HousekeepingTask>)ViewData["Housekeeping_ActiveTasks"]!)
+                    {
+                        <tr>
+                            <td><strong>Room @t.Room.RoomNumber</strong></td>
+                            <td>@t.TaskDescription</td>
+                            <td><span class="cogstay-badge @(t.TaskStatus == CogStayMVC.Enums.TaskStatus.InProgress ? "warning" : "danger")">@t.TaskStatus.ToString()</span></td>
+                            <td style="text-align: right;"><a href="/Housekeeping/Edit?id=@t.TaskId" class="btn btn-primary btn-sm">Update</a></td>
+                        </tr>
+                    }
+                    @if (!((IEnumerable<CogStayMVC.Models.HousekeepingTask>)ViewData["Housekeeping_ActiveTasks"]!).Any())
+                    {
+                        <tr>
+                            <td colspan="4" style="text-align: center; color: var(--color-text-muted);">No active cleaning duties assigned.</td>
+                        </tr>
+                    }
                 </tbody>
             </table>
         </div>
@@ -181,7 +182,7 @@ else if (role == "Manager")
         <div class="cogstay-stat-card manager">
             <div class="cogstay-stat-details">
                 <p>Available Rooms</p>
-                <h3>4 Rooms</h3>
+                <h3>@ViewData["Manager_AvailableRoomsCount"] Rooms</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-door-open"></i>
@@ -191,7 +192,7 @@ else if (role == "Manager")
         <div class="cogstay-stat-card manager">
             <div class="cogstay-stat-details">
                 <p>Active Reservations</p>
-                <h3>22 Bookings</h3>
+                <h3>@ViewData["Manager_ActiveReservationsCount"] Bookings</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-calendar-check"></i>
@@ -201,7 +202,7 @@ else if (role == "Manager")
         <div class="cogstay-stat-card manager">
             <div class="cogstay-stat-details">
                 <p>Active Stays</p>
-                <h3>14 Stays</h3>
+                <h3>@ViewData["Manager_ActiveStaysCount"] Stays</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-key"></i>
@@ -211,7 +212,7 @@ else if (role == "Manager")
         <div class="cogstay-stat-card manager">
             <div class="cogstay-stat-details">
                 <p>Pending Payments</p>
-                <h3>₹34,200.00</h3>
+                <h3>₹@(((decimal)ViewData["Manager_PendingPaymentsAmount"]!).ToString("N2"))</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-file-invoice-dollar"></i>
@@ -227,16 +228,16 @@ else if (role == "Manager")
             </div>
             <div class="cogstay-card-body">
                 <div class="manager-kpi-row">
-                    <span>Occupancy Rate</span>
-                    <strong>85% (34 / 40 Rooms)</strong>
+                    <span>Occupancy Details</span>
+                    <strong>@ViewData["Manager_OccupiedRoomsCount"] / @ViewData["Manager_TotalRoomsCount"] Rooms</strong>
                 </div>
                 <div class="manager-kpi-row">
                     <span>Housekeeping Completion</span>
-                    <strong>90% Completed</strong>
+                    <strong>@ViewData["Manager_HousekeepingCompletionPercentage"]% Completed</strong>
                 </div>
                 <div class="manager-kpi-row">
                     <span>Outstanding Invoices</span>
-                    <strong>₹34,200.00 (3 pending)</strong>
+                    <strong>₹@(((decimal)ViewData["Manager_PendingPaymentsAmount"]!).ToString("N2")) (@ViewData["Manager_OutstandingInvoicesCount"] pending)</strong>
                 </div>
             </div>
         </div>
@@ -261,7 +262,7 @@ else if (role == "Admin")
         <div class="cogstay-stat-card admin">
             <div class="cogstay-stat-details">
                 <p>Total Rooms</p>
-                <h3>40 Rooms</h3>
+                <h3>@ViewData["Admin_TotalRoomsCount"] Rooms</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-door-open"></i>
@@ -271,7 +272,7 @@ else if (role == "Admin")
         <div class="cogstay-stat-card admin">
             <div class="cogstay-stat-details">
                 <p>Active Reservations</p>
-                <h3>22 Bookings</h3>
+                <h3>@ViewData["Admin_ActiveReservationsCount"] Bookings</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-calendar-check"></i>
@@ -281,7 +282,7 @@ else if (role == "Admin")
         <div class="cogstay-stat-card admin">
             <div class="cogstay-stat-details">
                 <p>Active Stays</p>
-                <h3>14 Stays</h3>
+                <h3>@ViewData["Admin_ActiveStaysCount"] Stays</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-key"></i>
@@ -291,7 +292,7 @@ else if (role == "Admin")
         <div class="cogstay-stat-card admin">
             <div class="cogstay-stat-details">
                 <p>Pending Payments</p>
-                <h3>₹34,200.00</h3>
+                <h3>₹@(((decimal)ViewData["Admin_PendingPaymentsAmount"]!).ToString("N2"))</h3>
             </div>
             <div class="cogstay-stat-icon">
                 <i class="fa-solid fa-file-invoice-dollar"></i>
@@ -318,7 +319,7 @@ else if (role == "Admin")
                 <h3 class="cogstay-card-title"><i class="fa-solid fa-info-circle"></i> Quick Admin Info</h3>
             </div>
             <div class="cogstay-card-body" style="font-size: 13.5px; line-height: 1.5; color: var(--color-text-muted);">
-                Welcome to administrative dashboard. System is running under **Development Mode (Temporary Navigation)**. Security checks, migrations, and model binding are disabled.
+                Welcome to the administrator dashboard. System is connected to the EF Core data layer and SQL Server database. Configure staff members, manage room inventory catalogs, monitor billing logs, and override system records.
             </div>
         </div>
     </div>

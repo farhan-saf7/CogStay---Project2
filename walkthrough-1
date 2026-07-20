@@ -1,0 +1,84 @@
+# CogStay Hotel Reservation & Guest Management System - Backend Overhaul Walkthrough
+
+The complete backend implementation for the CogStay Hotel Reservation & Guest Management System has been successfully executed and integrated. All database queries, business rules, controllers, views, security measures, and seed parameters compile with **0 errors**.
+
+---
+
+## 1. NuGet Packages Installed
+Installed and configured the following libraries in [CogStayMVC.csproj](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/CogStayMVC.csproj):
+* **BCrypt.Net-Next (v4.2.0)**: Used for secure corporate and guest password hashing and validation.
+* **Microsoft.EntityFrameworkCore.InMemory (v10.0.10)**: Configured as a local development database fallback. This resolves SQL Server LocalDB startup failures caused by modern NVMe SSD physical sector size misalignment on Windows 11/10.
+
+---
+
+## 2. Repository Layer (`Repositories/`)
+Created repository interfaces in `Repositories/Interfaces/` and class implementations in `Repositories/` to manage database operations for all models:
+* [IGuestRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/Interfaces/IGuestRepository.cs) / [GuestRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/GuestRepository.cs)
+* [IRoomRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/Interfaces/IRoomRepository.cs) / [RoomRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/RoomRepository.cs)
+* [IReservationRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/Interfaces/IReservationRepository.cs) / [ReservationRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/ReservationRepository.cs)
+* [IStayRecordRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/Interfaces/IStayRecordRepository.cs) / [StayRecordRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/StayRecordRepository.cs)
+* [IHousekeepingRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/Interfaces/IHousekeepingRepository.cs) / [HousekeepingRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/HousekeepingRepository.cs)
+* [IBillingRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/Interfaces/IBillingRepository.cs) / [BillingRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/BillingRepository.cs)
+* [IStaffRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/Interfaces/IStaffRepository.cs) / [StaffRepository.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Repositories/StaffRepository.cs)
+
+---
+
+## 3. Service Layer & Business Logic (`Services/`)
+Created service interfaces in `Services/Interfaces/` and class implementations in `Services/` hosting core business workflow rules:
+* [IGuestService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/Interfaces/IGuestService.cs) / [GuestService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/GuestService.cs): Registration verification, email unique constraint checking, and password hashing/validation.
+* [IRoomService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/Interfaces/IRoomService.cs) / [RoomService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/RoomService.cs): Catalog entry uniqueness checks and catalog deletions protection (avoids deleting rooms containing stay or task history).
+* [IReservationService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/Interfaces/IReservationService.cs) / [ReservationService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/ReservationService.cs): Restricts reserving occupied or under-maintenance rooms; verifies check-out is after check-in.
+* [IStayRecordService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/Interfaces/IStayRecordService.cs) / [StayRecordService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/StayRecordService.cs): Handles check-ins (room status set to `Occupied`) and check-outs (room status set to `Available`), and automatically triggers invoice compilation based on stay duration days.
+* [IHousekeepingService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/Interfaces/IHousekeepingService.cs) / [HousekeepingService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/HousekeepingService.cs): Manages task status lifecycle updates.
+* [IBillingService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/Interfaces/IBillingService.cs) / [BillingService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/BillingService.cs): Generates invoice totals (`Stay Days * Room PricePerNight`) and processes invoice payments.
+* [IStaffService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/Interfaces/IStaffService.cs) / [StaffService.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Services/StaffService.cs): Controls profile creation, status toggle, and password authentication.
+
+---
+
+## 4. Custom Authentication & Development Interceptor
+Configured in [Program.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Program.cs):
+* **Custom Cookie Authentication**: Implemented role claim mapping via standard ASP.NET Core cookies.
+* **Simulator Auto-Login Interceptor**: Added custom middleware events during unauthorized redirects. If the query string contains `?role=Admin`, `?role=FrontDesk`, etc. (or within the `ReturnUrl`), the system automatically registers a mock authenticated user session for that role. This enables seamless navigation in development simulation previews without forcing constant login inputs.
+
+---
+
+## 5. Unified Controller Bindings
+Connected all controller routes to their business services and set up strongly typed form data validation checks:
+* [HomeController.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Controllers/HomeController.cs): Portal redirection based on login roles.
+* [GuestController.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Controllers/GuestController.cs): Login validation, registration panel, guest dashboard KPIs, reservation history, stay invoice billing page, profile update forms, and sign-out.
+* [StaffController.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Controllers/StaffController.cs): Corporate authentication, role-based operations dashboard (dynamically counts bookings, active stays, housekeeping completion ratios, and outstanding balances), and Admin-only staff directory CRUD portals.
+* [RoomController.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Controllers/RoomController.cs): Catalog modification, details, search queries, and availability index.
+* [ReservationController.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Controllers/ReservationController.cs): Front desk booking creation and cancellation logs.
+* [CheckInController.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Controllers/CheckInController.cs): Registers arrivals, active stay listings, and departures checkout.
+* [HousekeepingController.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Controllers/HousekeepingController.cs): Room maintenance cleaning status updates.
+* [BillingController.cs](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Controllers/BillingController.cs): Invoice settlements, payments processing, and history archive.
+
+---
+
+## 6. Dynamic View Integrations
+Converted static mockup layouts into fully data-bound Razor templates:
+* [Guest/Dashboard.cshtml](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Views/Guest/Dashboard.cshtml): Dynamically reads stay cards, upcoming reservations, pending invoice totals, and guest profiles.
+* [Staff/Dashboard.cshtml](file:///C:/Users/farha/OneDrive/Desktop/CogStay--20-07/CogStay---Project2/Views/Staff/Dashboard.cshtml): Customizes stats counters, queue logs, shortcuts, and info cards dynamically across 4 distinct staff roles (`FrontDesk`, `Housekeeping`, `Manager`, `Admin`).
+
+---
+
+## 7. Database Seeder & Fallback
+On startup, if the database is empty:
+* Auto-populates 5 default profiles:
+  - **Admin**: `admin@cogstay.com` (pw: `admin123`)
+  - **Manager**: `manager@cogstay.com` (pw: `manager123`)
+  - **FrontDesk**: `frontdesk@cogstay.com` (pw: `frontdesk123`)
+  - **Housekeeping**: `housekeeping@cogstay.com` (pw: `housekeeping123`)
+  - **Guest**: `guest@example.com` (pw: `guest123`)
+* Configures 3 standard room listings.
+* Reconnects automatically using SQL Server LocalDB if `"UseInMemoryDatabase"` toggle is set to `false` in `appsettings.json`.
+
+---
+
+## Verification Results
+
+* Ran compilation validation in terminal using:
+  ```powershell
+  dotnet build CogStayMVC.csproj
+  ```
+* **Result**: **Build succeeded with 0 Errors**.

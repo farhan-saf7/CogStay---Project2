@@ -7,6 +7,14 @@ public class HomeController : Controller
 {
     public IActionResult Index()
     {
+        if (User.Identity?.IsAuthenticated == true)
+        {
+            if (User.IsInRole("Guest"))
+            {
+                return RedirectToAction("Dashboard", "Guest");
+            }
+            return RedirectToAction("Dashboard", "Staff");
+        }
         return View();
     }
 

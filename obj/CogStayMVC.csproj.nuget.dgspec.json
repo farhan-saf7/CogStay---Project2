@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\farha\\Downloads\\CogStay---Project-Main\\CogStay---Project-Main\\CogStayMVC.csproj": {}
+    "C:\\Users\\farha\\OneDrive\\Desktop\\CogStay--20-07\\CogStay---Project2\\CogStayMVC.csproj": {}
   },
   "projects": {
-    "C:\\Users\\farha\\Downloads\\CogStay---Project-Main\\CogStay---Project-Main\\CogStayMVC.csproj": {
+    "C:\\Users\\farha\\OneDrive\\Desktop\\CogStay--20-07\\CogStay---Project2\\CogStayMVC.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\farha\\Downloads\\CogStay---Project-Main\\CogStay---Project-Main\\CogStayMVC.csproj",
+        "projectUniqueName": "C:\\Users\\farha\\OneDrive\\Desktop\\CogStay--20-07\\CogStay---Project2\\CogStayMVC.csproj",
         "projectName": "CogStayMVC",
-        "projectPath": "C:\\Users\\farha\\Downloads\\CogStay---Project-Main\\CogStay---Project-Main\\CogStayMVC.csproj",
+        "projectPath": "C:\\Users\\farha\\OneDrive\\Desktop\\CogStay--20-07\\CogStay---Project2\\CogStayMVC.csproj",
         "packagesPath": "C:\\Users\\farha\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\farha\\Downloads\\CogStay---Project-Main\\CogStay---Project-Main\\obj\\",
+        "outputPath": "C:\\Users\\farha\\OneDrive\\Desktop\\CogStay--20-07\\CogStay---Project2\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\farha\\AppData\\Roaming\\NuGet\\NuGet.Config"
@@ -46,6 +46,10 @@
           "framework": "net10.0",
           "targetAlias": "net10.0",
           "dependencies": {
+            "BCrypt.Net-Next": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[10.0.10, )"
@@ -53,6 +57,10 @@
             "Microsoft.EntityFrameworkCore.Design": {
               "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
               "suppressParent": "All",
+              "target": "Package",
+              "version": "[10.0.10, )"
+            },
+            "Microsoft.EntityFrameworkCore.InMemory": {
               "target": "Package",
               "version": "[10.0.10, )"
             },
@@ -86,7 +94,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.301/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",

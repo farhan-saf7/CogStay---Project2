@@ -1,3 +1,4 @@
+@using CogStayMVC.Models
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewData["Title"] = "Guest Dashboard";
@@ -5,8 +6,8 @@
 }
 
 <div style="margin-bottom: 30px;">
-    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Welcome back, Mr. Henderson</h1>
-    <p style="color: var(--color-text-muted);">CogStay Guest Portal &bull; Room 304 (Penthouse Suite)</p>
+    <h1 style="font-family: var(--font-serif); font-size: 32px; color: var(--color-primary-dark);">Welcome back, @ViewData["GuestName"]</h1>
+    <p style="color: var(--color-text-muted);">CogStay Guest Portal &bull; @(ViewData["ActiveStay"] != null ? $"Room {((StayRecord)ViewData["ActiveStay"]).Reservation.Room.RoomNumber} ({((StayRecord)ViewData["ActiveStay"]).Reservation.Room.RoomType})" : "No Active Stay")</p>
 </div>
 
 <!-- Stats Counters / Status Cards -->
@@ -15,8 +16,17 @@
     <div class="cogstay-stat-card customer">
         <div class="cogstay-stat-details">
             <p>Upcoming Reservation</p>
-            <h3>July 22, 2026</h3>
-            <span style="font-size: 12px; color: var(--color-text-muted);">ID: #RES-94021 &bull; Deluxe Room</span>
+            @if (ViewData["Upcoming"] != null)
+            {
+                var r = (Reservation)ViewData["Upcoming"];
+                <h3>@r.CheckInDate.ToString("MMMM dd, yyyy")</h3>
+                <span style="font-size: 12px; color: var(--color-text-muted);">ID: #RES-@r.ReservationId &bull; @r.Room.RoomType</span>
+            }
+            else
+            {
+                <h3>None</h3>
+                <span style="font-size: 12px; color: var(--color-text-muted);">No upcoming bookings</span>
+            }
         </div>
         <div class="cogstay-stat-icon">
             <i class="fa-solid fa-plane-arrival"></i>
@@ -27,8 +37,17 @@
     <div class="cogstay-stat-card customer">
         <div class="cogstay-stat-details">
             <p>Current Stay Status</p>
-            <h3>Room 304</h3>
-            <span style="font-size: 12px; color: var(--color-success); font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Checked In</span>
+            @if (ViewData["ActiveStay"] != null)
+            {
+                var s = (StayRecord)ViewData["ActiveStay"];
+                <h3>Room @s.Reservation.Room.RoomNumber</h3>
+                <span style="font-size: 12px; color: var(--color-success); font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Checked In</span>
+            }
+            else
+            {
+                <h3>Not Checked In</h3>
+                <span style="font-size: 12px; color: var(--color-text-muted); font-weight: 600;"><i class="fa-solid fa-circle-xmark"></i> Outside Stay</span>
+            }
         </div>
         <div class="cogstay-stat-icon">
             <i class="fa-solid fa-key"></i>
@@ -39,8 +58,16 @@
     <div class="cogstay-stat-card customer">
         <div class="cogstay-stat-details">
             <p>Pending Payment</p>
-            <h3>₹12,000.00</h3>
-            <span style="font-size: 12px; color: var(--color-warning); font-weight: 600;"><i class="fa-solid fa-clock"></i> Invoice #INV-5502</span>
+            <h3>₹@(((decimal)ViewData["PendingAmount"]).ToString("N2"))</h3>
+            @if (ViewData["PendingBill"] != null)
+            {
+                var b = (Billing)ViewData["PendingBill"];
+                <span style="font-size: 12px; color: var(--color-warning); font-weight: 600;"><i class="fa-solid fa-clock"></i> Invoice #INV-@b.BillId</span>
+            }
+            else
+            {
+                <span style="font-size: 12px; color: var(--color-success); font-weight: 600;"><i class="fa-solid fa-circle-check"></i> Settled</span>
+            }
         </div>
         <div class="cogstay-stat-icon">
             <i class="fa-solid fa-file-invoice-dollar"></i>
@@ -54,27 +81,68 @@
         <div class="cogstay-card">
             <div class="cogstay-card-header">
                 <h3 class="cogstay-card-title"><i class="fa-solid fa-circle-info"></i> Your Current Booking Details</h3>
-                <span class="cogstay-badge success">Checked In</span>
+                @if (ViewData["ActiveStay"] != null)
+                {
+                    <span class="cogstay-badge success">Checked In</span>
+                }
+                else if (ViewData["Upcoming"] != null)
+                {
+                    <span class="cogstay-badge info">Reserved</span>
+                }
+                else
+                {
+                    <span class="cogstay-badge secondary">No Reservation</span>
+                }
             </div>
             <div class="cogstay-card-body">
-                <div class="grid-container grid-cols-2" style="gap: 15px; margin-bottom: 20px;">
-                    <div>
-                        <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Guest Name</strong>
-                        <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">John Henderson</p>
+                @if (ViewData["ActiveStay"] != null)
+                {
+                    var s = (StayRecord)ViewData["ActiveStay"];
+                    <div class="grid-container grid-cols-2" style="gap: 15px; margin-bottom: 20px;">
+                        <div>
+                            <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Guest Name</strong>
+                            <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">@ViewData["GuestName"]</p>
+                        </div>
+                        <div>
+                            <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Room Selection</strong>
+                            <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">Room @s.Reservation.Room.RoomNumber - @s.Reservation.Room.RoomType</p>
+                        </div>
+                        <div>
+                            <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Check-In Date</strong>
+                            <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">@s.ActualCheckIn?.ToString("MMMM dd, yyyy")</p>
+                        </div>
+                        <div>
+                            <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Check-Out Date</strong>
+                            <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">@s.Reservation.CheckOutDate.ToString("MMMM dd, yyyy")</p>
+                        </div>
                     </div>
-                    <div>
-                        <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Room Selection</strong>
-                        <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">Room 304 - Penthouse Suite</p>
+                }
+                else if (ViewData["Upcoming"] != null)
+                {
+                    var r = (Reservation)ViewData["Upcoming"];
+                    <div class="grid-container grid-cols-2" style="gap: 15px; margin-bottom: 20px;">
+                        <div>
+                            <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Guest Name</strong>
+                            <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">@ViewData["GuestName"]</p>
+                        </div>
+                        <div>
+                            <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Room Selection</strong>
+                            <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">Room @r.Room.RoomNumber - @r.Room.RoomType</p>
+                        </div>
+                        <div>
+                            <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Check-In Date</strong>
+                            <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">@r.CheckInDate.ToString("MMMM dd, yyyy")</p>
+                        </div>
+                        <div>
+                            <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Check-Out Date</strong>
+                            <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">@r.CheckOutDate.ToString("MMMM dd, yyyy")</p>
+                        </div>
                     </div>
-                    <div>
-                        <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Check-In Date</strong>
-                        <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">June 24, 2026</p>
-                    </div>
-                    <div>
-                        <strong style="font-size: 13px; color: var(--color-text-muted); text-transform: uppercase;">Check-Out Date</strong>
-                        <p style="font-size: 15px; font-weight: 600; margin-top: 3px;">June 28, 2026</p>
-                    </div>
-                </div>
+                }
+                else
+                {
+                    <p style="padding: 20px 0; text-align: center; color: var(--color-text-muted);">You do not have any active stays or upcoming bookings at the moment.</p>
+                }
                 
                 <div style="background-color: #FAF9F6; border: 1px solid var(--color-border); border-radius: var(--border-radius); padding: 15px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 10px;">
                     <div>
