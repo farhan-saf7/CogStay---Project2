@@ -23,18 +23,22 @@
                     <p class="cogstay-login-desc">Sign in with your corporate credentials</p>
                 </div>
                 
-                <form action="/Staff/Dashboard" method="get">
-                    <!-- Default to Admin for standard form action -->
-                    <input type="hidden" name="role" value="Admin" />
+                <form action="/Staff/Login" method="post">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div style="background-color: var(--color-danger-light); color: var(--color-danger); border: 1px solid var(--color-danger); padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 14px;">
+                            @Html.ValidationSummary(false, "")
+                        </div>
+                    }
 
                     <div class="cogstay-form-group">
                         <label class="cogstay-form-label">Corporate Email Address</label>
-                        <input type="email" class="cogstay-form-control" placeholder="staff@cogstay.com" required />
+                        <input type="email" name="email" class="cogstay-form-control" placeholder="staff@cogstay.com" required />
                     </div>
                     
                     <div class="cogstay-form-group">
                         <label class="cogstay-form-label">Security Password</label>
-                        <input type="password" class="cogstay-form-control" placeholder="••••••••" required />
+                        <input type="password" name="password" class="cogstay-form-control" placeholder="••••••••" required />
                     </div>
                     
                     <button type="submit" class="btn btn-primary" style="width: 100%; margin-top: 10px;">Access Panel</button>

@@ -23,36 +23,43 @@
                     <p class="cogstay-login-desc">Sign up to enjoy personalized luxury services</p>
                 </div>
                 
-                <form action="/Guest/Login" method="get">
+                <form action="/Guest/Register" method="post">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div style="background-color: var(--color-danger-light); color: var(--color-danger); border: 1px solid var(--color-danger); padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 14px;">
+                            @Html.ValidationSummary(false, "")
+                        </div>
+                    }
+
                     <div class="cogstay-form-group">
                         <label class="cogstay-form-label">Full Name</label>
-                        <input type="text" class="cogstay-form-control" placeholder="John Doe" required />
+                        <input type="text" name="fullName" class="cogstay-form-control" placeholder="John Doe" required />
                     </div>
                     
                     <div class="cogstay-form-row">
                         <div class="cogstay-form-group">
                             <label class="cogstay-form-label">Email Address</label>
-                            <input type="email" class="cogstay-form-control" placeholder="john@example.com" required />
+                            <input type="email" name="email" class="cogstay-form-control" placeholder="john@example.com" required />
                         </div>
                         <div class="cogstay-form-group">
                             <label class="cogstay-form-label">Phone Number</label>
-                            <input type="tel" class="cogstay-form-control" placeholder="+91 99999-88888" required />
+                            <input type="tel" name="phoneNumber" class="cogstay-form-control" placeholder="+91 99999-88888" required />
                         </div>
                     </div>
 
                     <div class="cogstay-form-group">
                         <label class="cogstay-form-label">Address</label>
-                        <input type="text" class="cogstay-form-control" placeholder="Flat 401, Crescent Enclave, New Delhi" required />
+                        <input type="text" name="address" class="cogstay-form-control" placeholder="Flat 401, Crescent Enclave, New Delhi" required />
                     </div>
                     
                     <div class="cogstay-form-row">
                         <div class="cogstay-form-group">
                             <label class="cogstay-form-label">Password</label>
-                            <input type="password" class="cogstay-form-control" placeholder="••••••••" required />
+                            <input type="password" name="password" class="cogstay-form-control" placeholder="••••••••" required />
                         </div>
                         <div class="cogstay-form-group">
                             <label class="cogstay-form-label">Confirm Password</label>
-                            <input type="password" class="cogstay-form-control" placeholder="••••••••" required />
+                            <input type="password" name="confirmPassword" class="cogstay-form-control" placeholder="••••••••" required />
                         </div>
                     </div>
                     

@@ -205,9 +205,18 @@
                 </ul>
 
                 <div class="cogstay-sidebar-footer">
-                    <a href="/Home/Index" class="cogstay-logout-btn">
-                        <i class="fa-solid fa-right-from-bracket"></i> Logout
-                    </a>
+                    @if (role == "Guest")
+                    {
+                        <a href="/Guest/Logout" class="cogstay-logout-btn">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </a>
+                    }
+                    else
+                    {
+                        <a href="/Staff/Logout" class="cogstay-logout-btn">
+                            <i class="fa-solid fa-right-from-bracket"></i> Logout
+                        </a>
+                    }
                 </div>
             </aside>
 

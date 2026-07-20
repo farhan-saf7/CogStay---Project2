@@ -23,15 +23,22 @@
                     <p class="cogstay-login-desc">Sign in to manage your luxury stay</p>
                 </div>
                 
-                <form action="/Guest/Dashboard" method="get">
+                <form action="/Guest/Login" method="post">
+                    @if (!ViewData.ModelState.IsValid)
+                    {
+                        <div style="background-color: var(--color-danger-light); color: var(--color-danger); border: 1px solid var(--color-danger); padding: 12px; border-radius: 6px; margin-bottom: 20px; font-size: 14px;">
+                            @Html.ValidationSummary(false, "")
+                        </div>
+                    }
+
                     <div class="cogstay-form-group">
                         <label class="cogstay-form-label">Email Address</label>
-                        <input type="email" class="cogstay-form-control" placeholder="guest@example.com" required />
+                        <input type="email" name="email" class="cogstay-form-control" placeholder="guest@example.com" required />
                     </div>
                     
                     <div class="cogstay-form-group">
                         <label class="cogstay-form-label">Password</label>
-                        <input type="password" class="cogstay-form-control" placeholder="••••••••" required />
+                        <input type="password" name="password" class="cogstay-form-control" placeholder="••••••••" required />
                     </div>
                     
                     <button type="submit" class="btn btn-accent" style="width: 100%; color: var(--color-primary-dark); font-weight: 700; margin-top: 10px;">Sign In</button>
