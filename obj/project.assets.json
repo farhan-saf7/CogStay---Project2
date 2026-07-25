@@ -3091,19 +3091,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ritesh SK\\.nuget\\packages\\": {}
+    "C:\\Users\\farha\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ritesh SK\\Desktop\\COgstay 6\\CogStay---Project2\\CogStayMVC.csproj",
+      "projectUniqueName": "C:\\Users\\farha\\OneDrive\\Desktop\\CogStay--Final\\CogStay---Project2\\CogStayMVC.csproj",
       "projectName": "CogStayMVC",
-      "projectPath": "C:\\Users\\Ritesh SK\\Desktop\\COgstay 6\\CogStay---Project2\\CogStayMVC.csproj",
-      "packagesPath": "C:\\Users\\Ritesh SK\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ritesh SK\\Desktop\\COgstay 6\\CogStay---Project2\\obj\\",
+      "projectPath": "C:\\Users\\farha\\OneDrive\\Desktop\\CogStay--Final\\CogStay---Project2\\CogStayMVC.csproj",
+      "packagesPath": "C:\\Users\\farha\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\farha\\OneDrive\\Desktop\\CogStay--Final\\CogStay---Project2\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ritesh SK\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\farha\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0"

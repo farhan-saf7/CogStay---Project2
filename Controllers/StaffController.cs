@@ -5,9 +5,14 @@ using Microsoft.AspNetCore.Mvc;
 using CogStayMVC.DTOs;
 using CogStayMVC.Enums;
 using CogStayMVC.Services.Interfaces;
+using TaskStatus = CogStayMVC.Enums.TaskStatus;
 
 namespace CogStayMVC.Controllers;
 
+/// <summary>
+/// Controller for internal staff management and dashboard controls.
+/// Handles login, admin registration, dashboard summaries, staff directory CRUD, check-in tracking, and sign out.
+/// </summary>
 public class StaffController : Controller
 {
     private readonly IStaffService _staffService;
@@ -17,6 +22,15 @@ public class StaffController : Controller
     private readonly IHousekeepingService _housekeepingService;
     private readonly IBillingService _billingService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="StaffController"/> class.
+    /// </summary>
+    /// <param name="staffService">Service managing staff records.</param>
+    /// <param name="roomService">Service managing room records.</param>
+    /// <param name="reservationService">Service managing reservations.</param>
+    /// <param name="checkInService">Service managing check-in stay records.</param>
+    /// <param name="housekeepingService">Service managing housekeeping tasks.</param>
+    /// <param name="billingService">Service managing bills.</param>
     public StaffController(
         IStaffService staffService,
         IRoomService roomService,
@@ -33,9 +47,18 @@ public class StaffController : Controller
         _billingService = billingService;
     }
 
+    /// <summary>
+    /// Renders the staff login form view.
+    /// </summary>
+    /// <returns>Staff login View.</returns>
     [HttpGet]
     public IActionResult Login() => View(new StaffLoginDTO());
 
+    /// <summary>
+    /// Validates staff credentials and initiates their dashboard session.
+    /// </summary>
+    /// <param name="dto">The staff login details DTO.</param>
+    /// <returns>Redirects to staff Dashboard on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(StaffLoginDTO dto)
@@ -56,6 +79,10 @@ public class StaffController : Controller
         return RedirectToAction(nameof(Dashboard), new { role = staff.Role.ToString() });
     }
 
+    /// <summary>
+    /// Renders the admin registration form (accessible only by existing Admins or if no admin exists).
+    /// </summary>
+    /// <returns>Admin registration View.</returns>
     [HttpGet]
     public IActionResult RegisterAdmin()
     {
@@ -68,6 +95,11 @@ public class StaffController : Controller
         return View(new CreateStaffDTO { Role = StaffRole.Admin });
     }
 
+    /// <summary>
+    /// Processes admin registration form submissions.
+    /// </summary>
+    /// <param name="dto">The administrative staff registration details DTO.</param>
+    /// <returns>Redirects to admin Dashboard on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> RegisterAdmin(CreateStaffDTO dto)
@@ -101,6 +133,11 @@ public class StaffController : Controller
         }
     }
 
+    /// <summary>
+    /// Renders the centralized Dashboard gathering metrics from rooms, housekeeping, stays, and billings.
+    /// </summary>
+    /// <param name="role">Role of the staff member viewing the dashboard.</param>
+    /// <returns>Dashboard View with loaded metrics.</returns>
     [HttpGet]
     public async Task<IActionResult> Dashboard(string role = "Admin")
     {
@@ -114,32 +151,36 @@ public class StaffController : Controller
         ViewBag.StaffName = HttpContext.Session.GetString("StaffName") ?? "Staff Member";
 
         var rooms = await _roomService.GetAllRoomsAsync();
-        var availableRooms = rooms.Where(r => r.Status == Enums.RoomStatus.Available).ToList();
+        var availableRooms = rooms.Where(r => r.Status == RoomStatus.Available).ToList();
         var reservations = await _reservationService.GetAllReservationsAsync();
         var activeStays = await _checkInService.GetAllStaysAsync();
         var currentActiveStays = activeStays.Where(s => !s.ActualCheckOut.HasValue).ToList();
         var housekeepingTasks = await _housekeepingService.GetAllTasksAsync();
         var bills = await _billingService.GetAllBillsAsync();
-        var pendingBills = bills.Where(b => b.PaymentStatus == Enums.PaymentStatus.Pending).ToList();
+        var pendingBills = bills.Where(b => b.PaymentStatus == PaymentStatus.Pending).ToList();
         var staffList = await _staffService.GetAllStaffAsync();
 
         ViewBag.TotalRoomsCount = rooms.Count();
         ViewBag.TotalStaffCount = staffList.Count();
         ViewBag.AvailableRoomsCount = availableRooms.Count();
-        ViewBag.ReservationsCount = reservations.Count(r => r.ReservationStatus == Enums.ReservationStatus.Booked);
+        ViewBag.ReservationsCount = reservations.Count(r => r.ReservationStatus == ReservationStatus.Booked);
         ViewBag.ActiveStaysCount = currentActiveStays.Count();
-        ViewBag.PendingTasksCount = housekeepingTasks.Count(t => t.TaskStatus == Enums.TaskStatus.Pending);
-        ViewBag.InProgressTasksCount = housekeepingTasks.Count(t => t.TaskStatus == Enums.TaskStatus.InProgress);
-        ViewBag.CompletedTasksCount = housekeepingTasks.Count(t => t.TaskStatus == Enums.TaskStatus.Completed);
+        ViewBag.PendingTasksCount = housekeepingTasks.Count(t => t.TaskStatus == TaskStatus.Pending);
+        ViewBag.InProgressTasksCount = housekeepingTasks.Count(t => t.TaskStatus == TaskStatus.InProgress);
+        ViewBag.CompletedTasksCount = housekeepingTasks.Count(t => t.TaskStatus == TaskStatus.Completed);
         ViewBag.PendingPaymentAmount = pendingBills.Sum(b => b.TotalAmount);
         ViewBag.PendingBillsCount = pendingBills.Count();
 
-        ViewBag.ArrivalsList = reservations.Where(r => r.ReservationStatus == Enums.ReservationStatus.Booked).Take(5).ToList();
-        ViewBag.HousekeepingTasksList = housekeepingTasks.Where(t => t.TaskStatus != Enums.TaskStatus.Completed).Take(5).ToList();
+        ViewBag.ArrivalsList = reservations.Where(r => r.ReservationStatus == ReservationStatus.Booked).Take(5).ToList();
+        ViewBag.HousekeepingTasksList = housekeepingTasks.Where(t => t.TaskStatus != TaskStatus.Completed).Take(5).ToList();
 
         return View();
     }
 
+    /// <summary>
+    /// Lists all staff members. Restricted to Admin.
+    /// </summary>
+    /// <returns>Index view showing staff directory.</returns>
     [HttpGet]
     public async Task<IActionResult> Index()
     {
@@ -155,6 +196,11 @@ public class StaffController : Controller
         return View(staffList);
     }
 
+    /// <summary>
+    /// Displays details of a specific staff member.
+    /// </summary>
+    /// <param name="id">Staff identifier.</param>
+    /// <returns>Details View, or 404.</returns>
     [HttpGet]
     public async Task<IActionResult> Details(int id)
     {
@@ -171,6 +217,10 @@ public class StaffController : Controller
         return View(staff);
     }
 
+    /// <summary>
+    /// Renders the staff registration form (for Admin use to add employees).
+    /// </summary>
+    /// <returns>Create staff form View.</returns>
     [HttpGet]
     public IActionResult Create()
     {
@@ -185,6 +235,11 @@ public class StaffController : Controller
         return View(new CreateStaffDTO());
     }
 
+    /// <summary>
+    /// Processes employee creation submissions.
+    /// </summary>
+    /// <param name="dto">The new staff DTO parameters.</param>
+    /// <returns>Redirects to staff list Index on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateStaffDTO dto)
@@ -212,6 +267,11 @@ public class StaffController : Controller
         }
     }
 
+    /// <summary>
+    /// Renders the edit form for updating a staff member's details.
+    /// </summary>
+    /// <param name="id">Staff identifier.</param>
+    /// <returns>Edit form View, or 404.</returns>
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
@@ -238,6 +298,12 @@ public class StaffController : Controller
         return View(dto);
     }
 
+    /// <summary>
+    /// Processes staff detail updates.
+    /// </summary>
+    /// <param name="id">Staff identifier.</param>
+    /// <param name="dto">Updated details DTO.</param>
+    /// <returns>Redirects back to staff Index view.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, UpdateStaffDTO dto)
@@ -266,6 +332,11 @@ public class StaffController : Controller
         }
     }
 
+    /// <summary>
+    /// Renders the deletion confirmation form for a staff member.
+    /// </summary>
+    /// <param name="id">Staff identifier.</param>
+    /// <returns>Delete confirmation View, or 404.</returns>
     [HttpGet]
     public async Task<IActionResult> Delete(int id)
     {
@@ -282,6 +353,11 @@ public class StaffController : Controller
         return View(staff);
     }
 
+    /// <summary>
+    /// Processes staff deletions.
+    /// </summary>
+    /// <param name="id">Staff identifier.</param>
+    /// <returns>Redirects back to staff Index view.</returns>
     [HttpPost, ActionName("Delete")]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> DeleteConfirmed(int id)
@@ -306,6 +382,10 @@ public class StaffController : Controller
         return RedirectToAction(nameof(Index), new { role = "Admin" });
     }
 
+    /// <summary>
+    /// Renders a list of all stay records to track active check-ins. Restricted to Admin.
+    /// </summary>
+    /// <returns>CheckInStatus View.</returns>
     [HttpGet]
     public async Task<IActionResult> CheckInStatus()
     {
@@ -321,6 +401,11 @@ public class StaffController : Controller
         return View(stays);
     }
 
+    /// <summary>
+    /// Submits a request to checkout an active stay.
+    /// </summary>
+    /// <param name="stayId">Stay record ID.</param>
+    /// <returns>Redirects back to CheckInStatus View.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> RequestCheckOut(int stayId)
@@ -338,6 +423,10 @@ public class StaffController : Controller
         return RedirectToAction(nameof(CheckInStatus));
     }
 
+    /// <summary>
+    /// Logs out staff members and clears their active session context.
+    /// </summary>
+    /// <returns>Redirects to staff Login page.</returns>
     [HttpGet]
     public IActionResult Logout()
     {

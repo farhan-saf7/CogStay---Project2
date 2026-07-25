@@ -1,143 +1,133 @@
-# CogStay - Integrated Hotel Management System
+# 🏨 CogStay - Integrated Hotel Management System
 
-CogStay is a modern, enterprise-grade Hotel Management System (HMS) built with **ASP.NET Core MVC**. It provides a seamless experience for guests and comprehensive digital tools for hotel staff across various departments including Administration, Front Desk, Housekeeping, and Management.
+[![Build Status](https://img.shields.io/badge/build-passing-brightgreen.svg)](#)
+[![Framework](https://img.shields.io/badge/framework-ASP.NET%20Core%2010.0-blue.svg)](#)
+[![Database](https://img.shields.io/badge/database-SQL%20Server-red.svg)](#)
+[![Architecture](https://img.shields.io/badge/architecture-MVC%20%2F%20Repository-orange.svg)](#)
 
-## 🏨 Project Overview
-
-The system is designed to streamline hotel operations, from the initial room booking by a customer to the final checkout and subsequent room maintenance. It features a role-based access control system implemented through MVC Areas.
+CogStay is a modern, enterprise-grade Integrated Hotel Management System (HMS) built on **ASP.NET Core MVC**. It provides a fully digitized, automated operational workflow for hotel guests and staff departments. It coordinates the lifecycle of booking, stay execution, billing invoices, payments, and housekeeping cleaning cycles.
 
 ---
 
-## 📋 System Architecture
+## 🌟 Key Features
 
-LANDING PAGE 1 (Customer Hotel Homepage)
+*   **Secure Authentication:** Hashed credentials (SHA-256) for both Guests and Staff members.
+*   **Role-Based Access Control:** Separate portals and session scopes for Guests, Front Desk, Housekeeping, Managers, and Admins.
+*   **Dynamic Room Allocation & Booking:** Validation logic preventing date collisions and double-bookings.
+*   **Integrated Billing System:** Nightly rate calculations and automated invoice generation upon checkout or custom billing entries.
+*   **Service & Cleaning Workflows:** Room clean status state machine that updates Room availability automatically when housekeeping tasks are resolved.
+
+---
+
+## 🏗 System Architecture & Directory Structure
+
+CogStay implements a clear **N-Tier Architecture** coupled with the **Repository and Service Pattern** to decouple the Presentation, Business Logic, and Data Access Layers.
+
+```
+CogStay---Project2/
 │
-├── Customer Login
-│   └── Customer Login Page
-│       └── Customer Dashboard
-│           ├── Available Rooms
-│           ├── Book Rooms
-│           ├── Booking History
-│           ├── Payment
-│           ├── Profile Management
-│           └── Feedback
-│
-└── Staff Login
-    └── LANDING PAGE 2 (Staff Role Login Page)
-        ├── Admin Login
-        │   └── Admin Dashboard
-        │       ├── Room Management
-        │       ├── Reservation Monitoring
-        │       ├── Reports
-        │       ├── Staff & User Management
-        │       └── Settings
-        │
-        ├── Manager Login
-        │   └── Manager Dashboard
-        │       ├── Reservations
-        │       ├── Occupancy
-        │       ├── Revenue
-        │       ├── Housekeeping
-        │       └── Feedbacks
-        │
-        ├── Front Desk Login
-        │   └── Front Desk Dashboard
-        │       ├── Check In
-        │       ├── Check Out
-        │       ├── Reservations
-        │       ├── Housekeeping
-        │       └── Guest Operations
-        │
-        └── Housekeeping Login
-            └── Housekeeping Dashboard
-                ├── Housekeeping Service Requests
-                ├── Laundry Service
-                ├── Food Service
-                ├── Maintenance Service
-                ├── Cleaning Service
-                ├── WellnessSpaRequest
-                └── Assign Task to Employee
-
-## 🚀 Core Modules
-
-The application is divided into five primary modules, each tailored to specific user roles:
-
-### 1. Admin Module
-The central hub for system administration and high-level control.
-- **Staff User Management:** Add, edit, or deactivate staff accounts and assign roles.
-- **Room Management:** Configure room types, pricing, capacity, and status.
-- **Reservation Monitoring:** Real-time oversight of all hotel bookings.
-- **System Settings:** Global configuration for hotel policies and system behavior.
-- **Reporting:** Access to historical data and system logs.
-
-### 2. Customer Module
-A user-friendly interface designed for guests to manage their stay.
-- **Room Discovery:** Browse available rooms with detailed specs (King, Deluxe, Penthouse, etc.).
-- **Booking Engine:** Securely book rooms for specific dates.
-- **Payment Integration:** Handle room charges and view transaction history.
-- **Guest Profile:** Manage personal information and preferences.
-- **Feedback System:** Submit ratings and comments regarding their stay.
-
-### 3. Front Desk Module
-The operational engine for daily guest interactions.
-- **Check-In/Out:** Efficiently process guest arrivals and departures.
-- **Live Reservations:** View and modify upcoming and current bookings.
-- **Housekeeping Coordination:** Communicate directly with the housekeeping team for room readiness.
-- **Guest Operations:** Handle special guest requests and billing inquiries.
-
-### 4. Housekeeping Module
-Dedicated to maintaining the highest standards of room cleanliness and service.
-- **Task Management:** Real-time list of cleaning tasks (Checkout Clean, Stay-Over Clean).
-- **Service Requests:** Handle guest requests for Laundry, Food, SPA, and Maintenance.
-- **Status Updates:** Update room cleanliness status (Clean/Dirty) to notify the Front Desk.
-- **Checklists:** Follow systematic cleaning protocols for different task types.
-
-### 5. Manager Module
-Focused on business performance and operational efficiency.
-- **Occupancy Tracking:** Monitor current and projected hotel occupancy rates.
-- **Revenue Analytics:** Analyze daily, weekly, and monthly revenue reports.
-- **Performance Overview:** Review housekeeping efficiency and staff performance.
-- **Feedback Moderation:** Review and analyze guest feedback to improve service quality.
+├── Controllers/                 # Presentation layer entry points (MVC Routing)
+├── Services/                    # Core Business Logic Layer (Interfaces & Implementations)
+├── Repositories/                # Persistence & Data Access Layer (Generic/Entity Repositories)
+├── Data/                        # DBContext configurations, seeding scripts, and migrations
+├── Models/                      # Relational Entity Schemas (Room, StayRecord, Billing, etc.)
+├── DTOs/                        # Data Transfer Objects for decoupled parameter passing
+├── Enums/                       # Strongly typed system states (RoomStatus, PaymentStatus, etc.)
+├── Views/                       # Razor View UI pages (Home, Shared, Layouts)
+└── wwwroot/                     # Static UI assets (CSS stylesheets, JS scripts, icons, libraries)
+```
 
 ---
 
-## 🔄 Key Operational Flows
+## 🛠 Technology Stack
 
-### A. The Booking & Reservation Flow
-1. **Inquiry:** Customer browses `AvailableRooms`.
-2. **Booking:** Customer selects a room and provides stay details.
-3. **Reservation:** System creates a `Pending` reservation.
-4. **Payment:** Customer completes the `Payment` flow; status moves to `Confirmed`.
-
-### B. The Check-In & Stay Flow
-1. **Arrival:** Front Desk identifies the reservation and selects `Check-In`.
-2. **Activation:** Room status changes from `Available` to `Occupied`.
-3. **Guest Experience:** Customer uses the `Dashboard` to request services (Laundry, Food, etc.).
-4. **Service Execution:** Housekeeping receives the request, completes the task, and marks it as `Done`.
-
-### C. The Checkout & Turnover Flow
-1. **Departure:** Front Desk processes `Check-Out` and ensures `TotalAmount` is paid.
-2. **Cleaning Trigger:** System automatically creates a `Checkout Clean` task for Housekeeping.
-3. **Room Status:** Room status becomes `Dirty/Maintenance`.
-4. **Turnover:** Housekeeper completes the task; room status reverts to `Available` and `Clean`, ready for the next guest.
+*   **Backend:** ASP.NET Core 10.0 (MVC Framework)
+*   **ORM / Data Layer:** Entity Framework Core 10.0
+*   **Database:** Microsoft SQL Server (LocalDB / SQLExpress)
+*   **Frontend UI:** Razor Views, HTML5, CSS3, Bootstrap 5, JavaScript
+*   **Security:** Cryptographic SHA-256 password hashing
 
 ---
 
-## 🛠 Tech Stack
+## 🚀 Getting Started
 
-- **Framework:** ASP.NET Core 8.0 (MVC Architecture)
-- **Frontend:** HTML5, CSS3, JavaScript, Bootstrap 5
-- **Data Layer:** Entity Framework Core (In-memory/LocalDB for development)
-- **Architecture:** Area-based modularity for distinct user roles
+### 📋 Prerequisites
 
-## 📂 Project Structure
+1.  [.NET 10.0 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) installed on your system.
+2.  [Microsoft SQL Server](https://www.microsoft.com/sql-server/) (SQLExpress or Developer edition) running locally.
+3.  [SQL Server Management Studio (SSMS)](https://learn.microsoft.com/sql/ssms/download-sql-server-management-studio-ssms) or SQL command line tools.
 
-- `/Areas`: Contains the five core modules (Admin, Customer, FrontDesk, Housekeeping, Manager).
-- `/Controllers`: Shared controllers (Home, StaffLogin).
-- `/Models`: Core data entities (Room, Booking, StaffUser, etc.).
-- `/Views`: Shared UI components and layouts.
-- `/wwwroot`: Static assets (Images, CSS, JS).
-- `/Data`: Database context and sample data seed logic.
+### ⚙ Configuration & Connection String
+
+1.  Open the `appsettings.json` file in the project root.
+2.  Modify the `ConnectionStrings.DefaultConnection` value to target your local SQL Server instance:
+
+```json
+{
+  "ConnectionStrings": {
+    "DefaultConnection": "Server=YOUR_SERVER_NAME;Initial Catalog=Cogstay;Integrated Security=True;TrustServerCertificate=true;"
+  }
+}
+```
+
+> [ll] NOTE
+> Ensure that your SQL Server service is running and that your Windows account has appropriate permissions to create and manage the database.
 
 ---
-*Developed as part of the Cognizant Project Series.*
+
+## 🔄 Database Setup & Migrations
+
+To apply database tables, constraints, relationship configurations, and initial data seeding, execute the following commands in your shell from the project root:
+
+### 1. Restore Dependencies
+```powershell
+dotnet restore
+```
+
+### 2. Apply Migrations
+Apply the EF Core migrations to automatically generate the database and seed initial admin, staff, and room inventory:
+```powershell
+dotnet ef database update
+```
+
+> [ll] TIP
+> If you do not have the EF Core command-line tool installed, install it globally using:
+> `dotnet tool install --global dotnet-ef`
+
+---
+
+## 💻 Building and Running the Application
+
+### Build the Project
+To compile the project and check for syntax or type errors:
+```powershell
+dotnet build CogStayMVC.csproj
+```
+
+### Run Locally
+To spin up the local development web server:
+```powershell
+dotnet run
+```
+
+The application will launch and listen on:
+*   `https://localhost:7147` (Default SSL port)
+*   `http://localhost:5242` (Default HTTP port)
+
+Open your web browser and navigate to `https://localhost:7147` to access the hotel landing page.
+
+---
+
+## 📖 Complete Documentation Suite
+
+For deep-dives into workflows, database details, program structures, and interview prep, please refer to the files in the directory:
+
+*   📄 **[USER_MANUAL.md](file:///c:/Users/farha/OneDrive/Desktop/CogStay--Final/CogStay---Project2/USER_MANUAL.md):** End-user guide for hotel roles, login procedures, check-in, checkout, and housekeeping.
+*   📄 **[FLOW.md](file:///c:/Users/farha/OneDrive/Desktop/CogStay--Final/CogStay---Project2/FLOW.md):** Full-page visual flowcharts detailing customer, front desk, and housekeeping operational paths.
+*   📄 **[BACKEND_GUIDE.md](file:///c:/Users/farha/OneDrive/Desktop/CogStay--Final/CogStay---Project2/BACKEND_GUIDE.md):** Deep explanation of DbContext, DI registrations, Middleware, and core file structures.
+*   📄 **[PROJECT_STRUCTURE.md](file:///c:/Users/farha/OneDrive/Desktop/CogStay--Final/CogStay---Project2/PROJECT_STRUCTURE.md):** Directory-by-directory mapping of files, views, controllers, models, and scripts.
+*   📄 **[DATABASE.md](file:///c:/Users/farha/OneDrive/Desktop/CogStay--Final/CogStay---Project2/DATABASE.md):** Entity-Relationship diagrams (Mermaid), tables, indexes, constraints, and cascade delete configurations.
+*   📄 **[INTERVIEW_GUIDE.md](file:///c:/Users/farha/OneDrive/Desktop/CogStay--Final/CogStay---Project2/INTERVIEW_GUIDE.md):** A preparation kit for interviews, viva voice, architectural pitches (2/5/10 mins), and key questions.
+
+---
+*Developed as part of the CogStay Integrated Hotel operational software series.*

@@ -7,6 +7,10 @@ using CogStayMVC.Services.Interfaces;
 
 namespace CogStayMVC.Controllers;
 
+/// <summary>
+/// Controller for guest operations. Handles registration, authentication, room discovery,
+/// reservation booking, personal bill queries, profile updates, and logout actions.
+/// </summary>
 public class GuestController : Controller
 {
     private readonly IGuestService _guestService;
@@ -15,6 +19,14 @@ public class GuestController : Controller
     private readonly ICheckInService _checkInService;
     private readonly IBillingService _billingService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="GuestController"/> class.
+    /// </summary>
+    /// <param name="guestService">Service handling guest CRUD and validation.</param>
+    /// <param name="roomService">Service managing hotel room views.</param>
+    /// <param name="reservationService">Service handling booking logic and checks.</param>
+    /// <param name="checkInService">Service managing check-in stay records.</param>
+    /// <param name="billingService">Service handling billing invoice queries.</param>
     public GuestController(
         IGuestService guestService,
         IRoomService roomService,
@@ -29,9 +41,18 @@ public class GuestController : Controller
         _billingService = billingService;
     }
 
+    /// <summary>
+    /// Renders the guest login view.
+    /// </summary>
+    /// <returns>Login form View.</returns>
     [HttpGet]
     public IActionResult Login() => View();
 
+    /// <summary>
+    /// Processes guest login credentials and sets up session variables.
+    /// </summary>
+    /// <param name="dto">Data transfer object containing guest login credentials.</param>
+    /// <returns>Redirects to Guest Dashboard on success, or returns form on failure.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Login(GuestLoginDTO dto)
@@ -52,9 +73,18 @@ public class GuestController : Controller
         return RedirectToAction(nameof(Dashboard));
     }
 
+    /// <summary>
+    /// Renders the guest registration form.
+    /// </summary>
+    /// <returns>Registration form View.</returns>
     [HttpGet]
     public IActionResult Register() => View();
 
+    /// <summary>
+    /// Processes new guest registration and sets up their active session.
+    /// </summary>
+    /// <param name="dto">The guest registration details DTO.</param>
+    /// <returns>Redirects to Guest Dashboard on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Register(CreateGuestDTO dto)
@@ -78,6 +108,10 @@ public class GuestController : Controller
         }
     }
 
+    /// <summary>
+    /// Displays the Guest Dashboard summarizing their active reservations.
+    /// </summary>
+    /// <returns>Dashboard View displaying current guest reservations.</returns>
     [HttpGet]
     public async Task<IActionResult> Dashboard()
     {
@@ -95,6 +129,10 @@ public class GuestController : Controller
         return View(reservations);
     }
 
+    /// <summary>
+    /// Displays all rooms that are currently available for booking.
+    /// </summary>
+    /// <returns>AvailableRooms View containing room lists.</returns>
     [HttpGet]
     public async Task<IActionResult> AvailableRooms()
     {
@@ -106,6 +144,11 @@ public class GuestController : Controller
         return View(rooms);
     }
 
+    /// <summary>
+    /// Renders the booking page for a specific room.
+    /// </summary>
+    /// <param name="roomId">Optional room identifier to pre-select.</param>
+    /// <returns>BookRoom View containing reservation setup details.</returns>
     [HttpGet]
     public async Task<IActionResult> BookRoom(int? roomId)
     {
@@ -123,6 +166,11 @@ public class GuestController : Controller
         return View(dto);
     }
 
+    /// <summary>
+    /// Processes room booking requests from the guest.
+    /// </summary>
+    /// <param name="dto">The reservation details DTO.</param>
+    /// <returns>Redirects to MyReservations View on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> BookRoom(CreateReservationDTO dto)
@@ -151,6 +199,10 @@ public class GuestController : Controller
         }
     }
 
+    /// <summary>
+    /// Displays all active reservations for the current guest.
+    /// </summary>
+    /// <returns>MyReservations View.</returns>
     [HttpGet]
     public async Task<IActionResult> MyReservations()
     {
@@ -161,6 +213,10 @@ public class GuestController : Controller
         return View(reservations);
     }
 
+    /// <summary>
+    /// Displays historical reservations completed or cancelled by this guest.
+    /// </summary>
+    /// <returns>BookingHistory View.</returns>
     [HttpGet]
     public async Task<IActionResult> BookingHistory()
     {
@@ -171,7 +227,10 @@ public class GuestController : Controller
         return View(reservations);
     }
 
-
+    /// <summary>
+    /// Lists all invoices and bills associated with the guest.
+    /// </summary>
+    /// <returns>Billing View displaying guest's invoice list.</returns>
     [HttpGet]
     public async Task<IActionResult> Billing()
     {
@@ -182,6 +241,10 @@ public class GuestController : Controller
         return View(bills);
     }
 
+    /// <summary>
+    /// Renders the profile update page for the logged-in guest.
+    /// </summary>
+    /// <returns>Profile View containing guest details.</returns>
     [HttpGet]
     public async Task<IActionResult> Profile()
     {
@@ -202,6 +265,11 @@ public class GuestController : Controller
         return View(dto);
     }
 
+    /// <summary>
+    /// Processes guest personal profile updates.
+    /// </summary>
+    /// <param name="dto">The updated guest details DTO.</param>
+    /// <returns>Redirects back to Profile page on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Profile(UpdateGuestDTO dto)
@@ -227,6 +295,10 @@ public class GuestController : Controller
         }
     }
 
+    /// <summary>
+    /// Logs the guest out and clears their active session context.
+    /// </summary>
+    /// <returns>Redirects to guest Login page.</returns>
     [HttpGet]
     public IActionResult Logout()
     {

@@ -7,15 +7,27 @@ using CogStayMVC.Services.Interfaces;
 
 namespace CogStayMVC.Controllers;
 
+/// <summary>
+/// Controller for managing rooms. Handles room creation, modification, deletion,
+/// detail queries, and room availability status checks for admin, managers, and front desk staff.
+/// </summary>
 public class RoomController : Controller
 {
     private readonly IRoomService _roomService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="RoomController"/> class.
+    /// </summary>
+    /// <param name="roomService">Service handling room operations and queries.</param>
     public RoomController(IRoomService roomService)
     {
         _roomService = roomService;
     }
 
+    /// <summary>
+    /// Displays a list of all hotel rooms. Restricted to Admin and Manager roles.
+    /// </summary>
+    /// <returns>Index View displaying rooms.</returns>
     [HttpGet]
     public async Task<IActionResult> Index()
     {
@@ -31,6 +43,11 @@ public class RoomController : Controller
         return View(rooms);
     }
 
+    /// <summary>
+    /// Displays detailed info for a specific room. Restricted to Admin and Manager roles.
+    /// </summary>
+    /// <param name="id">Room identifier.</param>
+    /// <returns>Details View, or 404 NotFound.</returns>
     [HttpGet]
     public async Task<IActionResult> Details(int id)
     {
@@ -47,6 +64,10 @@ public class RoomController : Controller
         return View(room);
     }
 
+    /// <summary>
+    /// Renders the room creation form view. Restricted to Admin and Manager roles.
+    /// </summary>
+    /// <returns>Create room form View.</returns>
     [HttpGet]
     public IActionResult Create()
     {
@@ -61,6 +82,11 @@ public class RoomController : Controller
         return View(new CreateRoomDTO());
     }
 
+    /// <summary>
+    /// Processes room creation form submissions.
+    /// </summary>
+    /// <param name="dto">Create room details DTO.</param>
+    /// <returns>Redirects to room list view on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateRoomDTO dto)
@@ -88,6 +114,11 @@ public class RoomController : Controller
         }
     }
 
+    /// <summary>
+    /// Renders the room edit form view. Restricted to Admin and Manager roles.
+    /// </summary>
+    /// <param name="id">Room identifier.</param>
+    /// <returns>Edit form View containing room details, or 404.</returns>
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
@@ -113,6 +144,12 @@ public class RoomController : Controller
         return View(dto);
     }
 
+    /// <summary>
+    /// Processes room update submissions.
+    /// </summary>
+    /// <param name="id">Room identifier.</param>
+    /// <param name="dto">Updated room details DTO.</param>
+    /// <returns>Redirects to room list view on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, UpdateRoomDTO dto)
@@ -141,6 +178,11 @@ public class RoomController : Controller
         }
     }
 
+    /// <summary>
+    /// Deletes a specific room. Restricted to Admin and Manager roles.
+    /// </summary>
+    /// <param name="id">Room identifier.</param>
+    /// <returns>Redirects back to Index action.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id)
@@ -165,6 +207,11 @@ public class RoomController : Controller
         return RedirectToAction(nameof(Index), new { role = staffRole });
     }
 
+    /// <summary>
+    /// Displays rooms currently available for checkout or assignment.
+    /// Restricted to FrontDesk, Manager, or Admin staff.
+    /// </summary>
+    /// <returns>CheckAvailability View showing available rooms.</returns>
     [HttpGet]
     public async Task<IActionResult> CheckAvailability()
     {

@@ -9,11 +9,20 @@ using CogStayMVC.Services.Interfaces;
 
 namespace CogStayMVC.Services.Manager;
 
+/// <summary>
+/// Service implementation managing customer feedbacks and ratings.
+/// Enables guests to submit ratings/comments and hotel managers to moderate reviews.
+/// </summary>
 public class FeedbackService : IFeedbackService
 {
     private readonly IFeedbackRepository _feedbackRepository;
     private readonly IGuestRepository _guestRepository;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="FeedbackService"/> class.
+    /// </summary>
+    /// <param name="feedbackRepository">Repository handling Feedback models.</param>
+    /// <param name="guestRepository">Repository managing Guest models.</param>
     public FeedbackService(
         IFeedbackRepository feedbackRepository,
         IGuestRepository guestRepository)
@@ -22,12 +31,21 @@ public class FeedbackService : IFeedbackService
         _guestRepository = guestRepository;
     }
 
+    /// <summary>
+    /// Retrieves all guest feedback comments, populated with related Guest and Room details.
+    /// </summary>
+    /// <returns>Collection of feedback response DTOs.</returns>
     public async Task<IEnumerable<FeedbackResponseDTO>> GetAllFeedbacksAsync()
     {
         var feedbacks = await _feedbackRepository.GetFeedbacksWithDetailsAsync();
         return feedbacks.Select(MapToDTO);
     }
 
+    /// <summary>
+    /// Retrieves detailed feedback by its ID.
+    /// </summary>
+    /// <param name="id">Feedback identifier.</param>
+    /// <returns>Feedback response DTO, or null if not found.</returns>
     public async Task<FeedbackResponseDTO?> GetFeedbackByIdAsync(int id)
     {
         var feedbacks = await _feedbackRepository.GetFeedbacksWithDetailsAsync();
@@ -35,6 +53,11 @@ public class FeedbackService : IFeedbackService
         return feedback != null ? MapToDTO(feedback) : null;
     }
 
+    /// <summary>
+    /// Submits a guest feedback review.
+    /// </summary>
+    /// <param name="dto">Create feedback DTO containing comments and rating stars.</param>
+    /// <returns>Created feedback response details.</returns>
     public async Task<FeedbackResponseDTO> SubmitFeedbackAsync(CreateFeedbackDTO dto)
     {
         var guest = await _guestRepository.GetByIdAsync(dto.GuestId);
@@ -54,11 +77,18 @@ public class FeedbackService : IFeedbackService
         return MapToDTO(feedback);
     }
 
+    /// <summary>
+    /// Deletes a specific feedback entry by its ID.
+    /// </summary>
+    /// <param name="id">Feedback identifier.</param>
     public async Task DeleteFeedbackAsync(int id)
     {
         await _feedbackRepository.DeleteAsync(id);
     }
 
+    /// <summary>
+    /// Maps a Feedback model to a FeedbackResponseDTO.
+    /// </summary>
     private static FeedbackResponseDTO MapToDTO(Feedback f) => new()
     {
         FeedbackId = f.FeedbackId,

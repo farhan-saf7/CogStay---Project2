@@ -7,11 +7,20 @@ using CogStayMVC.Services.Interfaces;
 
 namespace CogStayMVC.Controllers;
 
+/// <summary>
+/// Controller handling billing-related operations, including bill generation,
+/// payment processing, and bill history queries for hotel front desk and managers.
+/// </summary>
 public class BillingController : Controller
 {
     private readonly IBillingService _billingService;
     private readonly ICheckInService _checkInService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="BillingController"/> class.
+    /// </summary>
+    /// <param name="billingService">Service handling billing generation and payments.</param>
+    /// <param name="checkInService">Service managing check-in stays to calculate checkout fees.</param>
     public BillingController(
         IBillingService billingService,
         ICheckInService checkInService)
@@ -20,6 +29,10 @@ public class BillingController : Controller
         _checkInService = checkInService;
     }
 
+    /// <summary>
+    /// Displays all existing billing records. Restricted to FrontDesk or Manager staff roles.
+    /// </summary>
+    /// <returns>Billing Index View displaying all bills.</returns>
     [HttpGet]
     public async Task<IActionResult> Index()
     {
@@ -35,6 +48,11 @@ public class BillingController : Controller
         return View(bills);
     }
 
+    /// <summary>
+    /// Renders the form to manually generate a bill for an active stay record.
+    /// </summary>
+    /// <param name="stayId">Optional ID of the stay record to generate the bill for.</param>
+    /// <returns>Bill generation View.</returns>
     [HttpGet]
     public async Task<IActionResult> Create(int? stayId)
     {
@@ -50,6 +68,11 @@ public class BillingController : Controller
         return View(new CreateBillDTO { StayId = stayId ?? 0 });
     }
 
+    /// <summary>
+    /// Processes the submission for generating a bill.
+    /// </summary>
+    /// <param name="dto">Data transfer object containing stay reference and bill parameters.</param>
+    /// <returns>Redirects to Billing Index on success, or returns form on failure.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateBillDTO dto)
@@ -90,6 +113,12 @@ public class BillingController : Controller
         }
     }
 
+    /// <summary>
+    /// Renders the payment processing form for a specific active bill or stay record.
+    /// </summary>
+    /// <param name="stayId">Optional stay ID reference to find or generate the bill.</param>
+    /// <param name="billId">Optional direct bill ID reference.</param>
+    /// <returns>Payment processing View containing invoice details.</returns>
     [HttpGet]
     public async Task<IActionResult> Payment(int? stayId, int? billId)
     {
@@ -129,6 +158,11 @@ public class BillingController : Controller
         return View(dto);
     }
 
+    /// <summary>
+    /// Processes the submission of payment, completing the checkout flow.
+    /// </summary>
+    /// <param name="dto">The payment processing DTO containing remarks and bill references.</param>
+    /// <returns>Redirects to Billing History on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Payment(ProcessPaymentDTO dto)
@@ -161,6 +195,10 @@ public class BillingController : Controller
         }
     }
 
+    /// <summary>
+    /// Displays a complete history of all billing records.
+    /// </summary>
+    /// <returns>Billing History View.</returns>
     [HttpGet]
     public async Task<IActionResult> History()
     {
@@ -176,6 +214,11 @@ public class BillingController : Controller
         return View(bills);
     }
 
+    /// <summary>
+    /// Deletes a specific billing record. Restricted to authorized FrontDesk/Manager staff.
+    /// </summary>
+    /// <param name="id">The ID of the bill to delete.</param>
+    /// <returns>Redirects back to Billing Index view.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id)

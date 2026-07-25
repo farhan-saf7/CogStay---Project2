@@ -7,11 +7,20 @@ using CogStayMVC.Services.Interfaces;
 
 namespace CogStayMVC.Controllers;
 
+/// <summary>
+/// Controller for managing housekeeping operations. Allows housekeeping staff and managers
+/// to assign, view, update, and delete cleaning tasks, synchronizing room statuses (e.g. Dirty/Available).
+/// </summary>
 public class HousekeepingController : Controller
 {
     private readonly IHousekeepingService _housekeepingService;
     private readonly IRoomService _roomService;
 
+    /// <summary>
+    /// Initializes a new instance of the <see cref="HousekeepingController"/> class.
+    /// </summary>
+    /// <param name="housekeepingService">Service managing housekeeping tasks.</param>
+    /// <param name="roomService">Service managing room records.</param>
     public HousekeepingController(
         IHousekeepingService housekeepingService,
         IRoomService roomService)
@@ -20,6 +29,10 @@ public class HousekeepingController : Controller
         _roomService = roomService;
     }
 
+    /// <summary>
+    /// Lists all housekeeping tasks. Restricted to Housekeeping or Manager roles.
+    /// </summary>
+    /// <returns>Index View displaying tasks.</returns>
     [HttpGet]
     public async Task<IActionResult> Index()
     {
@@ -35,6 +48,11 @@ public class HousekeepingController : Controller
         return View(tasks);
     }
 
+    /// <summary>
+    /// Displays details of a specific housekeeping task.
+    /// </summary>
+    /// <param name="id">Task identifier.</param>
+    /// <returns>Details View containing task details, or 404.</returns>
     [HttpGet]
     public async Task<IActionResult> Details(int id)
     {
@@ -51,6 +69,10 @@ public class HousekeepingController : Controller
         return View(task);
     }
 
+    /// <summary>
+    /// Renders the housekeeping task creation form.
+    /// </summary>
+    /// <returns>Create task form View.</returns>
     [HttpGet]
     public async Task<IActionResult> Create()
     {
@@ -66,6 +88,11 @@ public class HousekeepingController : Controller
         return View(new CreateHousekeepingTaskDTO());
     }
 
+    /// <summary>
+    /// Processes task creation submissions.
+    /// </summary>
+    /// <param name="dto">Create task details DTO.</param>
+    /// <returns>Redirects back to task list on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Create(CreateHousekeepingTaskDTO dto)
@@ -98,6 +125,11 @@ public class HousekeepingController : Controller
         }
     }
 
+    /// <summary>
+    /// Renders the edit status form for a housekeeping task.
+    /// </summary>
+    /// <param name="id">Task identifier.</param>
+    /// <returns>Edit form View displaying task status details.</returns>
     [HttpGet]
     public async Task<IActionResult> Edit(int id)
     {
@@ -125,6 +157,12 @@ public class HousekeepingController : Controller
         return View(dto);
     }
 
+    /// <summary>
+    /// Processes task status updates and syncs room availability back to Front Desk.
+    /// </summary>
+    /// <param name="id">Task identifier.</param>
+    /// <param name="dto">Update status details DTO containing new status.</param>
+    /// <returns>Redirects back to task Index on success.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Edit(int id, UpdateTaskStatusDTO dto)
@@ -159,6 +197,11 @@ public class HousekeepingController : Controller
         }
     }
 
+    /// <summary>
+    /// Deletes a specific housekeeping task.
+    /// </summary>
+    /// <param name="id">Task identifier.</param>
+    /// <returns>Redirects back to task Index.</returns>
     [HttpPost]
     [ValidateAntiForgeryToken]
     public async Task<IActionResult> Delete(int id)
