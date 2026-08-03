@@ -13,6 +13,8 @@ using CogStayMVC.Services.FrontDesk;
 using CogStayMVC.Services.GuestModule;
 using CogStayMVC.Services.Housekeeping;
 using CogStayMVC.Services.Manager;
+using CogStayMVC.Models;
+using CogStayMVC.Enums;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -68,30 +70,30 @@ app.UseRouting();
 app.UseSession();
 app.UseAuthorization();
 
-// using (var scope = app.Services.CreateScope())
-// {
-//     var context = scope.ServiceProvider.GetRequiredService<HotelDbContext>();
-//     var defaultAdminEmail = "admin@gmail.com";
-//     if (!context.Staff.Any(s => s.Email == defaultAdminEmail))
-//     {
-//         using var sha256 = System.Security.Cryptography.SHA256.Create();
-//         var bytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes("123456"));
-//         var pwdHash = Convert.ToBase64String(bytes);
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider.GetRequiredService<HotelDbContext>();
+    var defaultAdminEmail = "admin@cogstay.com";
+    if (!context.Staff.Any(s => s.Email == defaultAdminEmail))
+    {
+        using var sha256 = System.Security.Cryptography.SHA256.Create();
+        var bytes = sha256.ComputeHash(System.Text.Encoding.UTF8.GetBytes("123456"));
+        var pwdHash = Convert.ToBase64String(bytes);
 
-//         var admin = new Staff
-//         {
-//             FullName = "Administrator",
-//             Email = defaultAdminEmail,
-//             PhoneNumber = "0000000000",
-//             PasswordHash = pwdHash,
-//             Role = StaffRole.Admin,
-//             IsActive = true,
-//             CreatedAt = DateTime.Now
-//         };
-//         context.Staff.Add(admin);
-//         context.SaveChanges();
-//     }
-// }
+        var admin = new Staff
+        {
+            FullName = "Administrator",
+            Email = defaultAdminEmail,
+            PhoneNumber = "0000000000",
+            PasswordHash = pwdHash,
+            Role = StaffRole.Admin,
+            IsActive = true,
+            CreatedAt = DateTime.Now
+        };
+        context.Staff.Add(admin);
+        context.SaveChanges();
+    }
+}
 
 // Default Route
 app.MapControllerRoute(

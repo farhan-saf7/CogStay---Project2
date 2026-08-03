@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace CogStayMVC.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial_Update : Migration
+    public partial class init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -92,6 +92,7 @@ namespace CogStayMVC.Migrations
                     ReservationId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     GuestId = table.Column<int>(type: "int", nullable: false),
+                    GuestName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, defaultValue: ""),
                     RoomId = table.Column<int>(type: "int", nullable: false),
                     CheckInDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CheckOutDate = table.Column<DateTime>(type: "datetime2", nullable: false),
@@ -152,7 +153,11 @@ namespace CogStayMVC.Migrations
                     GuestId = table.Column<int>(type: "int", nullable: false),
                     ReservationId = table.Column<int>(type: "int", nullable: false),
                     ActualCheckIn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    ActualCheckOut = table.Column<DateTime>(type: "datetime2", nullable: true)
+                    ActualCheckOut = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    GuestName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, defaultValue: ""),
+                    BookingReference = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    BillingReference = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    StayDetails = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -178,6 +183,8 @@ namespace CogStayMVC.Migrations
                     BillId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     StayId = table.Column<int>(type: "int", nullable: false),
+                    GuestId = table.Column<int>(type: "int", nullable: false, defaultValue: 0),
+                    GuestName = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false, defaultValue: ""),
                     TotalAmount = table.Column<decimal>(type: "decimal(18,2)", precision: 18, scale: 2, nullable: false),
                     PaymentStatus = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: false),
                     Remarks = table.Column<string>(type: "nvarchar(500)", maxLength: 500, nullable: true)

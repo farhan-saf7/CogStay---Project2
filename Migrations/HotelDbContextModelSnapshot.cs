@@ -293,19 +293,6 @@ namespace CogStayMVC.Migrations
                         .IsUnique();
 
                     b.ToTable("Staff");
-
-                    b.HasData(
-                        new
-                        {
-                            StaffId = 99,
-                            CreatedAt = new DateTime(2026, 8, 3, 0, 0, 0, 0, DateTimeKind.Utc),
-                            Email = "admin@cogstay.in",
-                            FullName = "Admin",
-                            IsActive = true,
-                            PasswordHash = "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=",
-                            PhoneNumber = "+91 9999999999",
-                            Role = "Admin"
-                        });
                 });
 
             modelBuilder.Entity("CogStayMVC.Models.StayRecord", b =>

@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CogStayMVC.Migrations
 {
     [DbContext(typeof(HotelDbContext))]
-    [Migration("20260720182213_initial_update2")]
-    partial class initial_update2
+    [Migration("20260803152954_init")]
+    partial class init
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -32,6 +32,18 @@ namespace CogStayMVC.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BillId"));
+
+                    b.Property<int>("GuestId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasDefaultValue(0);
+
+                    b.Property<string>("GuestName")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("");
 
                     b.Property<string>("PaymentStatus")
                         .IsRequired()
@@ -180,6 +192,13 @@ namespace CogStayMVC.Migrations
                     b.Property<int>("GuestId")
                         .HasColumnType("int");
 
+                    b.Property<string>("GuestName")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("");
+
                     b.Property<string>("ReservationStatus")
                         .IsRequired()
                         .HasMaxLength(50)
@@ -293,11 +312,30 @@ namespace CogStayMVC.Migrations
                     b.Property<DateTime?>("ActualCheckOut")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("BillingReference")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("BookingReference")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
                     b.Property<int>("GuestId")
                         .HasColumnType("int");
 
+                    b.Property<string>("GuestName")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValue("");
+
                     b.Property<int>("ReservationId")
                         .HasColumnType("int");
+
+                    b.Property<string>("StayDetails")
+                        .HasMaxLength(500)
+                        .HasColumnType("nvarchar(500)");
 
                     b.HasKey("StayId");
 
