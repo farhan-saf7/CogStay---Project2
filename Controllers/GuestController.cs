@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using System.Linq;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using CogStayMVC.DTOs;
@@ -161,15 +162,6 @@ public class GuestController : Controller
         return View(reservations);
     }
 
-    [HttpGet]
-    public async Task<IActionResult> BookingHistory()
-    {
-        int? guestId = HttpContext.Session.GetInt32("GuestId");
-        if (!guestId.HasValue) return RedirectToAction(nameof(Login));
-
-        var reservations = await _reservationService.GetReservationsByGuestAsync(guestId.Value);
-        return View(reservations);
-    }
 
 
     [HttpGet]
@@ -179,7 +171,8 @@ public class GuestController : Controller
         if (!guestId.HasValue) return RedirectToAction(nameof(Login));
 
         var bills = await _billingService.GetAllBillsAsync();
-        return View(bills);
+        var guestBills = bills.Where(b => b.GuestId == guestId.Value).ToList();
+        return View(guestBills);
     }
 
     [HttpGet]

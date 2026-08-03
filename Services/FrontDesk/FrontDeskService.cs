@@ -430,6 +430,7 @@ public class BillingService : IBillingService
     {
         BillId = bill.BillId,
         StayId = bill.StayId,
+        GuestId = bill.GuestId,
         GuestName = string.IsNullOrEmpty(bill.GuestName) ? (bill.StayRecord?.Guest?.FullName ?? "Unknown") : bill.GuestName,
         RoomNumber = bill.StayRecord?.Reservation?.Room?.RoomNumber ?? "N/A",
         TotalAmount = bill.TotalAmount,

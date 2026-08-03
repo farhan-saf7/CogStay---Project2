@@ -7,6 +7,7 @@ public class BillingResponseDTO
 {
     public int BillId { get; set; }
     public int StayId { get; set; }
+    public int GuestId { get; set; }
     public string GuestName { get; set; } = null!;
     public string RoomNumber { get; set; } = null!;
     public decimal TotalAmount { get; set; }

@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using CogStayMVC.Models;
+using CogStayMVC.Enums;
 
 namespace CogStayMVC.Data;
 
@@ -135,6 +136,18 @@ public class HotelDbContext : DbContext
 
             // Unique constraint on Email
             entity.HasIndex(s => s.Email).IsUnique();
+        });
+
+        modelBuilder.Entity<Staff>().HasData(new Staff
+        {
+            StaffId = 99,
+            FullName = "Admin",
+            Email = "admin@cogstay.in",
+            PhoneNumber = "+91 9999999999",
+            PasswordHash = "jZae727K08KaOmKSgOaGzww/XVqGr/PKEgIMkjrcbJI=",
+            Role = StaffRole.Admin,
+            IsActive = true,
+            CreatedAt = new DateTime(2026, 8, 3, 0, 0, 0, DateTimeKind.Utc)
         });
 
         // --- Feedback Configuration ---
